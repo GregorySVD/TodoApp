@@ -6,9 +6,9 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/', todoRouter);
+app.use("/", todoRouter);
 
-app.get('/test', async (req, res) => {
+app.get("/test", async (req, res) => {
     try {
         const [result] = await pool.execute("SELECT * FROM `todos`");
         res.json(result);
@@ -18,6 +18,6 @@ app.get('/test', async (req, res) => {
     }
 })
 
-app.listen(3001, '0.0.0.0', () => {
-    console.log('Listening on http://localhost:3001');
+app.listen(3001, "0.0.0.0", () => {
+    console.log("Listening on http://localhost:3001");
 });
