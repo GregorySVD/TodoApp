@@ -14,6 +14,5 @@ module.exports = {
     rules: {
         quotes: ['error', 'double', { avoidEscape: true }],
         'no-console': 'off',
-        'import/prefer-default-export': 'off',
     },
 };

@@ -20,6 +20,7 @@
     "moduleResolution": "node",
     //we will use node module
     "esModuleInterop": true,
-    "module": "CommonJS"
+    "module": "CommonJS",
+    "allowImportingTsExtensions": true
   }
 }

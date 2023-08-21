@@ -1,10 +1,9 @@
 import express = require("express");
-import {pool} from "./utils/db.ts";
 import "express-async-errors";
 
 import {todoRouter} from "./routers/todo.ts";
-
-import {handleError, ValidationError} from "./utils/errors.ts";
+import {handleError} from "./utils/errors.ts";
+import {TodoRecord} from "../records/todo.record.ts";
 
 const app = express();
 
@@ -15,10 +14,11 @@ app.use(handleError);
 
 app.get("/test", async (req, res) => {
     try {
-        const [result] = await pool.execute("SELECT * FROM `todos`");
+        const result = await TodoRecord.ListAll();
         res.json(result);
     } catch (err) {
-        throw new ValidationError("wrong connection");
+        console.log(err);
+        //@TODO: fix  ValidationError
     }
 })
 
