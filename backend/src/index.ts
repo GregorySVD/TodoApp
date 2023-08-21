@@ -1,10 +1,10 @@
 import express = require("express");
-import {pool} from "./utils/db";
-import 'express-async-errors';
+import {pool} from "./utils/db.ts";
+import "express-async-errors";
 
-import {todoRouter} from "./routers/todo";
-import './utils/db';
-import {handleError, ValidationError} from "./utils/errors";
+import {todoRouter} from "./routers/todo.ts";
+
+import {handleError, ValidationError} from "./utils/errors.ts";
 
 const app = express();
 
