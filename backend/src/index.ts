@@ -21,6 +21,14 @@ app.get("/test", async (req, res) => {
         //@TODO: fix  ValidationError
     }
 })
+app.get('/test/:id', async (req, res) => {
+    try {
+        const result = await TodoRecord.getOne(req.params.id);
+        res.json(result);
+    } catch (err) {
+        console.log(err);
+    }
+})
 
 app.listen(3001, "0.0.0.0", () => {
     console.log("Listening on http://localhost:3001");

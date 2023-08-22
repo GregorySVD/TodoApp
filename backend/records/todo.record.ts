@@ -27,6 +27,14 @@ export class TodoRecord implements TodoEntity {
         this.description = obj.description;
     }
 
+    static async getOne(id: string): Promise<TodoRecord | null> {
+        const [result] = (await pool.execute("SELECT * FROM `todos` WHERE `id` = :id",
+        {
+            id,
+        }) as TodoRecordResults)
+        return result.length === 0 ? null :  new TodoRecord(result[0]);
+    }
+
     static async ListAll(): Promise<TodoRecord[]> {
         const [results] = (await pool.execute("SELECT * FROM `todos` ORDER BY `date` ASC")) as TodoRecordResults;
         return results.map(obj => new TodoRecord(obj));
