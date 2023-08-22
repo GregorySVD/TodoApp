@@ -27,6 +27,12 @@ export class TodoRecord implements TodoEntity {
         this.description = obj.description;
     }
 
+    async delete(): Promise<void> {
+         await pool.execute("DELETE FROM `todos` WHERE `id` = :id",{
+            id: this.id,
+        })
+    }
+
     static async getOne(id: string): Promise<TodoRecord | null> {
         const [result] = (await pool.execute("SELECT * FROM `todos` WHERE `id` = :id",
         {

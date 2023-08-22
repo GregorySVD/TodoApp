@@ -17,7 +17,7 @@ todoRouter
     .get("/:id", async (req, res) => {
         try {
             const result = await TodoRecord.getOne(req.params.id);
-            if (result === null) {
+            if (!result) {
                 res.status(404).json({error: `Task with id ${req.params.id} does not exist`});
             } else {
                 res.json(result);
@@ -26,4 +26,12 @@ todoRouter
         } catch (err) {
             throw new ValidationError("Task with given id");
         }
-    });
+    })
+    .delete("/:id", async(req, res) => {
+        const task = await TodoRecord.getOne(req.params.id);
+        if(!task) {
+            throw new ValidationError("Task with given id not found");
+        }
+        await task.delete();
+        res.end();
+});
