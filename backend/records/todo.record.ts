@@ -2,6 +2,7 @@ import {TodoEntity} from "../src/types/todo";
 import {ValidationError} from "../src/utils/errors";
 import {pool} from "../src/utils/db";
 import {FieldPacket} from "mysql2";
+import {v4 as uuid} from "uuid";
 
 
 //pool always returns [[result], FieldPacket[]]
@@ -11,8 +12,8 @@ type TodoRecordResults = [TodoRecord[], FieldPacket[]]
 export class TodoRecord implements TodoEntity {
     public id?: string;
     public title: string;
-    public date: string;
-    public isDone: boolean;
+    public date?: string;
+    public isDone?: boolean;
     public description?: string;
 
     constructor(obj: TodoEntity) {
@@ -25,6 +26,23 @@ export class TodoRecord implements TodoEntity {
         this.date = obj.date;
         this.isDone = obj.isDone;
         this.description = obj.description;
+    }
+
+    async insert(): Promise<string> {
+        if (!this.id) {
+            this.id = uuid()
+        }
+        if(!this.isDone) {
+            this.isDone = false
+        }
+        //@TODO Fix insert method
+        await pool.execute("INSERT INTO `todos` VALUES(:id, :description, :title, :isDone, :date)", {
+            id: this.id,
+            title: this.title,
+            description: this.description,
+            isDone: this.isDone,
+        } as TodoRecord);
+        return this.id;
     }
 
     async delete(): Promise<void> {

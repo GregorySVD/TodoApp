@@ -1,4 +1,4 @@
-import {Router} from "express";
+import {Request, Response, Router} from "express";
 import {TodoRecord} from "../../records/todo.record.ts";
 import {ValidationError} from "../utils/errors.ts";
 
@@ -27,11 +27,21 @@ todoRouter
             throw new ValidationError("Task with given id");
         }
     })
-    .delete("/:id", async(req, res) => {
+    .delete("/:id", async (req, res) => {
         const task = await TodoRecord.getOne(req.params.id);
-        if(!task) {
+        if (!task) {
             throw new ValidationError("Task with given id not found");
         }
         await task.delete();
         res.end();
-});
+    })
+    .post("/", async (req, res) => {
+        const newTask = new TodoRecord({
+            description: 'Task description',
+            title: 'Title description TESTING POST',
+            id: '12412421',
+        });
+        await newTask.insert();
+
+        res.json(newTask);
+    });
