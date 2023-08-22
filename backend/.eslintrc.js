@@ -1,6 +1,3 @@
-
-
-
 module.exports = {
     root: true,
     parser: '@typescript-eslint/parser',
@@ -12,7 +9,8 @@ module.exports = {
         'prettier', // Add this line
     ],
     rules: {
-        quotes: ['error', 'double', { avoidEscape: true }],
+        quotes: ['error', 'double', {avoidEscape: true}],
         'no-console': 'off',
+        'import/prefer-default-export': 'off',
     },
 };
