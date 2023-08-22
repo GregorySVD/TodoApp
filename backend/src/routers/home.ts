@@ -4,5 +4,5 @@ export const homeRouter = Router();
 
 homeRouter
     .get("/", async (req, res) => {
-    res.redirect("/todo")
+    res.redirect("/todo");
 });

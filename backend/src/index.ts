@@ -22,7 +22,7 @@ app.get("/test/:id", async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-})
+});
 
 app.listen(3001, "0.0.0.0", () => {
     console.log("Listening on http://localhost:3001");

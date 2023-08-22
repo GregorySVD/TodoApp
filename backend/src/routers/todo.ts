@@ -26,4 +26,4 @@ todoRouter
         } catch (err) {
             throw new ValidationError("Task with given id");
         }
-    })
+    });

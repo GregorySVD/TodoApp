@@ -10,6 +10,7 @@ module.exports = {
     ],
     rules: {
         quotes: ['error', 'double', {avoidEscape: true}],
+        semi: ['error', 'always'],
         'no-console': 'off',
         'import/prefer-default-export': 'off',
     },
