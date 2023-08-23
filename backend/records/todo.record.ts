@@ -3,6 +3,7 @@ import {ValidationError} from "../src/utils/errors";
 import {pool} from "../src/utils/db";
 import {FieldPacket} from "mysql2";
 import {v4 as uuid} from "uuid";
+import {getCurrentFormattedDate} from "../src/utils/getCurrentFormattedDate";
 
 
 //pool always returns [[result], FieldPacket[]]
@@ -30,17 +31,20 @@ export class TodoRecord implements TodoEntity {
 
     async insert(): Promise<string> {
         if (!this.id) {
-            this.id = uuid()
+            this.id = uuid();
         }
         if(!this.isDone) {
             this.isDone = false
         }
-        //@TODO Fix insert method
+        if(!this.date) {
+            this.date = getCurrentFormattedDate();
+        }
         await pool.execute("INSERT INTO `todos` VALUES(:id, :description, :title, :isDone, :date)", {
             id: this.id,
             title: this.title,
             description: this.description,
             isDone: this.isDone,
+            date: this.date,
         } as TodoRecord);
         return this.id;
     }
