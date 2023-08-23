@@ -33,34 +33,34 @@ export class TodoRecord implements TodoEntity {
         if (!this.id) {
             this.id = uuid();
         }
-        if(!this.isDone) {
+        if (!this.isDone) {
             this.isDone = false
         }
-        if(!this.date) {
+        if (!this.date) {
             this.date = getCurrentFormattedDate();
         }
-        await pool.execute("INSERT INTO `todos` VALUES(:id, :description, :title, :isDone, :date)", {
+        await pool.execute("INSERT INTO `todos` VALUES(:id, :title, :date, :isDone, :description)", {
             id: this.id,
             title: this.title,
-            description: this.description,
-            isDone: this.isDone,
             date: this.date,
+            isDone: this.isDone,
+            description: this.description,
         } as TodoRecord);
         return this.id;
     }
 
     async delete(): Promise<void> {
-         await pool.execute("DELETE FROM `todos` WHERE `id` = :id",{
+        await pool.execute("DELETE FROM `todos` WHERE `id` = :id", {
             id: this.id,
         })
     }
 
     static async getOne(id: string): Promise<TodoRecord | null> {
         const [result] = (await pool.execute("SELECT * FROM `todos` WHERE `id` = :id",
-        {
-            id,
-        }) as TodoRecordResults)
-        return result.length === 0 ? null :  new TodoRecord(result[0]);
+            {
+                id,
+            }) as TodoRecordResults)
+        return result.length === 0 ? null : new TodoRecord(result[0]);
     }
 
     static async ListAll(): Promise<TodoRecord[]> {

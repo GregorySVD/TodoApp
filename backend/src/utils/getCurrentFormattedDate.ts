@@ -2,7 +2,7 @@ function addLeadingZero(value: number): string {
     return value < 10 ? `0${value}` : value+'';
 }
 
-export function getCurrentFormattedDate() {
+export function getCurrentFormattedDate():string {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = addLeadingZero(currentDate.getMonth() + 1);
@@ -14,3 +14,4 @@ export function getCurrentFormattedDate() {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
 }
+console.log(getCurrentFormattedDate())
