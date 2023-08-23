@@ -1,4 +1,4 @@
-import {Request, Response, Router} from "express";
+import { Router} from "express";
 import {TodoRecord} from "../../records/todo.record.ts";
 import {ValidationError} from "../utils/errors.ts";
 
@@ -37,9 +37,9 @@ todoRouter
     })
     .post("/", async (req, res) => {
         const newTask = new TodoRecord({
-            description: 'Task description',
-            title: 'Title description TESTING POST',
-            id: '12412421',
+            description: "Task description",
+            title: "Title description TESTING POST",
+            id: "12412421",
         });
         await newTask.insert();
 
