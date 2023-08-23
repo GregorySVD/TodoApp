@@ -1,4 +1,4 @@
-import { Router} from "express";
+import {Router} from "express";
 import {TodoRecord} from "../../records/todo.record.ts";
 import {ValidationError} from "../utils/errors.ts";
 
@@ -40,8 +40,19 @@ todoRouter
             description: "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST",
             title: "ETTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEFFAT",
         });
-        await console.log(newTask.date)
         await newTask.insert();
 
         res.json(newTask);
+    })
+    .patch("/:id", async (req, res) => {
+        const task = await TodoRecord.getOne(req.params.id);
+        if (!task) {
+            throw new ValidationError("Task with given id not found");
+        }
+        try {
+            await task.markDone(req.params.id);
+        } catch (err) {
+            res.status(500).json({error: `Error updating todo with id ${req.params.id}, try again later`});
+        }
+        res.end();
     });

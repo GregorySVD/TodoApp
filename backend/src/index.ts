@@ -3,8 +3,8 @@ import "express-async-errors";
 
 import {todoRouter} from "./routers/todo.ts";
 import {handleError} from "./utils/errors.ts";
-import {TodoRecord} from "../records/todo.record";
-import {homeRouter} from "./routers/home";
+import {TodoRecord} from "../records/todo.record.ts";
+import {homeRouter} from "./routers/home.ts";
 
 const app = express();
 
