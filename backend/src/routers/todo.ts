@@ -37,10 +37,10 @@ todoRouter
     })
     .post("/", async (req, res) => {
         const newTask = new TodoRecord({
-            description: "Task description",
-            title: "Title description TESTING POST",
-            id: "12412421",
+            description: "lorem",
+            title: "lorem",
         });
+        await console.log(newTask.date)
         await newTask.insert();
 
         res.json(newTask);
