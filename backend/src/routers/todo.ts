@@ -50,7 +50,7 @@ todoRouter
             throw new ValidationError("Task with given id not found");
         }
         try {
-            await task.markDone(req.params.id);
+            await task.markItDone();
         } catch (err) {
             res.status(500).json({error: `Error updating todo with id ${req.params.id}, try again later`});
         }

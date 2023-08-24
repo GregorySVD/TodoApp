@@ -28,11 +28,12 @@ export class TodoRecord implements TodoEntity {
         this.isDone = obj.isDone;
         this.description = obj.description;
     }
-    async markDone(id: string):Promise<void> {
+    async markItDone():Promise<void> {
         await pool.execute("UPDATE `todos` SET `isDone` = 1 WHERE `id` = :id",{
             id: this.id,
         });
     }
+
 
     async insert(): Promise<string> {
         if (!this.id) {
