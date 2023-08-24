@@ -1,4 +1,4 @@
-import {Router} from "express";
+import {Request, Response, Router} from "express";
 import {TodoRecord} from "../../records/todo.record.ts";
 import {ValidationError} from "../utils/errors.ts";
 
@@ -6,7 +6,7 @@ export const todoRouter = Router();
 
 
 todoRouter
-    .get("/", async (req, res) => {
+    .get("/", async (req: Request, res: Response) => {
         try {
             const result = await TodoRecord.ListAll();
             res.json(result);
@@ -14,7 +14,7 @@ todoRouter
             throw new ValidationError("List of gifts cannot be found, please try again later");
         }
     })
-    .get("/:id", async (req, res) => {
+    .get("/:id", async (req: Request, res: Response) => {
         try {
             const result = await TodoRecord.getOne(req.params.id);
             if (!result) {
@@ -27,7 +27,7 @@ todoRouter
             throw new ValidationError("Task with given id");
         }
     })
-    .delete("/:id", async (req, res) => {
+    .delete("/:id", async (req: Request, res: Response) => {
         const task = await TodoRecord.getOne(req.params.id);
         if (!task) {
             throw new ValidationError("Task with given id not found");
@@ -35,22 +35,33 @@ todoRouter
         await task.delete();
         res.end();
     })
-    .post("/", async (req, res) => {
+    .post("/", async (req: Request, res: Response) => {
         const newTask = new TodoRecord({
             description: "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST",
             title: "ETTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEFFAT",
         });
         await newTask.insert();
-
         res.json(newTask);
     })
-    .patch("/:id", async (req, res) => {
+    .patch("/done/:id", async (req: Request, res: Response) => {
         const task = await TodoRecord.getOne(req.params.id);
         if (!task) {
             throw new ValidationError("Task with given id not found");
         }
         try {
             await task.markItDone();
+        } catch (err) {
+            res.status(500).json({error: `Error updating todo with id ${req.params.id}, try again later`});
+        }
+        res.end();
+    })
+    .patch("/undone/:id", async (req: Request, res: Response) => {
+        const task = await TodoRecord.getOne(req.params.id);
+        if (!task) {
+            throw new ValidationError("Task with given id not found");
+        }
+        try {
+            await task.markItUnDone();
         } catch (err) {
             res.status(500).json({error: `Error updating todo with id ${req.params.id}, try again later`});
         }

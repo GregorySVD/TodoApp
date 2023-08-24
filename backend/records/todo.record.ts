@@ -33,6 +33,11 @@ export class TodoRecord implements TodoEntity {
             id: this.id,
         });
     }
+    async markItUnDone():Promise<void> {
+        await pool.execute("UPDATE `todos` SET `isDone` = 0 WHERE `id` = :id",{
+            id: this.id,
+        });
+    }
 
 
     async insert(): Promise<string> {
