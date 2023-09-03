@@ -16,6 +16,8 @@ test("Can build TodoRecord", async () => {
     expect(ad.title).toBe("Testing Jest");
     expect(ad.description).toBe("this is mock task");
 });
+
+// title Validation
 test("Validates too short title for task todo", async () => {
     const shortTitle = "X".repeat(2);
     expect(() => new TodoRecord({
@@ -29,4 +31,32 @@ test("Validates too long title for task todo", async () => {
         ...mockTodo,
         title: longTitle,
     })).toThrow("Title has to be between 3 and 150 characters long");
+});
+
+// Description validation
+test("Description is null, do not throw error", async () => {
+    expect(() => new TodoRecord({
+        title: "Description is null",
+    })).not.toThrow("Description has to be between 3 and 255 characters long");
+});
+test("Validates too long description for task todo", async () => {
+    const longTitle = "X".repeat(256);
+    expect(() => new TodoRecord({
+        ...mockTodo,
+        description: longTitle,
+    })).toThrow("Description has to be between 3 and 255 characters long");
+});
+test("Validates too short description for task todo", async () => {
+    const longTitle = "X".repeat(2);
+    expect(() => new TodoRecord({
+        ...mockTodo,
+        description: longTitle,
+    })).toThrow("Description has to be between 3 and 255 characters long");
+});
+test("No description returns null", async () => {
+    const Todo = new TodoRecord({
+        ...mockTodo,
+        description: null,
+    });
+    expect(Todo.description).toBeNull();
 });

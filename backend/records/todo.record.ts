@@ -1,6 +1,6 @@
 import {FieldPacket} from "mysql2";
 import {v4 as uuid} from "uuid";
-import {TodoEntity} from "../src/types/todo/index.ts";
+import {TodoEntity} from "../src/types";
 import {ValidationError} from "../src/utils/errors.ts";
 import {pool} from "../src/utils/db.ts";
 import {getCurrentFormattedDate} from "../src/utils/getCurrentFormattedDate.ts";
@@ -22,9 +22,10 @@ export class TodoRecord implements TodoEntity {
         if (!obj.title || obj.title.length < 3 || obj.title.length > 150) {
             throw new ValidationError("Title has to be between 3 and 150 characters long");
         }
-        if (obj.description !== null && obj.description.length < 3 || obj.description.length > 255) {
+        if (obj.description !== null && (obj.description.length < 3 || obj.description.length > 255)) {
             throw new ValidationError("Description has to be between 3 and 255 characters long");
         }
+
         this.id = obj.id;
         this.title = obj.title;
         this.date = obj.date;
