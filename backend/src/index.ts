@@ -1,4 +1,5 @@
 import express = require("express");
+import cors from "cors";
 import "express-async-errors";
 
 import {todoRouter} from "./routers/todo.ts";
@@ -6,6 +7,9 @@ import {handleError} from "./utils/errors.ts";
 import {homeRouter} from "./routers/home.ts";
 
 const app = express();
+app.use(cors({
+    origin: "http://localhost:3000",
+}));
 
 app.use(express.json());
 
