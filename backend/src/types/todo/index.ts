@@ -1,1 +1,1 @@
-export * from "./todo.entity.ts";
+export * from "./todo.entity";

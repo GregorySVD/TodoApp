@@ -1,13 +1,14 @@
-import {TodoEntity} from "../src/types/todo";
-import {ValidationError} from "../src/utils/errors";
-import {pool} from "../src/utils/db";
 import {FieldPacket} from "mysql2";
 import {v4 as uuid} from "uuid";
-import {getCurrentFormattedDate} from "../src/utils/getCurrentFormattedDate";
+import {TodoEntity} from "../src/types/todo/index.ts";
+import {ValidationError} from "../src/utils/errors.ts";
+import {pool} from "../src/utils/db.ts";
+import {getCurrentFormattedDate} from "../src/utils/getCurrentFormattedDate.ts";
 
 
-//pool always returns [[result], FieldPacket[]]
-type TodoRecordResults = [TodoRecord[], FieldPacket[]]
+// pool always returns [[result], FieldPacket[]]
+
+type TodoRecordResults = [TodoRecord[], FieldPacket[]];
 
 
 export class TodoRecord implements TodoEntity {
@@ -21,20 +22,22 @@ export class TodoRecord implements TodoEntity {
         if (!obj.title || obj.title.length < 3 || obj.title.length > 150) {
             throw new ValidationError("Title has to be between 3 and 150 characters long");
         }
-        //@TODO: Add description validation
+        // @TODO: Add description validation
         this.id = obj.id;
         this.title = obj.title;
         this.date = obj.date;
         this.isDone = obj.isDone;
         this.description = obj.description;
     }
-    async markItDone():Promise<void> {
-        await pool.execute("UPDATE `todos` SET `isDone` = 1 WHERE `id` = :id",{
+
+    async markItDone(): Promise<void> {
+        await pool.execute("UPDATE `todos` SET `isDone` = 1 WHERE `id` = :id", {
             id: this.id,
         });
     }
-    async markItUnDone():Promise<void> {
-        await pool.execute("UPDATE `todos` SET `isDone` = 0 WHERE `id` = :id",{
+
+    async markItUnDone(): Promise<void> {
+        await pool.execute("UPDATE `todos` SET `isDone` = 0 WHERE `id` = :id", {
             id: this.id,
         });
     }
@@ -45,7 +48,7 @@ export class TodoRecord implements TodoEntity {
             this.id = uuid();
         }
         if (!this.isDone) {
-            this.isDone = false
+            this.isDone = false;
         }
         if (!this.date) {
             this.date = getCurrentFormattedDate();
@@ -63,14 +66,14 @@ export class TodoRecord implements TodoEntity {
     async delete(): Promise<void> {
         await pool.execute("DELETE FROM `todos` WHERE `id` = :id", {
             id: this.id,
-        })
+        });
     }
 
     static async getOne(id: string): Promise<TodoRecord | null> {
         const [result] = (await pool.execute("SELECT * FROM `todos` WHERE `id` = :id",
             {
                 id,
-            }) as TodoRecordResults)
+            }) as TodoRecordResults);
         return result.length === 0 ? null : new TodoRecord(result[0]);
     }
 
