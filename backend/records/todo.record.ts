@@ -15,14 +15,16 @@ export class TodoRecord implements TodoEntity {
     public id?: string;
     public title: string;
     public date?: string;
-    public isDone?: boolean;
+    public isDone: boolean;
     public description?: string;
 
     constructor(obj: TodoEntity) {
         if (!obj.title || obj.title.length < 3 || obj.title.length > 150) {
             throw new ValidationError("Title has to be between 3 and 150 characters long");
         }
-        // @TODO: Add description validation
+        if (obj.description !== null && obj.description.length < 3 || obj.description.length > 255) {
+            throw new ValidationError("Description has to be between 3 and 255 characters long");
+        }
         this.id = obj.id;
         this.title = obj.title;
         this.date = obj.date;
@@ -53,7 +55,9 @@ export class TodoRecord implements TodoEntity {
         if (!this.date) {
             this.date = getCurrentFormattedDate();
         }
-        await pool.execute("INSERT INTO `todos` VALUES(:id, :title, :date, :isDone, :description)", {
+        await pool.execute("INSERT INTO `todos` (`id`, `title`, `date`, `isDone`, `description`)VALUES(:id, :title, :date," +
+            " :isDone," +
+            " :description)", {
             id: this.id,
             title: this.title,
             date: this.date,

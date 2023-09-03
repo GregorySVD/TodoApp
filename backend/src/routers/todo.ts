@@ -11,7 +11,7 @@ todoRouter
             const result = await TodoRecord.ListAll();
             res.json(result);
         } catch (err) {
-            throw new ValidationError("List of gifts cannot be found, please try again later");
+            throw new ValidationError("List of tasks cannot be found, please try again later");
         }
     })
     .get("/:id", async (req: Request, res: Response) => {
@@ -28,20 +28,26 @@ todoRouter
         }
     })
     .delete("/:id", async (req: Request, res: Response) => {
+        try {
         const task = await TodoRecord.getOne(req.params.id);
         if (!task) {
             throw new ValidationError("Task with given id not found");
         }
         await task.delete();
         res.end();
+        } catch (e) {
+            throw new ValidationError("Cannot delete task with given id");
+        }
     })
     .post("/", async (req: Request, res: Response) => {
-        const newTask = new TodoRecord({
-            description: "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST",
-            title: "ETTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEFFAT",
-        });
-        await newTask.insert();
-        res.json(newTask);
+        try {
+            const newTask = new TodoRecord(req.body);
+            await newTask.insert();
+            res.json(newTask);
+        } catch (e) {
+            throw new ValidationError("Cannot insert task with given id");
+        }
+
     })
     .patch("/done/:id", async (req: Request, res: Response) => {
         const task = await TodoRecord.getOne(req.params.id);
