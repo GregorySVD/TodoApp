@@ -26,7 +26,7 @@ export class TodoRecord implements TodoEntity {
             throw new ValidationError("Description has to be between 3 and 255 characters long");
         }
 
-        this.id = obj.id;
+        this.id = obj.id || uuid();
         this.title = obj.title;
         this.date = obj.date;
         this.isDone = obj.isDone;
@@ -86,5 +86,4 @@ export class TodoRecord implements TodoEntity {
         const [results] = (await pool.execute("SELECT * FROM `todos` ORDER BY `date` ASC")) as TodoRecordResults;
         return results.map(obj => new TodoRecord(obj));
     }
-
 }

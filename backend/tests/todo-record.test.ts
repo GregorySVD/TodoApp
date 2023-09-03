@@ -58,5 +58,6 @@ test("No description returns null", async () => {
         ...mockTodo,
         description: null,
     });
+    console.log(Todo);
     expect(Todo.description).toBeNull();
 });
