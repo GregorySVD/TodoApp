@@ -1,4 +1,4 @@
-import { Router} from "express";
+import {Request, Response, Router} from "express";
 import {TodoRecord} from "../../records/todo.record.ts";
 import {ValidationError} from "../utils/errors.ts";
 
@@ -6,15 +6,15 @@ export const todoRouter = Router();
 
 
 todoRouter
-    .get("/", async (req, res) => {
+    .get("/", async (req: Request, res: Response) => {
         try {
             const result = await TodoRecord.ListAll();
             res.json(result);
         } catch (err) {
-            throw new ValidationError("List of gifts cannot be found, please try again later");
+            throw new ValidationError("List of tasks cannot be found, please try again later");
         }
     })
-    .get("/:id", async (req, res) => {
+    .get("/:id", async (req: Request, res: Response) => {
         try {
             const result = await TodoRecord.getOne(req.params.id);
             if (!result) {
@@ -27,21 +27,49 @@ todoRouter
             throw new ValidationError("Task with given id");
         }
     })
-    .delete("/:id", async (req, res) => {
+    .delete("/:id", async (req: Request, res: Response) => {
+        try {
         const task = await TodoRecord.getOne(req.params.id);
         if (!task) {
             throw new ValidationError("Task with given id not found");
         }
         await task.delete();
         res.end();
+        } catch (e) {
+            throw new ValidationError("Cannot delete task with given id");
+        }
     })
-    .post("/", async (req, res) => {
-        const newTask = new TodoRecord({
-            description: "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST",
-            title: "ETTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEFFAT",
-        });
-        await console.log(newTask.date)
-        await newTask.insert();
+    .post("/", async (req: Request, res: Response) => {
+        try {
+            const newTask = new TodoRecord(req.body);
+            await newTask.insert();
+            res.json(newTask);
+        } catch (e) {
+            throw new ValidationError("Cannot insert task with given id");
+        }
 
-        res.json(newTask);
+    })
+    .patch("/done/:id", async (req: Request, res: Response) => {
+        const task = await TodoRecord.getOne(req.params.id);
+        if (!task) {
+            throw new ValidationError("Task with given id not found");
+        }
+        try {
+            await task.markItDone();
+        } catch (err) {
+            res.status(500).json({error: `Error updating todo with id ${req.params.id}, try again later`});
+        }
+        res.end();
+    })
+    .patch("/undone/:id", async (req: Request, res: Response) => {
+        const task = await TodoRecord.getOne(req.params.id);
+        if (!task) {
+            throw new ValidationError("Task with given id not found");
+        }
+        try {
+            await task.markItUnDone();
+        } catch (err) {
+            res.status(500).json({error: `Error updating todo with id ${req.params.id}, try again later`});
+        }
+        res.end();
     });

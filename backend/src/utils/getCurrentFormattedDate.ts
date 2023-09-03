@@ -1,5 +1,5 @@
 function addLeadingZero(value: number): string {
-    return value < 10 ? `0${value}` : value+'';
+    return value < 10 ? `0${value}` : `${value}`;
 }
 
 export function getCurrentFormattedDate():string {
@@ -14,4 +14,4 @@ export function getCurrentFormattedDate():string {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
 }
-console.log(getCurrentFormattedDate())
+console.log(getCurrentFormattedDate());
