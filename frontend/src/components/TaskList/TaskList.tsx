@@ -20,7 +20,7 @@ export const TaskList = () => {
             <h1>Task to do:</h1>
             <ol>
                 {tasks.map((task) => (
-                    <li key={task.id}>{task.title}<Btn text="Done"/></li>
+                    <li key={task.id}>{task.title}<Btn text="✅"/><Btn text="🗑️"/></li>
                 ))}
             </ol>
         </div>
