@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {TodoEntity} from "types"
+import {Btn} from "../common/Btn";
 
 
 export const TaskList = () => {
@@ -19,7 +20,7 @@ export const TaskList = () => {
             <h1>Task to do:</h1>
             <ol>
                 {tasks.map((task) => (
-                    <li key={task.id}>{task.title}</li>
+                    <li key={task.id}>{task.title}<Btn text="Done"/></li>
                 ))}
             </ol>
         </div>
