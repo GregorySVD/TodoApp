@@ -17,7 +17,7 @@ export const TaskList = () => {
 
     return (
         <div className="Task-List__Container">
-            <h1>Task to do:</h1>
+            <h1>Recent Tasks</h1>
             <ol>
                 {tasks.map((task) => (
                     <li key={task.id}>{task.title}<Btn text="✅"/><Btn text="🗑️"/></li>
