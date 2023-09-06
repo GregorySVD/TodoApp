@@ -1,7 +1,8 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import {TodoEntity} from "types"
 import {Btn} from "../common/Btn";
 import {TaskContext} from "../../context/TaskContext";
+import {Loader} from "../common/Loader/Loader";
 
 
 
@@ -15,9 +16,12 @@ export const TaskList = () => {
             const data = await res.json();
             setTask(data);
         })();
-    }, [tasks]);
-
+    }, []);
+    if(tasks.length === 0) {
+        return <Loader/>
+    }
     return (
+
         <div className="Task-List__Container">
             <TaskContext.Provider value={{tasks}}>
                 <h1>Recent Tasks</h1>
