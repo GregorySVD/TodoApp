@@ -1,11 +1,19 @@
-import React, {SyntheticEvent, useState} from 'react';
+import React, {SyntheticEvent, useContext, useState} from 'react';
 import {Btn} from "../common/Btn";
 import {TodoEntity} from 'types'
+import {FetchDataContext} from "../../context/FetchDataContext.tsx";
+import {Loader} from "../common/Loader/Loader";
 
 export const AddForm = () => {
     const [loading, setLoading] = useState(false);
     const [id, setId] = useState('');
+    const context = useContext(FetchDataContext);
 
+    if (!context) {
+        throw new Error('FetchDataContext is not provided!');
+    }
+
+    const {fetchData, setFetchData} = context;
 
     const [form, setForm] = useState<TodoEntity>({
         title: '',
@@ -26,7 +34,7 @@ export const AddForm = () => {
             })
             const data = await res.json();
             setId(data.id);
-
+            setFetchData(true);
         } finally {
             setLoading(false);
         }
@@ -40,7 +48,7 @@ export const AddForm = () => {
         }));
     };
     if (loading) {
-        return <h1>Loading...</h1>
+        return <Loader/>
     }
 
     return (
