@@ -1,27 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import {TodoEntity} from "types"
+import React from 'react';
+import {Btn} from "../common/Btn";
+import {TaskContext} from "../../context/TaskContext";
+import {Loader} from "../common/Loader/Loader";
 
 
 export const TaskList = () => {
-    const [tasks, setTask] = useState<TodoEntity[]>([]);
+    const context = React.useContext(TaskContext);
+    if (!context) return <Loader/>;
 
-
-    useEffect(() => {
-        (async () => {
-            const res = await fetch(`http://localhost:3001/todo`)
-            const data = await res.json();
-            setTask(data);
-        })();
-    }, []);
-
+    const {tasks} = context;
     return (
+
         <div className="Task-List__Container">
-            <h1>Task to do:</h1>
-            <ol>
+            <h1>Recent Tasks</h1>
+            <ol className="Task-List__Container">
                 {tasks.map((task) => (
-                    <li key={task.id}>{task.title}</li>
+                    <li key={task.id}>{task.title}<Btn text="✅"/><Btn text="🗑️"/></li>
                 ))}
             </ol>
         </div>
+
     )
 }
