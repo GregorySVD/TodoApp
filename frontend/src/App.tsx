@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {TaskList} from "./components/TaskList/TaskList";
 import {AddForm} from "./components/AddForm/AddForm";
-import './App.css'
 import {TaskContext} from "./context/TaskContext";
 import {TodoEntity} from 'types'
 import {Loader} from "./components/common/Loader/Loader";

@@ -3,6 +3,7 @@ import React from "react";
 import {TaskContext} from "../../context/TaskContext";
 import {Loader} from "../common/Loader/Loader";
 import {FetchDataContext} from "../../context/FetchDataContext.tsx";
+import './OneTask.css'
 
 
 export const OneTask = () => {
@@ -28,7 +29,7 @@ export const OneTask = () => {
     }
     return (
         <div>
-            <ul>
+            <ul className="OneTask__List">
                 {tasks.map((task) => (
                     <li key={task.id}>
                         {task.title}
