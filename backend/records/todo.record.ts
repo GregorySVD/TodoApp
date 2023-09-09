@@ -26,7 +26,6 @@ export class TodoRecord implements TodoEntity {
         this.title = obj.title;
         this.date = obj.date;
         this.isDone = obj.isDone;
-        this.description = obj.description;
 
         if (obj.description === null || obj.description === undefined) {
             this.description = null;
