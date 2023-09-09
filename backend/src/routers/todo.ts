@@ -42,6 +42,7 @@ todoRouter
     .post("/", async (req: Request, res: Response) => {
         try {
             const newTask = new TodoRecord(req.body);
+            await console.log(newTask);
             await newTask.insert();
             res.json(newTask);
         } catch (e) {
