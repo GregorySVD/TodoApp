@@ -14,4 +14,3 @@ export function getCurrentFormattedDate():string {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
 }
-console.log(getCurrentFormattedDate());
