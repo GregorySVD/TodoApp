@@ -36,14 +36,8 @@ export class TodoRecord implements TodoEntity {
         }
     }
 
-    async markItDone(): Promise<void> {
-        await pool.execute("UPDATE `todos` SET `isDone` = 1 WHERE `id` = :id", {
-            id: this.id,
-        });
-    }
-
-    async markItUnDone(): Promise<void> {
-        await pool.execute("UPDATE `todos` SET `isDone` = 0 WHERE `id` = :id", {
+    async switchIsDoneState(): Promise<void> {
+        await pool.execute("UPDATE `todos` SET `isDone` = CASE WHEN `isDone` = 0 THEN 1 WHEN `isDone` = 1 THEN 0 END WHERE `id` = :id;", {
             id: this.id,
         });
     }

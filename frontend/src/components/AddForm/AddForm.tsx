@@ -18,7 +18,6 @@ export const AddForm = () => {
 
     const [form, setForm] = useState<TodoEntity>({
         title: '',
-        description: null,
     });
     const saveTodo = async (e: SyntheticEvent) => {
         e.preventDefault();

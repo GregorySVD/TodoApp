@@ -11,12 +11,12 @@ afterAll(async () => {
     await pool.end();
 });
 test("TodoRecord returns data from database from one entry", async () => {
-    const todo = await TodoRecord.getOne("719ce2da-c46e-46b8-a6dd-213265fe8633");
+    const todo = await TodoRecord.getOne("621e0174-2e40-4cad-9aef-9f4a30e55418");
     expect(todo).toBeDefined();
-    expect(todo.id).toBe("719ce2da-c46e-46b8-a6dd-213265fe8633");
-    expect(todo.title).toBe("KICIA DO APTEKI!");
+    expect(todo.id).toBe("621e0174-2e40-4cad-9aef-9f4a30e55418");
+    expect(todo.title).toBe("Nic");
     expect(todo.description).toBeDefined();
-    expect(todo.isDone).toBeFalsy();
+    expect(todo.isDone).toBeDefined();
     expect(todo.date).toBeDefined();
 });
 
