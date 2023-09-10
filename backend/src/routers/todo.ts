@@ -57,8 +57,10 @@ todoRouter
         }
         try {
             await task.switchIsDoneState();
+            res.json({isDone: task.isDone});
         } catch (err) {
             res.status(500).json({error: `Error updating todo with id ${req.params.id}, try again later`});
         }
+
         res.end();
     });
