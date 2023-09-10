@@ -16,11 +16,20 @@ export const OneTask = () => {
     const {setFetchData} = contextFetch;
     const {tasks} = contextTask;
 
-    const deleteTask = async (taskId: string| undefined) => {
-        const res = await fetch(`http://localhost:3001/todo/${taskId}`, {
+    const switchIsDoneState = async (taskId: string | undefined) => {
+        await fetch(`http://localhost:3001/todo/switch/${taskId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        setFetchData(true);
+    }
+
+    const deleteTask = async (taskId: string | undefined) => {
+        await fetch(`http://localhost:3001/todo/${taskId}`, {
             method: 'DELETE',
         });
-        console.log(`Deleting ${taskId}`)
         setFetchData(true);
     }
 
@@ -33,7 +42,9 @@ export const OneTask = () => {
                 {tasks.map((task) => (
                     <li key={task.id}>
                         {task.title}
-                        <Btn text="✅"/>
+                        {task.isDone == false ? <Btn text="✅" onClick={() => switchIsDoneState(task.id)}/> :
+                            <Btn text="⛔" onClick={() => switchIsDoneState(task.id)}/>}
+
                         <Btn text="🗑️" onClick={() => deleteTask(task.id)}/>
                     </li>
                 ))}

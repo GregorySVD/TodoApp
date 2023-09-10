@@ -13,9 +13,7 @@ export const AddForm = () => {
     if (!context) {
         throw new Error('FetchDataContext is not provided!');
     }
-
     const {setFetchData} = context;
-
     const [form, setForm] = useState<TodoEntity>({
         title: '',
     });

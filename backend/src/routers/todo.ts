@@ -29,12 +29,12 @@ todoRouter
     })
     .delete("/:id", async (req: Request, res: Response) => {
         try {
-        const task = await TodoRecord.getOne(req.params.id);
-        if (!task) {
-            throw new ValidationError("Task with given id not found");
-        }
-        await task.delete();
-        res.end();
+            const task = await TodoRecord.getOne(req.params.id);
+            if (!task) {
+                throw new ValidationError("Task with given id not found");
+            }
+            await task.delete();
+            res.end();
         } catch (e) {
             throw new ValidationError("Cannot delete task with given id");
         }
@@ -50,25 +50,13 @@ todoRouter
         }
 
     })
-    .patch("/done/:id", async (req: Request, res: Response) => {
+    .patch("/switch/:id", async (req: Request, res: Response) => {
         const task = await TodoRecord.getOne(req.params.id);
         if (!task) {
             throw new ValidationError("Task with given id not found");
         }
         try {
-            await task.markItDone();
-        } catch (err) {
-            res.status(500).json({error: `Error updating todo with id ${req.params.id}, try again later`});
-        }
-        res.end();
-    })
-    .patch("/undone/:id", async (req: Request, res: Response) => {
-        const task = await TodoRecord.getOne(req.params.id);
-        if (!task) {
-            throw new ValidationError("Task with given id not found");
-        }
-        try {
-            await task.markItUnDone();
+            await task.switchIsDoneState();
         } catch (err) {
             res.status(500).json({error: `Error updating todo with id ${req.params.id}, try again later`});
         }
