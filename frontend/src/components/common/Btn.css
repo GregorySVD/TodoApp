@@ -1,0 +1,16 @@
+.btn-task-done {
+    background: green;
+    border: none;
+    margin: 0 1vh;
+    border-radius: 3px;
+
+}
+
+
+.btn-task-undone {
+    background: red;
+    border: none;
+    margin: 0 1vh;
+    border-radius: 3px;
+
+}

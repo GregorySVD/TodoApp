@@ -3,6 +3,7 @@ import {TodoEntity} from 'types'
 import {Btn} from "../common/Btn";
 import {FetchDataContext} from "../../context/FetchDataContext.tsx";
 import {Loader} from "../common/Loader/Loader";
+import './TaskTableRow.css'
 
 interface Props {
     task: TodoEntity;
@@ -42,12 +43,24 @@ export const TaskTableRow = (props: Props) => {
 
     return (
         <tr>
-            <td>
+            <td className="Td_title">
                 {props.task.title}
             </td>
-            <td>{props.task.isDone == false ? <Btn text="✅ Done" onClick={() => switchIsDoneState(props.task.id)}/> :
-                <Btn text="⛔ Undone" onClick={() => switchIsDoneState(props.task.id)}/>}</td>
-            <td><Btn text="🗑️" onClick={() => deleteTask(props.task.id)}/></td>
+            <td className="Td_task_status">
+                {props.task.isDone == false
+                ? <Btn
+                    className="btn-task-done"
+                    text="✅ Done"
+                    onClick={() => switchIsDoneState(props.task.id)}/>
+                : <Btn
+                    className="btn-task-undone"
+                    text="⛔ Undone"
+                     onClick={() => switchIsDoneState(props.task.id)}/>}
+            </td>
+            <td>
+                <Btn
+                    text="🗑️" onClick={() => deleteTask(props.task.id)}/>
+            </td>
         </tr>
     )
 }

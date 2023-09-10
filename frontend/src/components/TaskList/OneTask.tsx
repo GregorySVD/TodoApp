@@ -23,7 +23,7 @@ export const OneTask = () => {
 
     return (
         <div>
-            <table>
+            <table className="TaskList_table">
                 <thead>
                 <tr>
                     <th>Task title</th>
