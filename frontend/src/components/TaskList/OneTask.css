@@ -1,16 +1,25 @@
 .OneTask__List li {
     background-color: #282e33;
     border-radius: 3px;
-
     list-style: none;
     width: 90%;
     margin-bottom: 1vh;
     margin-left: 5%;
     padding: 10px 0;
-    color: #acb8c3;
+
 }
+
 .OneTask__List button {
     border: none;
     margin: 0 1vh;
     background-color: #282e33;
+}
+
+.done {
+    color: rgba(174, 185, 198, 0.5);
+    text-decoration: line-through;
+}
+
+.undone {
+    color: #aeb9c6;
 }

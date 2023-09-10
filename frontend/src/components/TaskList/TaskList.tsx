@@ -9,6 +9,5 @@ export const TaskList = () => {
             <h1>Recent Tasks</h1>
             <OneTask/>
         </div>
-
     )
 }
