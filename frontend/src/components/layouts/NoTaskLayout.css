@@ -1,0 +1,8 @@
+.NoTaskLayout__quote_container {
+    aspect-ratio: 16/9;
+    text-align: center;
+
+}
+.NoTaskLayout__quote_container blockquote {
+    color: red;
+}

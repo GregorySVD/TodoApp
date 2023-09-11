@@ -7,6 +7,7 @@ import {TodoEntity} from 'types'
 import {Loader} from "./components/common/Loader/Loader";
 import {FetchDataContext} from "./context/FetchDataContext.tsx";
 import {ClearTasksDone} from "./components/TaskList/ClearTasksDone";
+import {NoTaskLayout} from "./components/layouts/NoTaskLayout";
 
 function App() {
 
@@ -28,14 +29,18 @@ function App() {
         return <Loader/>
     }
 
+
     return (
         <div className="App">
             <FetchDataContext.Provider value={{fetchData, setFetchData}}>
                 <TaskContext.Provider value={{tasks}}>
-                    <ClearTasksDone/>
-                    <AddForm/>
-                    <TaskList/>
-
+                    {(tasks.length === 0) ? <NoTaskLayout/> :
+                        <div>
+                            <ClearTasksDone/>
+                            <AddForm/>
+                            <TaskList/>
+                        </div>
+                    }
                 </TaskContext.Provider>
             </FetchDataContext.Provider>
         </div>
