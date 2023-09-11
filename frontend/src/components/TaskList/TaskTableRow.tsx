@@ -20,9 +20,18 @@ export const TaskTableRow = (props: Props) => {
 
 
     const deleteTask = async (taskId: string | undefined) => {
-        await fetch(`http://localhost:3001/todo/${taskId}`, {
+        if(!window.confirm(`Are you sure you want to remove ${props.task.title} task?`)) {
+            return;
+        }
+        const res = await fetch(`http://localhost:3001/todo/${taskId}`, {
             method: 'DELETE',
         });
+
+        if (res.status === 400 || res.status === 500) {
+            const error = await res.json();
+            alert(`Error occurred: ${error.message}`)
+            return;
+        }
         setFetchData(true);
     }
 
@@ -47,7 +56,7 @@ export const TaskTableRow = (props: Props) => {
                 {props.task.title}
             </td>
             <td className="Td_task_status">
-                {props.task.isDone == true
+                {props.task.isDone === 1
                 ? <Btn
                     className="btn-task-done"
                     text="✅ Done"
