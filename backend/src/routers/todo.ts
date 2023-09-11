@@ -27,6 +27,14 @@ todoRouter
             throw new ValidationError("Task with given id");
         }
     })
+    .delete("/done", async (req, res) => {
+        try {
+            await TodoRecord.DeleteAllDoneTasks();
+            res.end();
+        } catch (e) {
+            throw new ValidationError("Cannot delete this tasks, try again later");
+        }
+    })
     .delete("/:id", async (req: Request, res: Response) => {
         try {
             const task = await TodoRecord.getOne(req.params.id);
@@ -40,14 +48,7 @@ todoRouter
         }
 
     })
-    .delete("/done", async (req, res) => {
-        try {
-            await TodoRecord.DeleteAllDoneTasks();
-            res.end();
-        } catch (e) {
-            throw new ValidationError("Cannot delete this tasks, try again later");
-        }
-    })
+
     .post("/", async (req: Request, res: Response) => {
         try {
             const newTask = new TodoRecord(req.body);

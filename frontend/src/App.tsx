@@ -6,6 +6,7 @@ import {TaskContext} from "./context/TaskContext";
 import {TodoEntity} from 'types'
 import {Loader} from "./components/common/Loader/Loader";
 import {FetchDataContext} from "./context/FetchDataContext.tsx";
+import {ClearTasksDone} from "./components/TaskList/ClearTasksDone";
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
         <div className="App">
             <FetchDataContext.Provider value={{fetchData, setFetchData}}>
                 <TaskContext.Provider value={{tasks}}>
-
+                    <ClearTasksDone/>
                     <AddForm/>
                     <TaskList/>
 
