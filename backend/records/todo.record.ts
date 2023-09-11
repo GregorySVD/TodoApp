@@ -87,4 +87,18 @@ export class TodoRecord implements TodoEntity {
         const [results] = (await pool.execute("SELECT * FROM `todos` ORDER BY `date` ASC")) as TodoRecordResults;
         return results.map(obj => new TodoRecord(obj));
     }
+
+    static async DeleteAllDoneTasks(): Promise<void> {
+        try {
+            const [results] = (await pool.execute("SELECT * FROM `todos` WHERE `isDone` = :isDone", { isDone: 1 })) as TodoRecordResults;
+
+            if(results.length > 0) {
+                throw new ValidationError("There are no tasks done");
+            }
+            await pool.execute("DELETE FROM `todos` WHERE `isDone` = :isDone", { isDone: true });
+        } catch (err) {
+            throw new ValidationError(err);
+        }
+
+    }
 }

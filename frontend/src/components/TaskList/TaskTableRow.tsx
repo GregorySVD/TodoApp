@@ -47,7 +47,7 @@ export const TaskTableRow = (props: Props) => {
                 {props.task.title}
             </td>
             <td className="Td_task_status">
-                {props.task.isDone == false
+                {props.task.isDone == true
                 ? <Btn
                     className="btn-task-done"
                     text="✅ Done"

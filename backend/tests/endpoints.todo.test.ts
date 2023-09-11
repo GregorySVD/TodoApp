@@ -42,3 +42,11 @@ test("TodoRecord.insert returns UUID, description is  null, isDone=false and dat
     expect(todo.isDone).toBeFalsy();
     expect(typeof todo.id).toBe("string");
 });
+test("TodoRecord.switchIsDoneState changes the state of isDone", async () => {
+    const todo = new TodoRecord(mockTodo);
+    const insertedId = await todo.insert();
+    expect(todo.isDone).toBeFalsy();
+    await todo.switchIsDoneState();
+    const test = await TodoRecord.getOne(insertedId);
+    expect(test.isDone).toBeTruthy();
+});
