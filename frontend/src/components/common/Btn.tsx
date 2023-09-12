@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 interface Props {
     text: string;
     to?: string;
-    onClick?: () => void;
+    onClick?: () => void | Promise<void>;
     className?: string;
 }
 

@@ -15,7 +15,7 @@ export class TodoRecord implements TodoEntity {
     public id?: string;
     public title: string;
     public date?: string;
-    public isDone: boolean;
+    public isDone: number;
     public description?: string | null;
 
     constructor(obj: TodoEntity) {
@@ -36,7 +36,7 @@ export class TodoRecord implements TodoEntity {
         }
     }
 
-    async switchIsDoneState(): Promise<boolean> {
+    async switchIsDoneState(): Promise<number> {
         await pool.execute("UPDATE `todos` SET `isDone` = CASE WHEN `isDone` = 0 THEN 1 WHEN `isDone` = 1 THEN 0 END WHERE `id` = :id;", {
             id: this.id,
         });
@@ -49,7 +49,7 @@ export class TodoRecord implements TodoEntity {
             this.id = uuid();
         }
         if (!this.isDone) {
-            this.isDone = false;
+            this.isDone = 0;
         }
         if (!this.date) {
             this.date = getCurrentFormattedDate();
@@ -86,5 +86,18 @@ export class TodoRecord implements TodoEntity {
     static async ListAll(): Promise<TodoRecord[]> {
         const [results] = (await pool.execute("SELECT * FROM `todos` ORDER BY `date` ASC")) as TodoRecordResults;
         return results.map(obj => new TodoRecord(obj));
+    }
+
+    static async DeleteAllDoneTasks(): Promise<void> {
+        try {
+            const [results] = await (await pool.execute("SELECT * FROM `todos` WHERE `isDone` = :isDone", {isDone: 1})) as TodoRecordResults;
+            if (results.length === 0) {
+                return;
+            }
+            await pool.execute("DELETE FROM `todos` WHERE `isDone` = :isDone", {isDone: 1});
+        } catch (err) {
+            throw new ValidationError(err);
+        }
+
     }
 }
