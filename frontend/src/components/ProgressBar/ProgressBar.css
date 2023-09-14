@@ -1,0 +1,23 @@
+
+.progress-container::before {
+    content: '';
+    background-color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 100%;
+    z-index: -1;
+}
+.progress {
+    background-color: yellow;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 20%;
+    z-index: -1;
+    transition: 0.4s ease;
+}

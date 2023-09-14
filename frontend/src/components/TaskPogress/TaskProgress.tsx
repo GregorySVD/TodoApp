@@ -3,6 +3,7 @@ import './TaskProgress.css'
 
 import {TaskContext} from "../../context/TaskContext";
 import {FetchDataContext} from "../../context/FetchDataContext.tsx";
+import {ProgressBar} from "../ProgressBar/ProgressBar";
 
 
 export const TaskProgress = () => {
@@ -29,7 +30,8 @@ export const TaskProgress = () => {
 
     return (
         <div className="TaskProgressBar__container">
-            <p>Your Progress{taskDoneCounter}/{taskToDoCounter}</p>
+            <p>Your Progress</p>
+        <ProgressBar doneTask={taskDoneCounter} allTasks={taskToDoCounter}/>
         </div>
     )
 }
