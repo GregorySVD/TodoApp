@@ -38,7 +38,6 @@ function App() {
                     {(tasks.length === 0) ? <NoTaskLayout/> :
                         <div>
                             <TaskProgress/>
-                            <ClearTasksDone/>
                             <AddForm/>
                             <TaskList/>
                         </div>

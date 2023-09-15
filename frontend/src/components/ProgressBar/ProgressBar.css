@@ -1,23 +1,36 @@
+.ProgressBar__container {
+    display: flex;
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #264653;
+    gap: 10px;
+}
+.ProgressBar__container h4 {
+    margin-bottom: 5vh;
+    margin-left: 50%;
+}
 
 .progress-container::before {
     content: '';
     background-color: #ffffff;
     position: absolute;
     top: 50%;
-    left: 0;
+    left: 0%;
     transform: translateY(-50%);
-    height: 4px;
+    height: 5px;
     width: 100%;
-    z-index: -1;
+    z-index: 1;
 }
+
 .progress {
-    background-color: yellow;
+    background-color: #00d26a;
     position: absolute;
     top: 50%;
-    left: 0;
+    left: 0%;
     transform: translateY(-50%);
-    height: 4px;
-    width: 20%;
-    z-index: -1;
+    height: 5px;
+    width: 0;
+    z-index: 1;
     transition: 0.4s ease;
 }
