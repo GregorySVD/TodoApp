@@ -7,7 +7,7 @@
     gap: 10px;
 }
 .ProgressBar__container h4 {
-    margin-bottom: 5vh;
+    margin-bottom: 6vh;
     margin-left: 50%;
 }
 
@@ -16,7 +16,7 @@
     background-color: #ffffff;
     position: absolute;
     top: 50%;
-    left: 0%;
+    left: 0;
     transform: translateY(-50%);
     height: 5px;
     width: 100%;
@@ -27,7 +27,7 @@
     background-color: #00d26a;
     position: absolute;
     top: 50%;
-    left: 0%;
+    left: 0;
     transform: translateY(-50%);
     height: 5px;
     width: 0;

@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './ProgressBar.css'
+import {calcPercent} from "../../utils/calcPercent";
+import {FetchDataContext} from "../../context/FetchDataContext.tsx";
 
 interface Props {
     doneTask: number | null;
@@ -9,19 +11,23 @@ interface Props {
 export const ProgressBar = (props: Props) => {
     const [progressPercent, setProgressPercent] = useState<string>("0%");
 
-    useEffect(() => {
-        if(!props.doneTask || !props.allTasks) {
+    const contextFetch = React.useContext(FetchDataContext);
+
+    useEffect((): void => {
+        if (!contextFetch)
             return;
+        const {setFetchData} = contextFetch;
+        if (!props.doneTask || !props.allTasks) {
+            setProgressPercent("0%");
+        } else if (props.doneTask === 0 || props.doneTask === null) {
+            setProgressPercent("0%");
+        } else {
+            const percentValue = calcPercent(props.doneTask, props.allTasks);
+            setProgressPercent(percentValue);
+            setFetchData(true);
         }
-        if(props.doneTask===0) {
-            setProgressPercent("0");
-        }
-        setProgressPercent(calcPercent(props.doneTask, props.allTasks))
-    }, [props.doneTask, props.allTasks])
-//@TODO there is and error in return progressPercent to 0 fix it
-    const calcPercent = (TaskDone: number, AllTasks: number): string => {
-        return (TaskDone/AllTasks)*100 + '%'
-    }
+    },[props.doneTask, props.allTasks, contextFetch]);
+
     return (
         <div className="ProgressBar__container">
             <h4>{props.doneTask}/{props.allTasks}</h4>
@@ -29,5 +35,5 @@ export const ProgressBar = (props: Props) => {
                 <div className="progress" style={{width: progressPercent}}></div>
             </div>
         </div>
-    )
-}
+    );
+};
