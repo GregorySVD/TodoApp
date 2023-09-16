@@ -4,7 +4,6 @@ import {TodoEntity} from 'types'
 import {FetchDataContext} from "../../context/FetchDataContext.tsx";
 import {Loader} from "../common/Loader/Loader";
 import './AddForm.css'
-import {ClearTasksDone} from "../TaskList/ClearTasksDone";
 
 export const AddForm = () => {
     const [loading, setLoading] = useState(false);

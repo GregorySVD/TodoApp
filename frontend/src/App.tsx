@@ -8,6 +8,7 @@ import {Loader} from "./components/common/Loader/Loader";
 import {FetchDataContext} from "./context/FetchDataContext.tsx";
 import {ClearTasksDone} from "./components/TaskList/ClearTasksDone";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout";
+import {TaskProgress} from "./components/TaskPogress/TaskProgress";
 
 function App() {
 
@@ -36,7 +37,7 @@ function App() {
                 <TaskContext.Provider value={{tasks}}>
                     {(tasks.length === 0) ? <NoTaskLayout/> :
                         <div>
-                            <ClearTasksDone/>
+                            <TaskProgress/>
                             <AddForm/>
                             <TaskList/>
                         </div>

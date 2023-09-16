@@ -7,7 +7,6 @@ import './TaskTableRow.css'
 
 interface Props {
     task: TodoEntity;
-
 }
 
 
