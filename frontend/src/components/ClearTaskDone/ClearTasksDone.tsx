@@ -1,14 +1,15 @@
 import React from 'react';
-import { Btn } from "../common/Btn";
-import { FetchDataContext } from "../../context/FetchDataContext.tsx";
-import { Loader } from "../common/Loader/Loader";
+import {Btn} from "../common/Btn";
+import {FetchDataContext} from "../../context/FetchDataContext.tsx";
+import {Loader} from "../common/Loader/Loader";
+import './ClearTasksDone.css'
 
 export const ClearTasksDone = () => {
     const contextFetch = React.useContext(FetchDataContext);
 
     if (!contextFetch)
         return <Loader/>;
-    const { setFetchData } = contextFetch;
+    const {setFetchData} = contextFetch;
 
     const handleClearTasksDone = async (): Promise<void> => {
         await console.log("Clear tasks done");
@@ -22,9 +23,7 @@ export const ClearTasksDone = () => {
         }
     }
 
-    return (
-        <div>
-            <Btn text="Clear Done Todos" onClick={handleClearTasksDone} />
-        </div>
-    )
+    return <div>
+        <Btn text="Clear Done Todos" className="ClearTaskDone__btn" onClick={handleClearTasksDone}/>
+    </div>
 }

@@ -4,7 +4,7 @@ import './TaskProgress.css'
 import {TaskContext} from "../../context/TaskContext";
 import {FetchDataContext} from "../../context/FetchDataContext.tsx";
 import {ProgressBar} from "../ProgressBar/ProgressBar";
-import {ClearTasksDone} from "../TaskList/ClearTasksDone";
+import {ClearTasksDone} from "../ClearTaskDone/ClearTasksDone";
 
 
 export const TaskProgress = () => {

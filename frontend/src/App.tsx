@@ -6,7 +6,6 @@ import {TaskContext} from "./context/TaskContext";
 import {TodoEntity} from 'types'
 import {Loader} from "./components/common/Loader/Loader";
 import {FetchDataContext} from "./context/FetchDataContext.tsx";
-import {ClearTasksDone} from "./components/TaskList/ClearTasksDone";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout";
 import {TaskProgress} from "./components/TaskPogress/TaskProgress";
 
