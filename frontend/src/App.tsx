@@ -6,8 +6,9 @@ import {TaskContext} from "./context/TaskContext";
 import {TodoEntity} from 'types'
 import {Loader} from "./components/common/Loader/Loader";
 import {FetchDataContext} from "./context/FetchDataContext.tsx";
-import {NoTaskLayout} from "./components/layouts/NoTaskLayout";
+import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
 import {TaskProgress} from "./components/TaskPogress/TaskProgress";
+import {Header} from "./components/layouts/Header/Header";
 
 function App() {
 
@@ -32,6 +33,8 @@ function App() {
 
     return (
         <div className="App">
+            {/* eslint-disable-next-line react/jsx-no-undef */}
+            <Header></Header>
             <FetchDataContext.Provider value={{fetchData, setFetchData}}>
                 <TaskContext.Provider value={{tasks}}>
                     {(tasks.length === 0) ? <NoTaskLayout/> :

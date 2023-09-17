@@ -1,5 +1,5 @@
 import React from 'react';
-import {AddForm} from "../AddForm/AddForm";
+import {AddForm} from "../../AddForm/AddForm";
 import  './NoTaskLayout.css'
 
 
