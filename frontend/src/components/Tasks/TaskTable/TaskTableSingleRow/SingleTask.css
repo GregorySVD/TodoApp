@@ -6,18 +6,24 @@
     justify-content: space-around;
     font-weight: lighter;
     font-size: 1rem;
+    align-items: center;
 }
 .SingleTask_container .SingleTask_title {
     flex: 4;
     min-width: 100px;
     text-align: left;
  }
-.SingleTask_container .SingleTask_task_status {
-    flex: 1;
-}
+
 .overflow-hidden {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
+}
+.SingleTask_task_operation_Btn {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 20%;
+    min-width: 100px;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {TodoEntity} from 'types'
-import {Btn} from "../../../common/Btn";
+import {RemoveBtn} from "../../../common/RemoveBtn";
 import {Loader} from "../../../common/Loader/Loader";
 import './SingleTask.css'
 import {FetchDataContext} from "../../../../context/FetchDataContext.tsx";
@@ -57,15 +57,17 @@ export const SingleTask = (props: Props) => {
             <div className="SingleTask_title overflow-hidden">
                 {props.task.title}
             </div>
-            <div className="SingleTask_task_status">
-                <CheckBox
-                    status={Boolean(props.task.isDone)}
-                    onChange={() => switchIsDoneState(props.task.id)}
-                />
-            </div>
-            <div className="SingleTask_Btn_delete_task">
-                <Btn
-                    text="🗑️" onClick={() => deleteTask(props.task.id)}/>
+            <div className="SingleTask_task_operation_Btn">
+                <div className="SingleTask_task_status">
+                    <CheckBox
+                        status={Boolean(props.task.isDone)}
+                        onChange={() => switchIsDoneState(props.task.id)}
+                    />
+                </div>
+                <div className="SingleTask_Btn_delete_task">
+                    <RemoveBtn
+                        onClick={() => deleteTask(props.task.id)}/>
+                </div>
             </div>
         </li>
     )

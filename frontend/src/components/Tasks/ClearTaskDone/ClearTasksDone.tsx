@@ -1,5 +1,4 @@
 import React from 'react';
-import {Btn} from "../../common/Btn";
 import {Loader} from "../../common/Loader/Loader";
 import './ClearTasksDone.css'
 import {FetchDataContext} from "../../../context/FetchDataContext.tsx";
@@ -23,6 +22,6 @@ export const ClearTasksDone = () => {
     }
 
     return <div>
-        <Btn text="Clear Done Todos" className="ClearTaskDone__btn" onClick={handleClearTasksDone}/>
+        <button className="ClearTaskDone__btn" onClick={handleClearTasksDone}>Clear Tasks Done</button>
     </div>
 }

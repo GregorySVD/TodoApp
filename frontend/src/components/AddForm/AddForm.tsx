@@ -1,5 +1,4 @@
 import React, {SyntheticEvent, useContext, useState} from 'react';
-import {Btn} from "../common/Btn";
 import {TodoEntity} from 'types'
 import {FetchDataContext} from "../../context/FetchDataContext.tsx";
 import {Loader} from "../common/Loader/Loader";
@@ -69,7 +68,8 @@ export const AddForm = () => {
                         onChange={e => updateForm('title', e.target.value)}
                     />
                 </label>
-                <Btn text="+Add Task"/>
+                <button>Add
+                </button>
             </form>
         </div>
     )
