@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 70vw;
+    width: 100%;
 }
 .GetDate__date{
     text-align: left;

@@ -31,7 +31,7 @@ export const TaskProgress = () => {
     return (
         <div
             className="TaskProgressBar__container">
-            <h1>Your Progress</h1>
+            {/*<h1>Your Progress</h1>*/}
             <ProgressBar doneTask={taskDoneCounter} allTasks={taskToDoCounter}/>
             {(taskDoneCounter !== 0) ? <ClearTasksDone/> : null}
         </div>

@@ -13,4 +13,5 @@
     height: auto;
     font-size: 16px;
     padding: 2rem;
+    min-width: 400px;
 }
