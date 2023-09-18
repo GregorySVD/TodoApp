@@ -3,19 +3,16 @@
     position: relative;
     width: 80%;
     margin: 0 auto;
-    background-color: #264653;
-    gap: 10px;
 }
 .ProgressBar__container h4 {
-    margin-bottom: 6vh;
-    margin-left: 50%;
+    margin: 1vh auto;
 }
 
 .progress-container::before {
     content: '';
-    background-color: #ffffff;
+    background-color: #f0efe9;
     position: absolute;
-    top: 50%;
+    top: 90%;
     left: 0;
     transform: translateY(-50%);
     height: 5px;
@@ -24,9 +21,9 @@
 }
 
 .progress {
-    background-color: #00d26a;
+    background-color: #50e3a4;
     position: absolute;
-    top: 50%;
+    top: 90%;
     left: 0;
     transform: translateY(-50%);
     height: 5px;

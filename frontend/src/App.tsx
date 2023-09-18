@@ -33,15 +33,14 @@ function App() {
 
     return (
         <div className="App">
-            {/* eslint-disable-next-line react/jsx-no-undef */}
             <Header></Header>
             <FetchDataContext.Provider value={{fetchData, setFetchData}}>
                 <TaskContext.Provider value={{tasks}}>
                     {(tasks.length === 0) ? <NoTaskLayout/> :
                         <div>
                             <TaskProgress/>
-                            <AddForm/>
                             <TaskList/>
+                            <AddForm/>
                         </div>
                     }
                 </TaskContext.Provider>

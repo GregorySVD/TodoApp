@@ -12,7 +12,6 @@ export const ClearTasksDone = () => {
     const {setFetchData} = contextFetch;
 
     const handleClearTasksDone = async (): Promise<void> => {
-        await console.log("Clear tasks done");
         try {
             await fetch(`http://localhost:3001/todo/done`, {
                 method: "DELETE",

@@ -10,5 +10,6 @@
     text-align: center;
     color: #1d1e23;
     width: 70vw;
-    height: 1000px;
+    height: auto;
+    font-size: 16px;
 }

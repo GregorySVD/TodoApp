@@ -24,7 +24,6 @@ export const TaskProgress = () => {
         setTaskToDoCounter(tasks.length);
         const taskDone = tasks.filter((task) => task.isDone === 1);
         setTaskDoneCounter(taskDone.length);
-
     }, [contextFetch, contextTask]);
     if (!contextTask || !contextFetch) return null;
 
@@ -34,7 +33,7 @@ export const TaskProgress = () => {
             className="TaskProgressBar__container">
             <h1>Your Progress</h1>
         <ProgressBar doneTask={taskDoneCounter} allTasks={taskToDoCounter}/>
-            <ClearTasksDone/>
+            {(taskDoneCounter!==0)? <ClearTasksDone/> : null}
         </div>
     )
 }
