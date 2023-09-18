@@ -4,6 +4,7 @@ import {Btn} from "../../../common/Btn";
 import {Loader} from "../../../common/Loader/Loader";
 import './SingleTask.css'
 import {FetchDataContext} from "../../../../context/FetchDataContext.tsx";
+import {CheckBox} from "../../../common/CheckBox/CheckBox";
 
 interface Props {
     task: TodoEntity;
@@ -47,6 +48,8 @@ export const SingleTask = (props: Props) => {
         } catch (err) {
             console.error('An error occurred while updating isDone status:', err);
         }
+
+
     }
 
     return (
@@ -55,15 +58,10 @@ export const SingleTask = (props: Props) => {
                 {props.task.title}
             </div>
             <div className="SingleTask_task_status">
-                {props.task.isDone === 1
-                    ? <Btn
-                        className="btn-task-done "
-                        text="✅ Done"
-                        onClick={() => switchIsDoneState(props.task.id)}/>
-                    : <Btn
-                        className="btn-task-undone"
-                        text="⛔ Undone"
-                        onClick={() => switchIsDoneState(props.task.id)}/>}
+                <CheckBox
+                    status={Boolean(props.task.isDone)}
+                    onChange={() => switchIsDoneState(props.task.id)}
+                />
             </div>
             <div className="SingleTask_Btn_delete_task">
                 <Btn
