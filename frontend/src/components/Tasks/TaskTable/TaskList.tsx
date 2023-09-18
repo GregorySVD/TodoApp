@@ -1,12 +1,12 @@
 import React from "react";
 import {TaskContext} from "../../../context/TaskContext";
 import {Loader} from "../../common/Loader/Loader";
-import './TaskTable.css';
-import {TaskTableSingleRow} from "./TaskTableSingleRow/TaskTableSingleRow";
+import './TaskList.css';
+import {SingleTask} from "./TaskTableSingleRow/SingleTask";
 import {FetchDataContext} from "../../../context/FetchDataContext.tsx";
 
 
-export const TaskTable = () => {
+export const TaskList = () => {
     const contextTask = React.useContext(TaskContext);
     const contextFetch = React.useContext(FetchDataContext);
 
@@ -21,22 +21,12 @@ export const TaskTable = () => {
     }
 
     return (
-        <div>
-            <table className="TaskList_table">
-                <thead>
-                <tr>
-                    <th>Task title</th>
-                    <th>Task status</th>
-                    <th>Remove task</th>
-                </tr>
-                </thead>
-                <tbody>
+        <div className="TaskList_container">
+            <ol className="TaskList_list">
                 {tasks.map((task) => (
-                    <TaskTableSingleRow key={task.id} task={task}/>
+                    <SingleTask key={task.id} task={task}/>
                 ))}
-                </tbody>
-            </table>
-
+            </ol>
         </div>
     );
 

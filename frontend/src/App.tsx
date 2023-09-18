@@ -8,7 +8,7 @@ import {FetchDataContext} from "./context/FetchDataContext.tsx";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
 import {TaskProgress} from "./components/Tasks/TaskPogress/TaskProgress";
 import {Header} from "./components/layouts/Header/Header";
-import {TaskTable} from "./components/Tasks/TaskTable/TaskTable";
+import {TaskList} from "./components/Tasks/TaskTable/TaskList";
 
 function App() {
 
@@ -39,7 +39,7 @@ function App() {
                     {(tasks.length === 0) ? <NoTaskLayout/> :
                         <div>
                             <TaskProgress/>
-                            <TaskTable/>
+                            <TaskList/>
                             <AddForm/>
                         </div>
                     }
