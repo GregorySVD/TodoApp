@@ -1,8 +1,8 @@
 import React from 'react';
-import {Btn} from "../common/Btn";
-import {FetchDataContext} from "../../context/FetchDataContext.tsx";
-import {Loader} from "../common/Loader/Loader";
+import {Btn} from "../../common/Btn";
+import {Loader} from "../../common/Loader/Loader";
 import './ClearTasksDone.css'
+import {FetchDataContext} from "../../../context/FetchDataContext.tsx";
 
 export const ClearTasksDone = () => {
     const contextFetch = React.useContext(FetchDataContext);

@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {TaskList} from "./components/TaskList/TaskList";
 import {AddForm} from "./components/AddForm/AddForm";
 import {TaskContext} from "./context/TaskContext";
 import {TodoEntity} from 'types'
 import {Loader} from "./components/common/Loader/Loader";
 import {FetchDataContext} from "./context/FetchDataContext.tsx";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
-import {TaskProgress} from "./components/TaskPogress/TaskProgress";
+import {TaskProgress} from "./components/Tasks/TaskPogress/TaskProgress";
 import {Header} from "./components/layouts/Header/Header";
+import {TaskTable} from "./components/Tasks/TaskTable/TaskTable";
 
 function App() {
 
@@ -39,7 +39,7 @@ function App() {
                     {(tasks.length === 0) ? <NoTaskLayout/> :
                         <div>
                             <TaskProgress/>
-                            <TaskList/>
+                            <TaskTable/>
                             <AddForm/>
                         </div>
                     }

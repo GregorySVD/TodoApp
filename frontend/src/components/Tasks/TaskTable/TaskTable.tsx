@@ -1,13 +1,12 @@
-import {Btn} from "../common/Btn";
 import React from "react";
-import {TaskContext} from "../../context/TaskContext";
-import {Loader} from "../common/Loader/Loader";
-import {FetchDataContext} from "../../context/FetchDataContext.tsx";
-import './OneTask.css';
-import {TaskTableRow} from "./TaskTableRow";
+import {TaskContext} from "../../../context/TaskContext";
+import {Loader} from "../../common/Loader/Loader";
+import './TaskTable.css';
+import {TaskTableSingleRow} from "./TaskTableSingleRow/TaskTableSingleRow";
+import {FetchDataContext} from "../../../context/FetchDataContext.tsx";
 
 
-export const OneTask = () => {
+export const TaskTable = () => {
     const contextTask = React.useContext(TaskContext);
     const contextFetch = React.useContext(FetchDataContext);
 
@@ -33,7 +32,7 @@ export const OneTask = () => {
                 </thead>
                 <tbody>
                 {tasks.map((task) => (
-                    <TaskTableRow key={task.id} task={task}/>
+                    <TaskTableSingleRow key={task.id} task={task}/>
                 ))}
                 </tbody>
             </table>

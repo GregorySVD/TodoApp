@@ -1,16 +1,16 @@
 import React from 'react';
 import {TodoEntity} from 'types'
-import {Btn} from "../common/Btn";
-import {FetchDataContext} from "../../context/FetchDataContext.tsx";
-import {Loader} from "../common/Loader/Loader";
-import './TaskTableRow.css'
+import {Btn} from "../../../common/Btn";
+import {Loader} from "../../../common/Loader/Loader";
+import './TaskTableSingleRow.css'
+import {FetchDataContext} from "../../../../context/FetchDataContext.tsx";
 
 interface Props {
     task: TodoEntity;
 }
 
 
-export const TaskTableRow = (props: Props) => {
+export const TaskTableSingleRow = (props: Props) => {
 
     const contextFetch = React.useContext(FetchDataContext);
     if (!contextFetch)

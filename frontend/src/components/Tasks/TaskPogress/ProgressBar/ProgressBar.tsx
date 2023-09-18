@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './ProgressBar.css'
-import {calcPercent} from "../../utils/calcPercent";
-import {FetchDataContext} from "../../context/FetchDataContext.tsx";
+import {calcPercent} from "../../../../utils/calcPercent";
 
 interface Props {
     doneTask: number | null;
@@ -11,22 +10,18 @@ interface Props {
 export const ProgressBar = (props: Props) => {
     const [progressPercent, setProgressPercent] = useState<string>("0%");
 
-    const contextFetch = React.useContext(FetchDataContext);
-
     useEffect((): void => {
-        if (!contextFetch)
-            return;
-        const {setFetchData} = contextFetch;
         if (!props.doneTask || !props.allTasks) {
             setProgressPercent("0%");
         } else if (props.doneTask === 0 || props.doneTask === null) {
             setProgressPercent("0%");
         } else {
             const percentValue = calcPercent(props.doneTask, props.allTasks);
+
             setProgressPercent(percentValue);
-            setFetchData(true);
+
         }
-    },[props.doneTask, props.allTasks, contextFetch]);
+    },[props.doneTask, props.allTasks]);
 
     return (
         <div className="ProgressBar__container">
