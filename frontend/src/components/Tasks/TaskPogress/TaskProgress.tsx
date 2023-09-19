@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './TaskProgress.css'
 
-import {TaskContext} from "../../context/TaskContext";
-import {FetchDataContext} from "../../context/FetchDataContext.tsx";
-import {ProgressBar} from "../ProgressBar/ProgressBar";
-import {ClearTasksDone} from "../TaskList/ClearTasksDone";
+import {TaskContext} from "../../../context/TaskContext";
+import {ProgressBar} from "./ProgressBar/ProgressBar";
+import {FetchDataContext} from "../../../context/FetchDataContext.tsx";
+import {ClearTasksDone} from "../ClearTaskDone/ClearTasksDone";
 
 
 export const TaskProgress = () => {
@@ -24,7 +24,6 @@ export const TaskProgress = () => {
         setTaskToDoCounter(tasks.length);
         const taskDone = tasks.filter((task) => task.isDone === 1);
         setTaskDoneCounter(taskDone.length);
-
     }, [contextFetch, contextTask]);
     if (!contextTask || !contextFetch) return null;
 
@@ -32,9 +31,8 @@ export const TaskProgress = () => {
     return (
         <div
             className="TaskProgressBar__container">
-            <h1>Your Progress</h1>
-        <ProgressBar doneTask={taskDoneCounter} allTasks={taskToDoCounter}/>
-            <ClearTasksDone/>
+            <ProgressBar doneTask={taskDoneCounter} allTasks={taskToDoCounter}/>
+            {(taskDoneCounter !== 0) ? <ClearTasksDone/> : null}
         </div>
     )
 }

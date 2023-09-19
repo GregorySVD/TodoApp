@@ -1,13 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 .App {
-    font-family: "Roboto", sans-serif;
-    margin: 0 auto;
+    font-family: "Lato", sans-serif;
+    margin: 10vh auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background-color: #455059;
+    flex-direction: column;
+    overflow: visible;
+    background-color: #ffffff;
     text-align: center;
-    width: 80vw;
+    color: #1d1e23;
+    width: 70vw;
+    height: auto;
+    font-size: 16px;
+    padding: 2rem 2rem 0 2rem;
+    min-width: 300px;
+    position: relative;
+    max-width: 1000px;
 }

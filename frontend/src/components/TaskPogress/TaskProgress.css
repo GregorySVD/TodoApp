@@ -1,9 +1,0 @@
-.TaskProgressBar__container {
-    display: flex;
-    width: 60vw;
-    flex-direction: column;
-    background-color: #264653;
-    height: min(200px, 100vh);
-    border-radius: 20px;
-    margin: 10px auto;
-}

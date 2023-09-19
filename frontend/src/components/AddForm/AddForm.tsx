@@ -1,19 +1,23 @@
 import React, {SyntheticEvent, useContext, useState} from 'react';
-import {Btn} from "../common/Btn";
 import {TodoEntity} from 'types'
 import {FetchDataContext} from "../../context/FetchDataContext.tsx";
 import {Loader} from "../common/Loader/Loader";
 import './AddForm.css'
+import {OpenAddFormContext} from "../../context/OpenAddFormContext";
+import {AddFormOpenBtn} from "./AddFormOpenBtn/AddFormOpenBtn";
+import {AddFormCloseBtn} from "./AddFormCloseBtn/AddFormCloseBtn";
 
 export const AddForm = () => {
     const [loading, setLoading] = useState(false);
     const [id, setId] = useState('');
-    const context = useContext(FetchDataContext);
+    const contextFetch = useContext(FetchDataContext);
+    const contextAddForm = useContext(OpenAddFormContext);
 
-    if (!context) {
+    if (!contextFetch) {
         throw new Error('FetchDataContext is not provided!');
     }
-    const {setFetchData} = context;
+    const {setAddFormIsOpen, AddFormIsOpen} = contextAddForm
+    const {setFetchData} = contextFetch;
     const [form, setForm] = useState<TodoEntity>({
         title: '',
     });
@@ -21,7 +25,6 @@ export const AddForm = () => {
         e.preventDefault();
         try {
             setLoading(true);
-            await console.log(form)
             const res = await fetch(`http://localhost:3001/todo`, {
                 method: 'POST',
                 headers: {
@@ -33,14 +36,15 @@ export const AddForm = () => {
             })
 
             const data = await res.json();
-            await console.log(data);
             setId(data.id);
             setFetchData(true);
         } finally {
             setLoading(false);
             await console.log(id);
+            setForm({
+                title: '',
+            })
         }
-
     }
 
     const updateForm = (key: string, value: string) => {
@@ -50,27 +54,47 @@ export const AddForm = () => {
         }));
     };
 
+
+    const handleClosePopup = () => {
+        setAddFormIsOpen(false);
+    }
+    const handleOpenPopup = () => {
+        setAddFormIsOpen(true);
+
+    }
     if (loading) {
         return <Loader/>
     }
 
-    return (
-        <div className="AddForm_container">
-            <form className="AddForm__container" onSubmit={saveTodo}>
-                <label>
-                    <input
-                        type="text"
-                        className="AddForm_input_title"
-                        placeholder="Add a new task..."
-                        name="title"
-                        required
-                        maxLength={150}
-                        value={form.title}
-                        onChange={e => updateForm('title', e.target.value)}
-                    />
-                </label>
-                <Btn text="+Add Task"/>
-            </form>
+    return (<div className="AddForm">
+            <div>
+                {!AddFormIsOpen && <AddFormOpenBtn action={handleOpenPopup}/>}
+                {AddFormIsOpen && (
+                    <div>
+                        <AddFormCloseBtn action={handleClosePopup}/>
+
+                        <form className="AddForm__form" onSubmit={saveTodo}>
+                            <label>
+                                <div className="AddForm__input_group">
+                                    <input
+                                        type="text" className="AddForm_input_title"
+                                        name="title"
+                                        required
+                                        maxLength={150}
+                                        value={form.title}
+                                        onChange={e => updateForm('title', e.target.value)}
+                                    />
+                                    <label htmlFor="Title">Title</label>
+                                </div>
+                            </label>
+                            <div className="AddForm__add_task_BTN_container">
+                                <button className="AddForm__add_task_BTN"
+                                        onClick={() => updateForm}><span>Add New Task</span></button>
+                            </div>
+                        </form>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

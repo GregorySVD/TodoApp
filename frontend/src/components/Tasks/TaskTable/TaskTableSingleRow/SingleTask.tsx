@@ -1,16 +1,17 @@
 import React from 'react';
 import {TodoEntity} from 'types'
-import {Btn} from "../common/Btn";
-import {FetchDataContext} from "../../context/FetchDataContext.tsx";
-import {Loader} from "../common/Loader/Loader";
-import './TaskTableRow.css'
+import {RemoveBtn} from "../../../common/RemoveBtn";
+import {Loader} from "../../../common/Loader/Loader";
+import './SingleTask.css'
+import {FetchDataContext} from "../../../../context/FetchDataContext.tsx";
+import {CheckBox} from "../../../common/CheckBox/CheckBox";
 
 interface Props {
     task: TodoEntity;
 }
 
 
-export const TaskTableRow = (props: Props) => {
+export const SingleTask = (props: Props) => {
 
     const contextFetch = React.useContext(FetchDataContext);
     if (!contextFetch)
@@ -19,7 +20,7 @@ export const TaskTableRow = (props: Props) => {
 
 
     const deleteTask = async (taskId: string | undefined) => {
-        if(!window.confirm(`Are you sure you want to remove ${props.task.title} task?`)) {
+        if (!window.confirm(`Are you sure you want to remove ${props.task.title} task?`)) {
             return;
         }
         const res = await fetch(`http://localhost:3001/todo/${taskId}`, {
@@ -47,28 +48,27 @@ export const TaskTableRow = (props: Props) => {
         } catch (err) {
             console.error('An error occurred while updating isDone status:', err);
         }
+
+
     }
 
     return (
-        <tr>
-            <td className="Td_title">
+        <li className="SingleTask_container" key={props.task.id}>
+            <div className="SingleTask_title overflow-hidden">
                 {props.task.title}
-            </td>
-            <td className="Td_task_status">
-                {props.task.isDone === 1
-                ? <Btn
-                    className="btn-task-done"
-                    text="✅ Done"
-                    onClick={() => switchIsDoneState(props.task.id)}/>
-                : <Btn
-                    className="btn-task-undone"
-                    text="⛔ Undone"
-                     onClick={() => switchIsDoneState(props.task.id)}/>}
-            </td>
-            <td>
-                <Btn
-                    text="🗑️" onClick={() => deleteTask(props.task.id)}/>
-            </td>
-        </tr>
+            </div>
+            <div className="SingleTask_task_operation_Btn">
+                <div className="SingleTask_task_status">
+                    <CheckBox
+                        status={Boolean(props.task.isDone)}
+                        onChange={() => switchIsDoneState(props.task.id)}
+                    />
+                </div>
+                <div className="SingleTask_Btn_delete_task">
+                    <RemoveBtn
+                        onClick={() => deleteTask(props.task.id)}/>
+                </div>
+            </div>
+        </li>
     )
 }

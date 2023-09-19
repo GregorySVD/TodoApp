@@ -1,0 +1,35 @@
+.GetDate__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.GetDate__date{
+    text-align: left;
+    justify-content: space-between;
+    display: flex;
+    gap: 1vw;
+}
+.GetDate__date_day_number{
+    font-weight: bolder;
+    font-size: 2.2em;
+}
+.GetDate__month_and_year{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.GetDate__date_day_of_week{
+    text-align: right;
+}
+
+.GetDate__date_day_of_week{
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: 0.7em;
+    letter-spacing: 2px;
+}
+.GetDate__date_month{
+    text-transform: uppercase;
+    font-weight: bolder;
+}
