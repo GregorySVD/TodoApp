@@ -32,20 +32,20 @@ function App() {
 
 
     return (
-        <div className="App">
-            <Header></Header>
-            <FetchDataContext.Provider value={{fetchData, setFetchData}}>
-                <TaskContext.Provider value={{tasks}}>
-                    {(tasks.length === 0) ? <NoTaskLayout/> :
-                        <div>
-                            <TaskProgress/>
-                            <TaskList/>
-                            <AddForm/>
-                        </div>
-                    }
-                </TaskContext.Provider>
-            </FetchDataContext.Provider>
-        </div>
+            <div className="App">
+                <Header/>
+                <FetchDataContext.Provider value={{fetchData, setFetchData}}>
+                    <TaskContext.Provider value={{tasks}}>
+                        {(tasks.length === 0) ? <NoTaskLayout/> :
+                            <div>
+                                <TaskProgress/>
+                                <TaskList/>
+                                <AddForm/>
+                            </div>
+                        }
+                    </TaskContext.Provider>
+                </FetchDataContext.Provider>
+            </div>
 
     );
 }

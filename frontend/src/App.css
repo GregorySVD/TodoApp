@@ -5,13 +5,14 @@
     margin: 10vh auto;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
     background-color: #ffffff;
     text-align: center;
     color: #1d1e23;
     width: 70vw;
     height: auto;
     font-size: 16px;
-    padding: 2rem;
+    padding: 2rem 2rem 0 2rem;
     min-width: 300px;
+    position: relative;
 }
