@@ -10,7 +10,6 @@ export const AddForm = () => {
     const [id, setId] = useState('');
     const contextFetch = useContext(FetchDataContext);
     const contextAddForm = useContext(OpenAddFormContext);
-    // const [isOpen, setIsOpen] = useState<boolean>(false);
 
     if (!contextFetch) {
         throw new Error('FetchDataContext is not provided!');
