@@ -3,17 +3,20 @@ import {TodoEntity} from 'types'
 import {FetchDataContext} from "../../context/FetchDataContext.tsx";
 import {Loader} from "../common/Loader/Loader";
 import './AddForm.css'
+import {OpenAddFormContext} from "../../context/OpenAddFormContext";
 
 export const AddForm = () => {
     const [loading, setLoading] = useState(false);
     const [id, setId] = useState('');
-    const context = useContext(FetchDataContext);
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const contextFetch = useContext(FetchDataContext);
+    const contextAddForm = useContext(OpenAddFormContext);
+    // const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    if (!context) {
+    if (!contextFetch) {
         throw new Error('FetchDataContext is not provided!');
     }
-    const {setFetchData} = context;
+    const {setAddFormIsOpen, AddFormIsOpen} = contextAddForm
+    const {setFetchData} = contextFetch;
     const [form, setForm] = useState<TodoEntity>({
         title: '',
     });
@@ -50,12 +53,12 @@ export const AddForm = () => {
         }));
     };
     const handleOpenPopup = () => {
-        setIsOpen(true);
+        setAddFormIsOpen(true);
 
     }
 
     const handleClosePopup = () => {
-        setIsOpen(false);
+        setAddFormIsOpen(false);
     }
     if (loading) {
         return <Loader/>
@@ -64,13 +67,13 @@ export const AddForm = () => {
     return (<div className="AddForm">
 
             <div className="AddForm_container">
-                {!isOpen && (<button className="AddForm__add_BTN" onClick={handleOpenPopup}
+                {!AddFormIsOpen && (<button className="AddForm__add_BTN" onClick={handleOpenPopup}
                     ><i className="fa fa-plus"></i>
                     </button>
                 )}
             </div>
             <div>
-                {isOpen && (
+                {AddFormIsOpen && (
                     <div className="AddForm__PopUpForm">
                         <button className="AddForm__close_BTN" onClick={handleClosePopup}><i className="fa fa-arrow-up"></i></button>
                         <form className="AddForm__form" onSubmit={saveTodo}>

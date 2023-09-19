@@ -9,11 +9,13 @@ import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
 import {TaskProgress} from "./components/Tasks/TaskPogress/TaskProgress";
 import {Header} from "./components/layouts/Header/Header";
 import {TaskList} from "./components/Tasks/TaskTable/TaskList";
+import {OpenAddFormContext} from "./context/OpenAddFormContext";
 
 function App() {
 
     const [tasks, setTask] = useState<TodoEntity[] | null>(null);
     const [fetchData, setFetchData] = useState(true);
+    const [AddFormIsOpen, setAddFormIsOpen] = useState(false);
 
     useEffect(() => {
         if (fetchData) {
@@ -32,10 +34,11 @@ function App() {
 
 
     return (
-            <div className="App">
-                <Header/>
-                <FetchDataContext.Provider value={{fetchData, setFetchData}}>
-                    <TaskContext.Provider value={{tasks}}>
+        <div className="App">
+            <Header/>
+            <FetchDataContext.Provider value={{fetchData, setFetchData}}>
+                <TaskContext.Provider value={{tasks}}>
+                    <OpenAddFormContext.Provider value={{AddFormIsOpen, setAddFormIsOpen}} >
                         {(tasks.length === 0) ? <NoTaskLayout/> :
                             <div>
                                 <TaskProgress/>
@@ -43,9 +46,10 @@ function App() {
                                 <AddForm/>
                             </div>
                         }
-                    </TaskContext.Provider>
-                </FetchDataContext.Provider>
-            </div>
+                    </OpenAddFormContext.Provider>
+                </TaskContext.Provider>
+            </FetchDataContext.Provider>
+        </div>
 
     );
 }
