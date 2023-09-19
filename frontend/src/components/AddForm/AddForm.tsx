@@ -5,6 +5,7 @@ import {Loader} from "../common/Loader/Loader";
 import './AddForm.css'
 import {OpenAddFormContext} from "../../context/OpenAddFormContext";
 import {AddFormOpenBtn} from "./AddFormOpenBtn/AddFormOpenBtn";
+import {AddFormCloseBtn} from "./AddFormCloseBtn/AddFormCloseBtn";
 
 export const AddForm = () => {
     const [loading, setLoading] = useState(false);
@@ -67,10 +68,11 @@ export const AddForm = () => {
 
     return (<div className="AddForm">
             <div>
-                {!AddFormIsOpen && (<AddFormOpenBtn action={handleOpenPopup}></AddFormOpenBtn>)}
+                {!AddFormIsOpen && <AddFormOpenBtn action={handleOpenPopup}/>}
                 {AddFormIsOpen && (
-                    <div className="AddForm__PopUpForm">
-                        <button className="AddForm__close_BTN" onClick={handleClosePopup}><i className="fa fa-arrow-up"></i></button>
+                    <div>
+                        <AddFormCloseBtn action={handleClosePopup}/>
+
                         <form className="AddForm__form" onSubmit={saveTodo}>
                             <label>
                                 <div className="AddForm__input_group">
