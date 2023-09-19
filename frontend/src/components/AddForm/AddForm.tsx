@@ -4,6 +4,7 @@ import {FetchDataContext} from "../../context/FetchDataContext.tsx";
 import {Loader} from "../common/Loader/Loader";
 import './AddForm.css'
 import {OpenAddFormContext} from "../../context/OpenAddFormContext";
+import {AddFormOpenBtn} from "./AddFormOpenBtn/AddFormOpenBtn";
 
 export const AddForm = () => {
     const [loading, setLoading] = useState(false);
@@ -51,27 +52,22 @@ export const AddForm = () => {
             [key]: value,
         }));
     };
-    const handleOpenPopup = () => {
-        setAddFormIsOpen(true);
 
-    }
 
     const handleClosePopup = () => {
         setAddFormIsOpen(false);
+    }
+    const handleOpenPopup = () => {
+        setAddFormIsOpen(true);
+
     }
     if (loading) {
         return <Loader/>
     }
 
     return (<div className="AddForm">
-
-            <div className="AddForm_container">
-                {!AddFormIsOpen && (<button className="AddForm__add_BTN" onClick={handleOpenPopup}
-                    ><i className="fa fa-plus"></i>
-                    </button>
-                )}
-            </div>
             <div>
+                {!AddFormIsOpen && (<AddFormOpenBtn action={handleOpenPopup}></AddFormOpenBtn>)}
                 {AddFormIsOpen && (
                     <div className="AddForm__PopUpForm">
                         <button className="AddForm__close_BTN" onClick={handleClosePopup}><i className="fa fa-arrow-up"></i></button>
