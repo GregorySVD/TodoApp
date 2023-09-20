@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {AddForm} from "../../AddForm/AddForm";
+import {AddTaskForm} from "../../AddForm/AddTaskForm";
 import './NoTaskLayout.css'
 import {OpenAddFormContext} from "../../../context/OpenAddFormContext";
 
@@ -20,7 +20,7 @@ export const NoTaskLayout = () => {
                     — Tony Robbins
                 </footer>
             </blockquote>
-            <AddForm/>
+            <AddTaskForm/>
         </div>
     )
 }

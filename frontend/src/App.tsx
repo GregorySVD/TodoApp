@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {AddForm} from "./components/AddForm/AddForm";
+import {AddTaskForm} from "./components/AddForm/AddTaskForm";
 import {TaskContext} from "./context/TaskContext";
 import {TodoEntity} from 'types'
 import {Loader} from "./components/common/Loader/Loader";
@@ -43,7 +43,7 @@ function App() {
                             <div>
                                 <TaskProgress/>
                                 <TaskList/>
-                                <AddForm/>
+                                <AddTaskForm/>
                             </div>
                         }
                     </OpenAddFormContext.Provider>
