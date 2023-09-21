@@ -21,17 +21,15 @@ export const AddTaskForm = () => {
         setAddFormIsOpen(true);
 
     }
-
-    return (<div className="AddForm">
-            <div>
-                {!AddFormIsOpen && <AddFormOpenBtn action={handleOpenPopup}/>}
-                {AddFormIsOpen && (
-                    <div>
-                        <TaskForm/>
-                        <AddFormCloseBtn action={handleClosePopup}/>
-                    </div>
-                )}
+    return (!AddFormIsOpen)
+        ?
+            <AddFormOpenBtn action={handleOpenPopup}/>
+        :
+        (<div className="AddForm">
+                <div>
+                    <TaskForm/>
+                    <AddFormCloseBtn action={handleClosePopup}/>
+                </div>
             </div>
-        </div>
-    )
+        )
 }

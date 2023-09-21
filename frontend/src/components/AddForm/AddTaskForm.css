@@ -2,7 +2,7 @@
 
 
 .AddForm {
-    height: 25vh;
+    height: 26vh;
 }
 .TaskForm__container{
     border-top: 2px solid #f0efe9;
@@ -32,7 +32,6 @@
 
 .AddForm__add_task_BTN_container {
     font-family: inherit;
-    margin: 1em 0 1em 0;
     max-width: 190px;
     min-width: 33%;
 }

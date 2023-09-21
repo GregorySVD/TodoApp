@@ -17,4 +17,5 @@
     position: relative;
     max-width: 500px;
     border-radius: 16px;
+    min-height: 400px;
 }
