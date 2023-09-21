@@ -12,7 +12,6 @@ import {TaskList} from "./components/Tasks/TaskTable/TaskList";
 import {OpenAddFormContext} from "./context/OpenAddFormContext";
 
 function App() {
-
     const [tasks, setTask] = useState<TodoEntity[] | null>(null);
     const [fetchData, setFetchData] = useState(true);
     const [AddFormIsOpen, setAddFormIsOpen] = useState(false);
@@ -38,7 +37,7 @@ function App() {
             <Header/>
             <FetchDataContext.Provider value={{fetchData, setFetchData}}>
                 <TaskContext.Provider value={{tasks}}>
-                    <OpenAddFormContext.Provider value={{AddFormIsOpen, setAddFormIsOpen}} >
+                    <OpenAddFormContext.Provider value={{AddFormIsOpen, setAddFormIsOpen}}>
                         {(tasks.length === 0) ? <NoTaskLayout/> :
                             <div>
                                 <TaskProgress/>

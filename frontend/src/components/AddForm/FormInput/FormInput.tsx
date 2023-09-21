@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './FormInput.css'
+import {FormValidationContext} from "../../../context/FormValidationContext";
 
 interface Props {
     name: string
@@ -14,6 +15,9 @@ interface Props {
 
 export const FormInput = (props: Props) => {
     const [inputValue, setInputValue] = useState<string>('');
+    const inputValidation = React.useContext(FormValidationContext);
+
+    const {setFormValidation} = inputValidation
 
     const validateLength = inputValue.length < props.setMinLength || inputValue.length > (props.setMaxLength - 1);
 
@@ -21,6 +25,11 @@ export const FormInput = (props: Props) => {
         const newValue = e.target.value;
         setInputValue(newValue);
 
+        if (inputValue.length < props.setMinLength || inputValue.length > (props.setMaxLength - 1)) {
+            setFormValidation(false);
+        } else {
+            setFormValidation(true);
+        }
         props.updateFormEvent(props.name, newValue);
 
     };
@@ -29,7 +38,8 @@ export const FormInput = (props: Props) => {
         <label className="TaskForm__label">
             {(validateLength) ?
                 <span
-                    className="TaskForm__instruction_text">{`${props.placeholder} needs to be between ${props.setMinLength}-${props.setMaxLength} character long`}</span> : null}
+                    className="TaskForm__instruction_text">{`${props.placeholder} needs to be between ${props.setMinLength}-${props.setMaxLength} character long`}</span>
+                : null}
             <div className="FormInput__input_group">
                 <input
                     type={props.type}
