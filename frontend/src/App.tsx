@@ -10,23 +10,35 @@ import {TaskProgress} from "./components/Tasks/TaskPogress/TaskProgress";
 import {Header} from "./components/layouts/Header/Header";
 import {TaskList} from "./components/Tasks/TaskTable/TaskList";
 import {OpenAddFormContext} from "./context/OpenAddFormContext";
+import {ErrorPage} from "./components/layouts/ErrorPage/ErrorPage";
 
 function App() {
     const [tasks, setTask] = useState<TodoEntity[] | null>(null);
     const [fetchData, setFetchData] = useState(true);
     const [AddFormIsOpen, setAddFormIsOpen] = useState(false);
+    const [error, setError] = useState<Error| null>(null);
 
     useEffect(() => {
         if (fetchData) {
             (async () => {
-                const res = await fetch(`http://localhost:3001/todo`)
-                const data = await res.json();
-                setTask(data);
+                try {
+                    const res = await fetch(`http://localhost:3001/todo`);
+                    if (!res.ok) {
+                        throw new Error('Failed to fetch data, try again later');
+                    }
+                    const data = await res.json();
+                    setTask(data);
+                } catch (err) {
+                    setError(err as Error);
+                }
             })();
         }
-        setFetchData(false)
+        setFetchData(false);
     }, [fetchData]);
 
+    if (error) {
+        return <ErrorPage error={error}/>
+    }
     if (tasks === null) {
         return <Loader/>
     }
