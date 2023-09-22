@@ -11,12 +11,14 @@ import {Header} from "./components/layouts/Header/Header";
 import {TaskList} from "./components/Tasks/TaskTable/TaskList";
 import {OpenAddFormContext} from "./context/OpenAddFormContext";
 import {ErrorPage} from "./components/layouts/ErrorPage/ErrorPage";
+import {ErrorContextProvider} from './context/ErrorContext';
 
-function App() {
+export const App = () => {
+
     const [tasks, setTask] = useState<TodoEntity[] | null>(null);
     const [fetchData, setFetchData] = useState(true);
     const [AddFormIsOpen, setAddFormIsOpen] = useState(false);
-    const [error, setError] = useState<Error| null>(null);
+    const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
         if (fetchData) {
@@ -24,7 +26,7 @@ function App() {
                 try {
                     const res = await fetch(`http://localhost:3001/todo`);
                     if (!res.ok) {
-                        throw new Error('Failed to fetch data, try again later');
+                        new Error('Failed to fetch data, try again later');
                     }
                     const data = await res.json();
                     setTask(data);
@@ -43,26 +45,26 @@ function App() {
         return <Loader/>
     }
 
-
+    /*@TODO implement ErrorContext in other Components*/
+    /*@TODO change other context to work better*/
     return (
-        <div className="App">
-            <Header/>
-            <FetchDataContext.Provider value={{fetchData, setFetchData}}>
-                <TaskContext.Provider value={{tasks}}>
-                    <OpenAddFormContext.Provider value={{AddFormIsOpen, setAddFormIsOpen}}>
-                        {(tasks.length === 0) ? <NoTaskLayout/> :
-                            <div>
-                                <TaskProgress/>
-                                <TaskList/>
-                                <AddTaskForm/>
-                            </div>
-                        }
-                    </OpenAddFormContext.Provider>
-                </TaskContext.Provider>
-            </FetchDataContext.Provider>
-        </div>
-
+        <ErrorContextProvider>
+            <div className="App">
+                <Header/>
+                <FetchDataContext.Provider value={{fetchData, setFetchData}}>
+                    <TaskContext.Provider value={{tasks}}>
+                        <OpenAddFormContext.Provider value={{AddFormIsOpen, setAddFormIsOpen}}>
+                            {(tasks.length === 0) ? <NoTaskLayout/> :
+                                <div>
+                                    <TaskProgress/>
+                                    <TaskList/>
+                                    <AddTaskForm/>
+                                </div>
+                            }
+                        </OpenAddFormContext.Provider>
+                    </TaskContext.Provider>
+                </FetchDataContext.Provider>
+            </div>
+        </ErrorContextProvider>
     );
-}
-
-export default App;
+};

@@ -10,7 +10,7 @@ export const NoTaskLayout = () => {
     const {setAddFormIsOpen} = contextAddForm;
 
     useEffect(() => {
-        setAddFormIsOpen(true);
+        setAddFormIsOpen(false);
     },[]);
 
     return (
@@ -20,6 +20,8 @@ export const NoTaskLayout = () => {
                     — Tony Robbins
                 </footer>
             </blockquote>
+            <p>Click big green button below to add your first tank :)</p>
+
             <AddTaskForm/>
         </div>
     )
