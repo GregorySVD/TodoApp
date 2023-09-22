@@ -2,15 +2,18 @@
 
 
 .AddForm {
-    height: 15vh;
+    height: 26vh;
+}
+.TaskForm__container{
+    border-top: 2px solid #f0efe9;
 }
 
 .AddForm__form {
     display: flex;
     justify-content: space-evenly;
+    flex-direction: column;
     align-items: center;
     height: 100%;
-    border-top: 2px solid #f0efe9;
 }
 
 .AddForm__form label, .AddForm__form button {
@@ -18,48 +21,17 @@
 }
 
 
-.AddForm__input_group {
-    font-family: inherit;
-    margin: 1em 0 1em 0;
-    max-width: 190px;
-    position: relative;
-}
-
-.AddForm__input_group input {
-    font-size: 100%;
-    padding: 0.8em;
-    outline: none;
-    border: 2px solid #cccccc;
-    background-color: transparent;
-    border-radius: 20px;
+.TaskForm__instruction_text {
+    font-size: 0.7em;
+    color: #ff4545;
     width: 100%;
+    font-style: italic;
 }
 
-.AddForm__input_group label {
-    font-size: 100%;
-    position: absolute;
-    left: 0;
-    padding: 0.8em;
-    margin-left: 1em;
-    pointer-events: none;
-    transition: all 0.3s ease;
-    color: rgb(100, 100, 100);
-}
 
-.AddForm__input_group :is(input:focus, input:valid) ~ label {
-    transform: translateY(-50%) scale(.9);
-    margin-left: 1.3em;
-    padding: 0.4em;
-    background-color: #ffffff;
-}
-
-.AddForm__input_group :is(input:focus, input:valid) {
-    border-color: #23c483;
-}
 
 .AddForm__add_task_BTN_container {
     font-family: inherit;
-    margin: 1em 0 1em 0;
     max-width: 190px;
     min-width: 33%;
 }
@@ -68,7 +40,7 @@
     background-color: transparent;
     padding: 0.8em;
     cursor: pointer;
-    border: 2px solid #cccccc;
+    border: 2px solid #23c483;
     max-width: 190px;
     border-radius: 20px;
     font-size: 100%;
@@ -84,6 +56,15 @@
     background-color: #23c483;
     border: 2px solid #23c483;
     animation: pulse_Add_task_BTN 1.5s ease;
+}
+.AddForm__add_task_BTN:disabled {
+    animation: none;
+    cursor: not-allowed;
+    border: 2px solid #ff4545;
+}
+.AddForm__add_task_BTN:disabled:hover {
+    background-color: transparent;
+
 }
 
 @keyframes pulse_Add_task_BTN {

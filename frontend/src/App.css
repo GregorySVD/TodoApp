@@ -15,5 +15,7 @@
     padding: 2rem 2rem 0 2rem;
     min-width: 300px;
     position: relative;
-    max-width: 1000px;
+    max-width: 500px;
+    border-radius: 16px;
+    min-height: 300px;
 }

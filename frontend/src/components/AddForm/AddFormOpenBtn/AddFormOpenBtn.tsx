@@ -8,9 +8,8 @@ interface Props {
 }
 
 export const AddFormOpenBtn = (props: Props) => {
-
     return (
-        <div className="AddForm_container">
+        <div className="AddForm_container_close">
             <button className="AddForm__Open_BTN" onClick={props.action}
                 ><i className="fa fa-plus"></i>
                 </button>

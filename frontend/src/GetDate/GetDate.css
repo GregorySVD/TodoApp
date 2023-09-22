@@ -9,18 +9,22 @@
     justify-content: space-between;
     display: flex;
     gap: 1vw;
+
 }
 .GetDate__date_day_number{
     font-weight: bolder;
     font-size: 2.2em;
+    color: #a05aff;
 }
 .GetDate__month_and_year{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    color: #a05aff;
 }
 .GetDate__date_day_of_week{
     text-align: right;
+    color: #a05aff;
 }
 
 .GetDate__date_day_of_week{

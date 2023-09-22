@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {AddForm} from "../../AddForm/AddForm";
+import {AddTaskForm} from "../../AddForm/AddTaskForm";
 import './NoTaskLayout.css'
 import {OpenAddFormContext} from "../../../context/OpenAddFormContext";
 
@@ -10,7 +10,7 @@ export const NoTaskLayout = () => {
     const {setAddFormIsOpen} = contextAddForm;
 
     useEffect(() => {
-        setAddFormIsOpen(true);
+        setAddFormIsOpen(false);
     },[]);
 
     return (
@@ -20,7 +20,9 @@ export const NoTaskLayout = () => {
                     — Tony Robbins
                 </footer>
             </blockquote>
-            <AddForm/>
+            <p>Click big green button below to add your first tank :)</p>
+
+            <AddTaskForm/>
         </div>
     )
 }
