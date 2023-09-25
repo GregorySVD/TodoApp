@@ -36,6 +36,7 @@ export const App = () => {
             })();
         }
         setFetchData(false);
+        setError(null);
     }, [fetchData]);
 
     if (error) {
