@@ -1,0 +1,45 @@
+
+.AddTaskFormOpener__button {
+    height: 3em;
+    width: 8em;
+    border: none;
+    border-radius: 10em;
+    background: #50e3a4;
+    font-size: 17px;
+    font-family: inherit;
+    font-weight: 500;
+    overflow: visible;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    transition: transform 1.5s ease;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.AddTaskFormOpener__button i {
+    font-size: 1.5em;
+}
+
+.AddTaskFormOpener__button:hover {
+    animation: pulse_green 1s linear infinite both;
+}
+
+
+@keyframes pulse_green {
+    0% {
+        transform: translate(-50%, 0%) scale(1);
+        box-shadow: 0 0 0 rgba(11, 110, 79, 0.5);
+    }
+
+    50% {
+        transform: translate(-50%, 0%) scale(1.2);
+        box-shadow: 0 0 100px rgba(11, 110, 79, 0.5);
+    }
+
+    100% {
+        transform: translate(-50%, 0%) scale(1);
+        box-shadow: 0 0 0 rgba(11, 110, 79, 0.5);
+    }
+}

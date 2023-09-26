@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 
 import './AddTaskForm.css'
 import {OpenAddFormContext} from "../../context/OpenAddFormContext";
-import {AddFormOpenBtn} from "./AddFormOpenBtn/AddFormOpenBtn";
+import {AddTaskFormOpener} from "./AddFormOpenBtn/AddTaskFormOpener";
 import {AddFormCloseBtn} from "./AddFormCloseBtn/AddFormCloseBtn";
 import {TaskForm} from "./TaskForm/TaskForm";
 import {FormValidationContext} from "../../context/FormValidationContext"
@@ -26,7 +26,7 @@ export const AddTaskForm = () => {
     }
     return (!AddFormIsOpen)
         ?
-        <AddFormOpenBtn action={handleOpenPopup}/>
+        <AddTaskFormOpener action={handleOpenPopup}/>
         :
         (
             <FormValidationContext.Provider value={{FormValidation, setFormValidation}}>
