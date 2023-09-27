@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './FormInput.css'
 import {FormValidationContext} from "../../../context/FormValidationContext";
 
@@ -16,27 +16,27 @@ interface Props {
 export const FormInput = (props: Props) => {
     const [inputValue, setInputValue] = useState<string>('');
     const inputValidation = React.useContext(FormValidationContext);
+    const {setFormValidation, FormValidation} = inputValidation;
 
-    const {setFormValidation} = inputValidation
 
-    const validateLength = inputValue.length < props.setMinLength || inputValue.length > (props.setMaxLength - 1);
-
-    const handleUpdateInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.value;
-        setInputValue(newValue);
-
-        if (inputValue.length < props.setMinLength || inputValue.length > (props.setMaxLength - 1)) {
+    useEffect(() => {
+        if (inputValue.length < props.setMinLength || inputValue.length > props.setMaxLength) {
             setFormValidation(false);
         } else {
             setFormValidation(true);
         }
-        props.updateFormEvent(props.name, newValue);
 
+    }, [inputValue, props.setMinLength, props.setMaxLength, setFormValidation]);
+
+    const handleUpdateInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.value;
+        setInputValue(newValue);
+        props.updateFormEvent(props.name, newValue);
     };
 
     return (
         <label className="TaskForm__label">
-            {(validateLength) ?
+            {(!FormValidation) ?
                 <span
                     className="TaskForm__instruction_text">{`${props.placeholder} needs to be between ${props.setMinLength}-${props.setMaxLength} character long`}</span>
                 : null}

@@ -6,6 +6,7 @@ import {FormInput} from "../FormInput/FormInput";
 import {FormValidationContext} from "../../../context/FormValidationContext";
 import {useErrorContext} from "../../../context/ErrorContext";
 import {ErrorPage} from "../../layouts/ErrorPage/ErrorPage";
+import {FormSubmitButton} from "../SendFormButton/FormSubmitButton";
 
 
 export const TaskForm = () => {
@@ -13,10 +14,10 @@ export const TaskForm = () => {
     const [id, setId] = useState('');
     const contextError = useErrorContext();
     const {error, setError} = contextError;
-
     const [form, setForm] = useState<TodoEntity>({
         title: '',
     });
+
 
     const inputValidation = useContext(FormValidationContext);
     const contextFetch = useContext(FetchDataContext);
@@ -24,12 +25,8 @@ export const TaskForm = () => {
         throw new Error('FetchDataContext is not provided!');
     }
     const {setFetchData} = contextFetch;
-    if (loading) {
-        return <Loader/>
-    }
 
-
-    const {FormValidation, setFormValidation} = inputValidation;
+    const {setFormValidation} = inputValidation;
 
 
     const updateForm = (key: string, value: string) => {
@@ -37,7 +34,6 @@ export const TaskForm = () => {
             ...prevForm,
             [key]: value,
         }));
-        console.log(id);
     };
 
     const saveTodo = async (e: SyntheticEvent) => {
@@ -71,6 +67,9 @@ export const TaskForm = () => {
             })
         }
     }
+    if (loading) {
+        return <Loader/>
+    }
     if (error) {
         return <ErrorPage error={error}/>
     }
@@ -87,13 +86,7 @@ export const TaskForm = () => {
                     setMinLength={3}
                     updateFormEvent={updateForm}
                 />
-                <div className="AddForm__add_task_BTN_container">
-                    <button className="AddForm__add_task_BTN"
-                            disabled={!FormValidation}
-                            onClick={saveTodo}>
-                        <span>Add New Task</span>
-                    </button>
-                </div>
+                <FormSubmitButton onClick={saveTodo}/>
             </form>
         </div>
 

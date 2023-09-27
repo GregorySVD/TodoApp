@@ -12,8 +12,6 @@ export const AddTaskForm = () => {
     const [FormValidation, setFormValidation] = useState(false);
 
     const contextAddForm = useContext(OpenAddFormContext);
-
-
     const {setAddFormIsOpen, AddFormIsOpen} = contextAddForm
 
 
@@ -22,7 +20,6 @@ export const AddTaskForm = () => {
     }
     const handleOpenPopup = () => {
         setAddFormIsOpen(true);
-
     }
     return (!AddFormIsOpen)
         ?
