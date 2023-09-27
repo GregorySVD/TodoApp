@@ -1,0 +1,54 @@
+.AddForm__Form_Submit_BTN {
+    flex: 1;
+}
+.AddForm__Form_Submit_BTN_container {
+    font-family: inherit;
+    max-width: 190px;
+    min-width: 33%;
+}
+.AddForm__Form_Submit_BTN {
+    background-color: transparent;
+    padding: 0.8em;
+    cursor: pointer;
+    border: 2px solid #23c483;
+    max-width: 190px;
+    border-radius: 20px;
+    font-size: 100%;
+    position: relative;
+    justify-content: center;
+    width: 100%;
+}
+.AddForm__Form_Submit_BTN:focus {
+    outline: none;
+}
+.AddForm__Form_Submit_BTN:hover {
+    background-color: #23c483;
+    border: 2px solid #23c483;
+    animation: pulse_Add_task_BTN 1.5s ease;
+}
+.AddForm__Form_Submit_BTN:disabled {
+    animation: none;
+    cursor: not-allowed;
+    border: 2px solid #ff4545;
+}
+.AddForm__Form_Submit_BTN:disabled:hover {
+    background-color: transparent;
+
+}
+
+@keyframes pulse__Form_Submit_BTN {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(11, 110, 79, 0.5);
+    }
+
+    50% {
+        transform: scale(1.2);
+        box-shadow: 0 0 100px rgba(11, 110, 79, 0.5);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(11, 110, 79, 0.5);
+    }
+}
