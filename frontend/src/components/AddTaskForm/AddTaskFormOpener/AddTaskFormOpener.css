@@ -1,5 +1,5 @@
 
-.AddTaskFormOpener__button {
+.AddTaskFormOpener__btn {
     height: 3em;
     width: 8em;
     border: none;
@@ -19,11 +19,11 @@
     justify-content: space-evenly;
     align-items: center;
 }
-.AddTaskFormOpener__button i {
+.AddTaskFormOpener__btn i {
     font-size: 1.5em;
 }
 
-.AddTaskFormOpener__button:hover {
+.AddTaskFormOpener__btn:hover {
     animation: pulse_green 1s linear infinite both;
 }
 

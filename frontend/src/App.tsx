@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {AddTaskForm} from "./components/AddForm/AddTaskForm";
+import {AddTaskForm} from "./components/AddTaskForm/AddTaskForm";
 import {TaskContext} from "./context/TaskContext";
 import {TodoEntity} from 'types'
 import {Loader} from "./components/common/Loader/Loader";

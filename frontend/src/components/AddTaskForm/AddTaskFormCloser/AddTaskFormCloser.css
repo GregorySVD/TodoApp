@@ -1,4 +1,4 @@
-.AddForm__close_BTN {
+.AddTaskFormCloser__close_Btn {
     width: 65px;
     border: 0;
     border-radius: 50%;
@@ -22,15 +22,15 @@
     align-items: center;
     height: auto;
 }
-.AddForm__close_BTN:focus {
+.AddTaskFormCloser__close_Btn:focus {
     outline: none;
 }
 
-.AddForm__close_BTN:hover {
+.AddTaskFormCloser__close_Btn:hover {
     animation: pulse_grey 2s normal;
 }
 
-.AddForm__close_BTN i {
+.AddTaskFormCloser__close_Btn i {
     font-size: 0.5em;
 }
 
