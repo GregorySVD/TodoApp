@@ -1,12 +1,12 @@
 import React, {SyntheticEvent, useContext, useEffect, useState} from 'react';
 import {FormValidationContext} from "../../../context/FormValidationContext";
-import './FormSubmitButton.css'
+import './SubmitTaskButton.css'
 
 interface SendFormButtonProps {
     onClick: (e: SyntheticEvent) => Promise<void>
 }
 
-export const FormSubmitButton: React.FC<SendFormButtonProps> = ({onClick}) => {
+export const SubmitTaskButton: React.FC<SendFormButtonProps> = ({onClick}) => {
     const inputValidation = useContext(FormValidationContext);
     const {FormValidation} = inputValidation;
     const [isFormValid, setIsFormValid] = useState(FormValidation);
@@ -16,10 +16,11 @@ export const FormSubmitButton: React.FC<SendFormButtonProps> = ({onClick}) => {
     }, [FormValidation]);
 
     return (
-        <div className="AddForm__Form_Submit_BTN_container">
-            <button className="AddForm__Form_Submit_BTN"
+        <div className="SubmitTaskButton__container">
+            <button className="SubmitTaskButton__btn"
                     disabled={!isFormValid}
                     onClick={onClick}>
+                <i className="fa fa-plus"></i>
                 <span>Add New Task</span>
             </button>
         </div>

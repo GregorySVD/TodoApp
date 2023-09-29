@@ -6,7 +6,7 @@ import {AddTaskFormTitleInput} from "../AddTaskFormTitleInput/AddTaskFormTitleIn
 import {FormValidationContext} from "../../../context/FormValidationContext";
 import {useErrorContext} from "../../../context/ErrorContext";
 import {ErrorPage} from "../../layouts/ErrorPage/ErrorPage";
-import {FormSubmitButton} from "../SendFormButton/FormSubmitButton";
+import {SubmitTaskButton} from "../SubmitTaskButton/SubmitTaskButton";
 
 
 export const TaskForm = () => {
@@ -56,6 +56,7 @@ export const TaskForm = () => {
             const data = await res.json();
             setId(data.id);
             setFetchData(true);
+            console.log(`${id} Task added successfully `)
         } catch (e) {
             setError(e as Error);
 
@@ -83,7 +84,7 @@ export const TaskForm = () => {
                     setMinLength={3}
                     updateFormEvent={updateForm}
                 />
-                <FormSubmitButton onClick={saveTodo}/>
+                <SubmitTaskButton onClick={saveTodo}/>
             </form>
         </div>
 

@@ -1,0 +1,88 @@
+.SubmitTaskButton__container {
+    font-family: inherit;
+    max-width: 190px;
+    min-width: 33%;
+}
+.SubmitTaskButton__btn {
+    flex: 1;
+}
+.SubmitTaskButton__btn {
+    background-color: transparent;
+    padding: 0.8em;
+    cursor: pointer;
+    border: 2px solid #23c483;
+    max-width: 190px;
+    border-radius: 10em;
+    font-size: 100%;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.SubmitTaskButton__btn:focus {
+    outline: none;
+}
+.SubmitTaskButton__btn:hover {
+
+    border: 2px solid #23c483;
+    animation: pulse__Submit_btn 1s linear infinite both;
+}
+.SubmitTaskButton__btn:not(:disabled) {
+    background: #50e3a4;
+}
+.SubmitTaskButton__btn:disabled {
+    animation: none;
+    cursor: not-allowed;
+    border: 2px solid #ff4545;
+}
+.SubmitTaskButton__btn:disabled:hover {
+    animation: shake3856 0.3s linear infinite both;
+
+}
+.SubmitTaskButton__btn i {
+    font-size: 1.5em;
+    margin-right: 0.5em;
+}
+
+@keyframes pulse__Submit_btn {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(11, 110, 79, 0.5);
+    }
+
+    50% {
+        transform: scale(1.2);
+        box-shadow: 0 0 100px rgba(11, 110, 79, 0.5);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(11, 110, 79, 0.5);
+    }
+}
+@keyframes shake3856 {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
