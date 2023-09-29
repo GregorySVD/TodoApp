@@ -2,7 +2,7 @@ import React, {SyntheticEvent, useContext, useState} from 'react';
 import {TodoEntity} from 'types';
 import {FetchDataContext} from "../../../context/FetchDataContext.tsx";
 import {Loader} from "../../common/Loader/Loader";
-import {FormInput} from "../FormInput/FormInput";
+import {AddTaskFormTitleInput} from "../AddTaskFormTitleInput/AddTaskFormTitleInput";
 import {FormValidationContext} from "../../../context/FormValidationContext";
 import {useErrorContext} from "../../../context/ErrorContext";
 import {ErrorPage} from "../../layouts/ErrorPage/ErrorPage";
@@ -75,12 +75,9 @@ export const TaskForm = () => {
     }
 
     return (
-
         <div className="TaskForm__container">
             <form className="AddForm__form" onSubmit={saveTodo}>
-                <FormInput
-                    name={"title"}
-                    type={'text'}
+                <AddTaskFormTitleInput
                     placeholder={"Title"}
                     setMaxLength={150}
                     setMinLength={3}

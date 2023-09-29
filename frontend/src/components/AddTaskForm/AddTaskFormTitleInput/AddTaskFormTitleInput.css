@@ -1,15 +1,14 @@
-.TaskForm__label {
+.AddTaskFormTitleInput__label {
     width: 100%;
 }
 
-.FormInput__input_group {
+.AddTaskFormTitleInput__input_group {
     font-family: inherit;
     margin: 1em 0 1em 0;
     max-width: 100%;
     position: relative;
-
 }
-.FormInput__input_group input {
+.AddTaskFormTitleInput__input_group input {
     font-size: 100%;
     padding: 0.8em;
     outline: none;
@@ -19,7 +18,7 @@
     width: 100%;
 }
 
-.FormInput__input_group label {
+.AddTaskFormTitleInput__input_group label {
     font-size: 100%;
     position: absolute;
     left: 0;
@@ -30,19 +29,19 @@
     color: rgb(100, 100, 100);
 }
 
-.FormInput__input_group :is(input:focus, input:valid) ~ label {
+.AddTaskFormTitleInput__input_group :is(input:focus, input:valid) ~ label {
     transform: translateY(-50%) scale(.9);
     margin-left: 1.3em;
     padding: 0.4em;
     background-color: #ffffff;
 }
 
-.FormInput__input_group :is(input:focus, input:valid) {
+.AddTaskFormTitleInput__input_group :is(input:focus, input:valid) {
     border-color: #23c483;
 }
-.FormInput__input_group input:invalid {
+.AddTaskFormTitleInput__input_group input:invalid {
     border-color: #ff5144;
 }
-.FormInput__input_group input:invalid + label {
+.AddTaskFormTitleInput__input_group input:invalid + label {
     color: #ff5144;
 }
