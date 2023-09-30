@@ -6,7 +6,7 @@ import {TaskProgress} from "./components/Tasks/TaskPogress/TaskProgress";
 import {Header} from "./components/layouts/Header/Header";
 import {OpenAddFormContext} from "./context/OpenAddFormContext";
 import {ErrorPage} from "./components/layouts/ErrorPage/ErrorPage";
-import {ErrorContextProvider} from './context/ErrorContext';
+import { useErrorContext} from './context/ErrorContext';
 import {AddTaskForm} from "./components/AddTaskForm/AddTaskForm";
 import {useTaskListRerenderContext} from "./context/TaskListRerenderContext";
 import {TaskList} from "./components/Tasks/TaskTable/TaskList";
@@ -16,8 +16,9 @@ export const App = () => {
     const useTaskListRenderContext = useTaskListRerenderContext();
     const {shouldRerender, setShouldRerender} = useTaskListRenderContext;
     const [AddFormIsOpen, setAddFormIsOpen] = useState(false);
-    const [error, setError] = useState<Error | null>(null);
 
+    const errorContext = useErrorContext()
+    const {error,setError,clearError} = errorContext;
     const TaskListContext = useTaskListContext();
     const {tasksList, setTaskList} = TaskListContext;
 
@@ -37,8 +38,8 @@ export const App = () => {
             })();
         }
         setShouldRerender(false);
-        setError(null);
-    }, [shouldRerender, setShouldRerender, setTaskList]);
+        clearError();
+    }, [shouldRerender, setShouldRerender, setTaskList, setError, clearError]);
 
     if (error) {
         return <ErrorPage error={error}/>
@@ -46,11 +47,8 @@ export const App = () => {
     if (tasksList === null) {
         return <Loader/>
     }
-
     /*@TODO implement ErrorContext in other Components*/
-    /*@TODO change other context to work better*/
     return (
-        <ErrorContextProvider>
             <div className="App">
                 <Header/>
                     <OpenAddFormContext.Provider value={{AddFormIsOpen, setAddFormIsOpen}}>
@@ -63,6 +61,5 @@ export const App = () => {
                         }
                     </OpenAddFormContext.Provider>
             </div>
-        </ErrorContextProvider>
     );
 };
