@@ -1,25 +1,15 @@
-@import "~font-awesome/css/font-awesome.css";
-
-
-.AddForm {
-    height: 26vh;
-}
-.TaskForm__container{
+.AddTaskForm__container{
     border-top: 2px solid #f0efe9;
+    height: 25vh;
 }
 
-.AddForm__form {
+.AddTaskForm__form {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
     height: 100%;
 }
-
-.AddForm__form label {
-    flex: 1;
-}
-
 
 .AddTaskFormTitleInput__validation_info {
     font-size: 0.7em;

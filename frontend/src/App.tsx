@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {AddTaskForm} from "./components/AddTaskForm/AddTaskForm";
 import {TaskContext} from "./context/TaskContext";
 import {TodoEntity} from 'types'
 import {Loader} from "./components/common/Loader/Loader";
@@ -12,6 +11,7 @@ import {TaskList} from "./components/Tasks/TaskTable/TaskList";
 import {OpenAddFormContext} from "./context/OpenAddFormContext";
 import {ErrorPage} from "./components/layouts/ErrorPage/ErrorPage";
 import {ErrorContextProvider} from './context/ErrorContext';
+import {AddTaskForm} from "./components/AddTaskForm/AddTaskForm";
 
 export const App = () => {
 

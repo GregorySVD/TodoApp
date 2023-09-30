@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
-import {AddTaskForm} from "../../AddTaskForm/AddTaskForm";
 import './NoTaskLayout.css'
 import {OpenAddFormContext} from "../../../context/OpenAddFormContext";
+import {AddTaskForm} from "../../AddTaskForm/AddTaskForm";
 
 
 export const NoTaskLayout = () => {
