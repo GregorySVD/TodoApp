@@ -2,7 +2,7 @@ import React, {SyntheticEvent, useContext, useState} from 'react';
 import {TodoEntity} from 'types';
 import {Loader} from "../common/Loader/Loader";
 import {AddTaskFormTitleInput} from "./AddTaskFormTitleInput/AddTaskFormTitleInput";
-import {FormValidationContext} from "../../context/FormValidationContext";
+import {useFormValidationContext} from "../../context/FormValidationContext";
 import {useErrorContext} from "../../context/ErrorContext";
 import {ErrorPage} from "../layouts/ErrorPage/ErrorPage";
 import {SubmitTaskButton} from "./SubmitTaskButton/SubmitTaskButton";
@@ -17,16 +17,16 @@ export const AddTaskForm = () => {
     const [id, setId] = useState('');
     const contextError = useErrorContext();
     const {error, setError} = contextError;
+
     const [form, setForm] = useState<TodoEntity>({
         title: '',
     });
-    const [FormValidation, setFormValidation] = useState(false);
 
-    const contextAddForm = useContext(OpenAddFormContext);
-    const {AddFormIsOpen, setAddFormIsOpen} = contextAddForm
+    const {AddFormIsOpen, setAddFormIsOpen} = useContext(OpenAddFormContext);
 
-    const useTaskListRenderContext = useTaskListRerenderContext();
-    const {setShouldRerender} = useTaskListRenderContext;
+    const {setFormIsValid} = useFormValidationContext();
+
+    const {setShouldRerender} = useTaskListRerenderContext();
 
     const updateForm = (key: string, value: string) => {
         setForm((prevForm) => ({
@@ -59,7 +59,7 @@ export const AddTaskForm = () => {
             setError(err as Error);
 
         } finally {
-            setFormValidation(false)
+            setFormIsValid(false)
             setLoading(false);
             setForm({
                 title: '',
@@ -85,19 +85,18 @@ export const AddTaskForm = () => {
         <AddTaskFormOpener onClick={handleOpenPopup}/>
         :
         (
-            <FormValidationContext.Provider value={{FormValidation, setFormValidation}}>
-                <div className="AddTaskForm__container">
-                    <form className="AddTaskForm__form" onSubmit={saveTodo}>
-                        <AddTaskFormTitleInput
-                            placeholder={"Title"}
-                            setMaxLength={150}
-                            setMinLength={3}
-                            updateFormEvent={updateForm}
-                        />
-                        <SubmitTaskButton onClick={saveTodo}/>
-                    </form>
-                    <AddTaskFormCloser onClick={handleCloseForm}/>
-                </div>
-            </FormValidationContext.Provider>
+
+            <div className="AddTaskForm__container">
+                <form className="AddTaskForm__form" onSubmit={saveTodo}>
+                    <AddTaskFormTitleInput
+                        placeholder={"Title"}
+                        setMaxLength={150}
+                        setMinLength={3}
+                        updateFormEvent={updateForm}
+                    />
+                    <SubmitTaskButton onClick={saveTodo}/>
+                </form>
+                <AddTaskFormCloser onClick={handleCloseForm}/>
+            </div>
         )
 }

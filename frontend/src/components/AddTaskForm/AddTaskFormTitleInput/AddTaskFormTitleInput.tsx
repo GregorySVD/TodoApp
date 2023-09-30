@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './AddTaskFormTitleInput.css'
-import {FormValidationContext} from "../../../context/FormValidationContext";
+import {useFormValidationContext} from "../../../context/FormValidationContext";
 
 interface Props {
     className?: string
@@ -12,16 +12,15 @@ interface Props {
 
 export const AddTaskFormTitleInput = (props: Props) => {
     const [titleInputValue, setTitleInputValue] = useState<string>('');
-    const inputValidation = React.useContext(FormValidationContext);
-    const {FormValidation, setFormValidation} = inputValidation;
+    const {formIsValid, setFormIsValid} = useFormValidationContext();
 
     useEffect(() => {
         if (titleInputValue.length < props.setMinLength || titleInputValue.length > props.setMaxLength) {
-            setFormValidation(false);
+            setFormIsValid(false);
         } else {
-            setFormValidation(true);
+            setFormIsValid(true);
         }
-    }, [titleInputValue, props.setMinLength, props.setMaxLength, setFormValidation]);
+    }, [titleInputValue, props.setMinLength, props.setMaxLength, setFormIsValid]);
 
     const handleUpdateTitleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newTitle = e.target.value;
@@ -31,7 +30,7 @@ export const AddTaskFormTitleInput = (props: Props) => {
 
     return (
         <label className="AddTaskFormTitleInput__label">
-            {(!FormValidation)
+            {(!formIsValid)
                 ?
                 <span className="AddTaskFormTitleInput__validation_info">{`${props.placeholder} needs to be between ${props.setMinLength}-${props.setMaxLength} character long`}</span>
                 : null
