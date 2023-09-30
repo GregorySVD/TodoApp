@@ -1,21 +1,19 @@
 import React from 'react';
-import {Loader} from "../../common/Loader/Loader";
 import './ClearTasksDone.css'
-import {FetchDataContext} from "../../../context/FetchDataContext.tsx";
+import {useTaskListRerenderContext} from "../../../context/TaskListRerenderContext";
+
 
 export const ClearTasksDone = () => {
-    const contextFetch = React.useContext(FetchDataContext);
 
-    if (!contextFetch)
-        return <Loader/>;
-    const {setFetchData} = contextFetch;
+    const useTaskListRenderContext = useTaskListRerenderContext();
+    const {setShouldRerender} = useTaskListRenderContext;
 
     const handleClearTasksDone = async (): Promise<void> => {
         try {
             await fetch(`http://localhost:3001/todo/done`, {
                 method: "DELETE",
             });
-            await setFetchData(true);
+            await setShouldRerender(true);
         } catch (err) {
             console.error(err);
         }

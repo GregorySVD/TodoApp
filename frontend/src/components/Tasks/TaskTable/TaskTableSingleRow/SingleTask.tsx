@@ -1,10 +1,9 @@
 import React from 'react';
 import {TodoEntity} from 'types'
 import {RemoveBtn} from "../../../common/RemoveBtn";
-import {Loader} from "../../../common/Loader/Loader";
 import './SingleTask.css'
-import {FetchDataContext} from "../../../../context/FetchDataContext.tsx";
 import {CheckBox} from "../../../common/CheckBox/CheckBox";
+import {useTaskListRerenderContext} from "../../../../context/TaskListRerenderContext";
 
 interface Props {
     task: TodoEntity;
@@ -13,10 +12,9 @@ interface Props {
 
 export const SingleTask = (props: Props) => {
 
-    const contextFetch = React.useContext(FetchDataContext);
-    if (!contextFetch)
-        return <Loader/>;
-    const {setFetchData} = contextFetch;
+    const useTaskListRenderContext = useTaskListRerenderContext();
+
+    const {setShouldRerender} = useTaskListRenderContext;
 
 
     const deleteTask = async (taskId: string | undefined) => {
@@ -32,7 +30,6 @@ export const SingleTask = (props: Props) => {
             alert(`Error occurred: ${error.message}`)
             return;
         }
-        setFetchData(true);
     }
 
     const switchIsDoneState = async (taskId: string | undefined) => {
@@ -43,13 +40,11 @@ export const SingleTask = (props: Props) => {
                     'Content-Type': 'application/json'
                 },
             })
-            setFetchData(true);
+            setShouldRerender(true);
             await res.json();
         } catch (err) {
             console.error('An error occurred while updating isDone status:', err);
         }
-
-
     }
 
     return (

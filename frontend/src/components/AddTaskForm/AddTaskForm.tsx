@@ -1,6 +1,5 @@
 import React, {SyntheticEvent, useContext, useState} from 'react';
 import {TodoEntity} from 'types';
-import {FetchDataContext} from "../../context/FetchDataContext.tsx";
 import {Loader} from "../common/Loader/Loader";
 import {AddTaskFormTitleInput} from "./AddTaskFormTitleInput/AddTaskFormTitleInput";
 import {FormValidationContext} from "../../context/FormValidationContext";
@@ -11,7 +10,7 @@ import './AddTaskForm.css'
 import {AddTaskFormCloser} from "./AddTaskFormCloser/AddTaskFormCloser";
 import {OpenAddFormContext} from "../../context/OpenAddFormContext";
 import {AddTaskFormOpener} from "./AddTaskFormOpener/AddTaskFormOpener";
-// @TODO FINISH THis CODE
+import {useTaskListRerenderContext} from "../../context/TaskListRerenderContext";
 
 export const AddTaskForm = () => {
     const [loading, setLoading] = useState(false);
@@ -26,12 +25,8 @@ export const AddTaskForm = () => {
     const contextAddForm = useContext(OpenAddFormContext);
     const {AddFormIsOpen, setAddFormIsOpen} = contextAddForm
 
-    const contextFetch = useContext(FetchDataContext);
-    if (!contextFetch) {
-        throw new Error('FetchDataContext is not provided!');
-    }
-    const {setFetchData} = contextFetch;
-
+    const useTaskListRenderContext = useTaskListRerenderContext();
+    const {setShouldRerender} = useTaskListRenderContext;
 
     const updateForm = (key: string, value: string) => {
         setForm((prevForm) => ({
@@ -58,7 +53,7 @@ export const AddTaskForm = () => {
             }
             const data = await res.json();
             setId(data.id);
-            setFetchData(true);
+            setShouldRerender(true);
             console.log(`${id} Task added successfully `)
         } catch (err) {
             setError(err as Error);

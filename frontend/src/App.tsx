@@ -3,25 +3,26 @@ import './App.css';
 import {TaskContext} from "./context/TaskContext";
 import {TodoEntity} from 'types'
 import {Loader} from "./components/common/Loader/Loader";
-import {FetchDataContext} from "./context/FetchDataContext.tsx";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
 import {TaskProgress} from "./components/Tasks/TaskPogress/TaskProgress";
 import {Header} from "./components/layouts/Header/Header";
-import {TaskList} from "./components/Tasks/TaskTable/TaskList";
 import {OpenAddFormContext} from "./context/OpenAddFormContext";
 import {ErrorPage} from "./components/layouts/ErrorPage/ErrorPage";
 import {ErrorContextProvider} from './context/ErrorContext';
 import {AddTaskForm} from "./components/AddTaskForm/AddTaskForm";
+import {useTaskListRerenderContext} from "./context/TaskListRerenderContext";
+import {TaskList} from "./components/Tasks/TaskTable/TaskList";
 
 export const App = () => {
+    const useTaskListRenderContext = useTaskListRerenderContext();
+    const {shouldRerender, setShouldRerender} = useTaskListRenderContext;
 
     const [tasks, setTask] = useState<TodoEntity[] | null>(null);
-    const [fetchData, setFetchData] = useState(true);
     const [AddFormIsOpen, setAddFormIsOpen] = useState(false);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        if (fetchData) {
+        if (!shouldRerender) {
             (async () => {
                 try {
                     const res = await fetch(`http://localhost:3001/todo`);
@@ -35,9 +36,9 @@ export const App = () => {
                 }
             })();
         }
-        setFetchData(false);
+        setShouldRerender(false);
         setError(null);
-    }, [fetchData]);
+    }, [shouldRerender, setShouldRerender]);
 
     if (error) {
         return <ErrorPage error={error}/>
@@ -52,19 +53,17 @@ export const App = () => {
         <ErrorContextProvider>
             <div className="App">
                 <Header/>
-                <FetchDataContext.Provider value={{fetchData, setFetchData}}>
-                    <TaskContext.Provider value={{tasks}}>
-                        <OpenAddFormContext.Provider value={{AddFormIsOpen, setAddFormIsOpen}}>
-                            {(tasks.length === 0) ? <NoTaskLayout/> :
-                                <div>
-                                    <TaskProgress/>
-                                    <TaskList/>
-                                    <AddTaskForm/>
-                                </div>
-                            }
-                        </OpenAddFormContext.Provider>
-                    </TaskContext.Provider>
-                </FetchDataContext.Provider>
+                <TaskContext.Provider value={{tasks}}>
+                    <OpenAddFormContext.Provider value={{AddFormIsOpen, setAddFormIsOpen}}>
+                        {(tasks.length === 0) ? <NoTaskLayout/> :
+                            <div>
+                                <TaskProgress/>
+                                <TaskList/>
+                                <AddTaskForm/>
+                            </div>
+                        }
+                    </OpenAddFormContext.Provider>
+                </TaskContext.Provider>
             </div>
         </ErrorContextProvider>
     );

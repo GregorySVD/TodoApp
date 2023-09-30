@@ -3,18 +3,14 @@ import {TaskContext} from "../../../context/TaskContext";
 import {Loader} from "../../common/Loader/Loader";
 import './TaskList.css';
 import {SingleTask} from "./TaskTableSingleRow/SingleTask";
-import {FetchDataContext} from "../../../context/FetchDataContext.tsx";
-
 
 export const TaskList = () => {
     const contextTask = React.useContext(TaskContext);
-    const contextFetch = React.useContext(FetchDataContext);
 
-    if (!contextTask || !contextFetch)
+    if (!contextTask)
         return <Loader/>;
 
     const {tasks} = contextTask;
-
 
     if (!tasks) {
         return <Loader/>
