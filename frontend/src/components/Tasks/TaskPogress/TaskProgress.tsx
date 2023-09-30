@@ -9,9 +9,7 @@ export const TaskProgress = () => {
     const [taskToDoCounter, setTaskToDoCounter] = useState<number | null>(null);
     const [taskDoneCounter, setTaskDoneCounter] = useState<number | null>(null);
 
-
-    const TaskListContext = useTaskListContext();
-    const {tasksList} = TaskListContext;
+    const {tasksList} = useTaskListContext();
 
     useEffect(() => {
         if (tasksList.length === 0) {

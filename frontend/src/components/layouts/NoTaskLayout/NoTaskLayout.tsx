@@ -1,17 +1,15 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import './NoTaskLayout.css'
-import {OpenAddFormContext} from "../../../context/OpenAddFormContext";
+import {useOpenAddTaskFormContext} from "../../../context/OpenAddTaskFormContext";
 import {AddTaskForm} from "../../AddTaskForm/AddTaskForm";
-
 
 export const NoTaskLayout = () => {
 
-    const contextAddForm = useContext(OpenAddFormContext);
-    const {setAddFormIsOpen} = contextAddForm;
+    const {addTaskFormIsOpen, setAddTaskFormIsOpen} = useOpenAddTaskFormContext();
 
     useEffect(() => {
-        setAddFormIsOpen(false);
-    },[]);
+        setAddTaskFormIsOpen(false);
+    },[addTaskFormIsOpen, setAddTaskFormIsOpen]);
 
     return (
         <div className="NoTaskLayout__quote_container">

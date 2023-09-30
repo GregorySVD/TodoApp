@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {Loader} from "./components/common/Loader/Loader";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
 import {TaskProgress} from "./components/Tasks/TaskPogress/TaskProgress";
 import {Header} from "./components/layouts/Header/Header";
-import {OpenAddFormContext} from "./context/OpenAddFormContext";
 import {ErrorPage} from "./components/layouts/ErrorPage/ErrorPage";
 import {useErrorContext} from './context/ErrorContext';
 import {AddTaskForm} from "./components/AddTaskForm/AddTaskForm";
@@ -14,14 +13,10 @@ import {useTaskListContext} from "./context/TaskListContext";
 import {FormValidationContextProvider} from "./context/FormValidationContext";
 
 export const App = () => {
-    const useTaskListRenderContext = useTaskListRerenderContext();
-    const {shouldRerender, setShouldRerender} = useTaskListRenderContext;
-    const [AddFormIsOpen, setAddFormIsOpen] = useState(false);
 
-    const errorContext = useErrorContext()
-    const {error, setError, clearError} = errorContext;
-    const TaskListContext = useTaskListContext();
-    const {tasksList, setTaskList} = TaskListContext;
+    const {shouldRerender, setShouldRerender} = useTaskListRerenderContext()
+    const {error, setError, clearError} = useErrorContext()
+    const {tasksList, setTaskList} = useTaskListContext();
 
     useEffect(() => {
         if (!shouldRerender) {
@@ -53,15 +48,13 @@ export const App = () => {
         <div className="App">
             <Header/>
             <FormValidationContextProvider>
-                <OpenAddFormContext.Provider value={{AddFormIsOpen, setAddFormIsOpen}}>
-                    {(tasksList.length === 0) ? <NoTaskLayout/> :
-                        <div>
-                            <TaskProgress/>
-                            <TaskList/>
-                            <AddTaskForm/>
-                        </div>
-                    }
-                </OpenAddFormContext.Provider>
+                {(tasksList.length === 0) ? <NoTaskLayout/> :
+                    <div>
+                        <TaskProgress/>
+                        <TaskList/>
+                        <AddTaskForm/>
+                    </div>
+                }
             </FormValidationContextProvider>
         </div>
     );

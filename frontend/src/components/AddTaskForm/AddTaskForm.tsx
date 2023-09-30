@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useContext, useState} from 'react';
+import React, {SyntheticEvent, useState} from 'react';
 import {TodoEntity} from 'types';
 import {Loader} from "../common/Loader/Loader";
 import {AddTaskFormTitleInput} from "./AddTaskFormTitleInput/AddTaskFormTitleInput";
@@ -8,25 +8,21 @@ import {ErrorPage} from "../layouts/ErrorPage/ErrorPage";
 import {SubmitTaskButton} from "./SubmitTaskButton/SubmitTaskButton";
 import './AddTaskForm.css'
 import {AddTaskFormCloser} from "./AddTaskFormCloser/AddTaskFormCloser";
-import {OpenAddFormContext} from "../../context/OpenAddFormContext";
+import {useOpenAddTaskFormContext} from "../../context/OpenAddTaskFormContext";
 import {AddTaskFormOpener} from "./AddTaskFormOpener/AddTaskFormOpener";
 import {useTaskListRerenderContext} from "../../context/TaskListRerenderContext";
 
 export const AddTaskForm = () => {
     const [loading, setLoading] = useState(false);
     const [id, setId] = useState('');
-    const contextError = useErrorContext();
-    const {error, setError} = contextError;
-
     const [form, setForm] = useState<TodoEntity>({
         title: '',
     });
 
-    const {AddFormIsOpen, setAddFormIsOpen} = useContext(OpenAddFormContext);
-
+    const {addTaskFormIsOpen, setAddTaskFormIsOpen} = useOpenAddTaskFormContext();
     const {setFormIsValid} = useFormValidationContext();
-
     const {setShouldRerender} = useTaskListRerenderContext();
+    const {error, setError} = useErrorContext();
 
     const updateForm = (key: string, value: string) => {
         setForm((prevForm) => ({
@@ -57,7 +53,6 @@ export const AddTaskForm = () => {
             console.log(`${id} Task added successfully `)
         } catch (err) {
             setError(err as Error);
-
         } finally {
             setFormIsValid(false)
             setLoading(false);
@@ -67,10 +62,10 @@ export const AddTaskForm = () => {
         }
     }
     const handleCloseForm = () => {
-        setAddFormIsOpen(false);
+        setAddTaskFormIsOpen(false);
     }
-    const handleOpenPopup = () => {
-        setAddFormIsOpen(true);
+    const handleOpenForm = () => {
+        setAddTaskFormIsOpen(true);
     }
 
     if (loading) {
@@ -80,9 +75,9 @@ export const AddTaskForm = () => {
         return <ErrorPage error={error}/>
     }
 
-    return (!AddFormIsOpen)
+    return (!addTaskFormIsOpen)
         ?
-        <AddTaskFormOpener onClick={handleOpenPopup}/>
+        <AddTaskFormOpener onClick={handleOpenForm}/>
         :
         (
 

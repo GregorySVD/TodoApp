@@ -11,11 +11,7 @@ interface Props {
 
 
 export const SingleTask = (props: Props) => {
-
-    const useTaskListRenderContext = useTaskListRerenderContext();
-
-    const {setShouldRerender} = useTaskListRenderContext;
-
+    const {setShouldRerender} = useTaskListRerenderContext();
 
     const deleteTask = async (taskId: string | undefined) => {
         if (!window.confirm(`Are you sure you want to remove ${props.task.title} task?`)) {

@@ -5,8 +5,7 @@ import {useTaskListRerenderContext} from "../../../context/TaskListRerenderConte
 
 export const ClearTasksDone = () => {
 
-    const useTaskListRenderContext = useTaskListRerenderContext();
-    const {setShouldRerender} = useTaskListRenderContext;
+    const {setShouldRerender} = useTaskListRerenderContext();
 
     const handleClearTasksDone = async (): Promise<void> => {
         try {

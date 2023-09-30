@@ -6,8 +6,7 @@ import {SingleTask} from "./TaskTableSingleRow/SingleTask";
 
 export const TaskList = () => {
 
-    const TaskListContext = useTaskListContext();
-    const {tasksList} = TaskListContext;
+    const {tasksList} = useTaskListContext();
 
     if (!tasksList)
         return <Loader/>;
