@@ -4,6 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {App} from './App';
 import {TaskListRerenderContextProvider} from "./context/TaskListRerenderContext";
+import {TaskListContextProvider} from "./context/TaskListContext";
 
 
 const root = ReactDOM.createRoot(
@@ -11,9 +12,13 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
+
         <TaskListRerenderContextProvider>
-            <App/>
+            <TaskListContextProvider>
+                <App/>
+            </TaskListContextProvider>
         </TaskListRerenderContextProvider>
+
     </React.StrictMode>
 );
 reportWebVitals();

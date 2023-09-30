@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './TaskProgress.css'
-import {TaskContext} from "../../../context/TaskContext";
+import {useTaskListContext} from "../../../context/TaskListContext";
 import {ProgressBar} from "./ProgressBar/ProgressBar";
 import {ClearTasksDone} from "../ClearTaskDone/ClearTasksDone";
 
@@ -9,20 +9,20 @@ export const TaskProgress = () => {
     const [taskToDoCounter, setTaskToDoCounter] = useState<number | null>(null);
     const [taskDoneCounter, setTaskDoneCounter] = useState<number | null>(null);
 
-    const contextTask = React.useContext(TaskContext);
+
+    const TaskListContext = useTaskListContext();
+    const {tasksList} = TaskListContext;
 
     useEffect(() => {
-        if (!contextTask)
-            return;
-        const {tasks} = contextTask;
-        if (tasks.length === 0) {
+        if (tasksList.length === 0) {
             return;
         }
-        setTaskToDoCounter(tasks.length);
-        const taskDone = tasks.filter((task) => task.isDone === 1);
+
+        setTaskToDoCounter(tasksList.length);
+        const taskDone = tasksList.filter((task) => task.isDone === 1);
         setTaskDoneCounter(taskDone.length);
-    }, [contextTask]);
-    if (!contextTask) return null;
+    }, [tasksList]);
+    if (!tasksList) return null;
 
     return (
         <div

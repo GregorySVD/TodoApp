@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {TaskContext} from "./context/TaskContext";
-import {TodoEntity} from 'types'
 import {Loader} from "./components/common/Loader/Loader";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
 import {TaskProgress} from "./components/Tasks/TaskPogress/TaskProgress";
@@ -12,14 +10,16 @@ import {ErrorContextProvider} from './context/ErrorContext';
 import {AddTaskForm} from "./components/AddTaskForm/AddTaskForm";
 import {useTaskListRerenderContext} from "./context/TaskListRerenderContext";
 import {TaskList} from "./components/Tasks/TaskTable/TaskList";
+import {useTaskListContext} from "./context/TaskListContext";
 
 export const App = () => {
     const useTaskListRenderContext = useTaskListRerenderContext();
     const {shouldRerender, setShouldRerender} = useTaskListRenderContext;
-
-    const [tasks, setTask] = useState<TodoEntity[] | null>(null);
     const [AddFormIsOpen, setAddFormIsOpen] = useState(false);
     const [error, setError] = useState<Error | null>(null);
+
+    const TaskListContext = useTaskListContext();
+    const {tasksList, setTaskList} = TaskListContext;
 
     useEffect(() => {
         if (!shouldRerender) {
@@ -29,8 +29,8 @@ export const App = () => {
                     if (!res.ok) {
                         new Error('Failed to fetch data, try again later');
                     }
-                    const data = await res.json();
-                    setTask(data);
+                    const result = await res.json();
+                    setTaskList(result);
                 } catch (err) {
                     setError(err as Error);
                 }
@@ -38,12 +38,12 @@ export const App = () => {
         }
         setShouldRerender(false);
         setError(null);
-    }, [shouldRerender, setShouldRerender]);
+    }, [shouldRerender, setShouldRerender, setTaskList]);
 
     if (error) {
         return <ErrorPage error={error}/>
     }
-    if (tasks === null) {
+    if (tasksList === null) {
         return <Loader/>
     }
 
@@ -53,9 +53,8 @@ export const App = () => {
         <ErrorContextProvider>
             <div className="App">
                 <Header/>
-                <TaskContext.Provider value={{tasks}}>
                     <OpenAddFormContext.Provider value={{AddFormIsOpen, setAddFormIsOpen}}>
-                        {(tasks.length === 0) ? <NoTaskLayout/> :
+                        {(tasksList.length === 0) ? <NoTaskLayout/> :
                             <div>
                                 <TaskProgress/>
                                 <TaskList/>
@@ -63,7 +62,6 @@ export const App = () => {
                             </div>
                         }
                     </OpenAddFormContext.Provider>
-                </TaskContext.Provider>
             </div>
         </ErrorContextProvider>
     );
