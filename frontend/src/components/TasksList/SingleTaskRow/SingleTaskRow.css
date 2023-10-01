@@ -1,14 +1,18 @@
-.SingleTaskRow_container {
+.SingleTaskRow{
+    border-top: 1px solid #f0efe9;
+}
+
+.SingleTaskRow__container {
     display: flex;
     width: 100%;
     height: auto;
-    margin-top: 4vh;
+    margin: 2vh 0;
     justify-content: space-around;
     font-weight: normal;
     font-size: 1.2rem;
     align-items: center;
 }
-.SingleTaskRow_container .SingleTaskRow_title {
+.SingleTaskRow .SingleTaskRow_title {
     flex: 4;
     text-align: left;
     line-height: 1.5rem;

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Spinner} from "./components/common/Loader/Spinner";
+import {Spinner} from "./components/common/Spinner/Spinner";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
 import {TaskProgress} from "./components/TasksList/TaskPogress/TaskProgress";
 import {Header} from "./components/layouts/Header/Header";

@@ -1,6 +1,6 @@
 import React, {SyntheticEvent, useState} from 'react';
 import {TodoEntity} from 'types';
-import {Spinner} from "../common/Loader/Spinner";
+import {Spinner} from "../common/Spinner/Spinner";
 import {AddTaskFormTitleInput} from "./AddTaskFormTitleInput/AddTaskFormTitleInput";
 import {useFormValidationContext} from "../../context/FormValidationContext";
 import {useErrorContext} from "../../context/ErrorContext";

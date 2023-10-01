@@ -1,11 +1,11 @@
 .Spinner__container{
     background-color: #ffffff;
-    width: 70vw;
+    width: 70%;
     margin: 10vh auto;
     text-align: center;
     height: auto;
     padding: 2rem;
-    min-width: 300px;
+    min-width: 150px;
     max-width: 500px;
     min-height: 300px;
     border-radius: 16px;

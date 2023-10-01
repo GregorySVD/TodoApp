@@ -49,11 +49,12 @@ export const SingleTaskRow = (props: Props) => {
     if (error) return <ErrorPage error={error}/>
 
     return (
-        <li className="SingleTaskRow_container" key={props.task.id}>
-            <div className="SingleTaskRow_title overflow-hidden">
-                {props.task.title}
-            </div>
-            <div className="SingleTaskRow__actions">
+        <li className="SingleTaskRow" key={props.task.id}>
+            <div className="SingleTaskRow__container">
+                <div className="SingleTaskRow_title overflow-hidden">
+                    {props.task.title}
+                </div>
+                <div className="SingleTaskRow__actions">
                     <TaskDoneStatusCheckbox
                         status={Boolean(props.task.isDone)}
                         onChange={() => switchDoneStatus(props.task.id)}
@@ -61,6 +62,7 @@ export const SingleTaskRow = (props: Props) => {
                     <TaskRemoval
                         onClick={() => deleteTask(props.task.id)}
                     />
+                </div>
             </div>
         </li>
     )

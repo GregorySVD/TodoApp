@@ -1,9 +1,9 @@
 
 .AddTaskFormOpener__btn {
-    height: 3em;
-    width: 8em;
+    height: 3rem;
+    width: 8rem;
     border: none;
-    border-radius: 10em;
+    border-radius: 10rem;
     background: #50e3a4;
     font-size: 17px;
     font-family: inherit;
@@ -11,8 +11,8 @@
     overflow: visible;
     position: absolute;
     left: 50%;
-    top: 95%;
-    transform: translate(-50%, 0%);
+    bottom: 0;
+    transform: translate(-50%,50%);
     transition: transform 1.5s ease;
     cursor: pointer;
     display: flex;
@@ -30,17 +30,17 @@
 
 @keyframes pulse_green {
     0% {
-        transform: translate(-50%, 0%) scale(1);
+        transform: translate(-50%, 50%) scale(1);
         box-shadow: 0 0 0 rgba(11, 110, 79, 0.5);
     }
 
     50% {
-        transform: translate(-50%, 0%) scale(1.2);
+        transform: translate(-50%,50%) scale(1.2);
         box-shadow: 0 0 100px rgba(11, 110, 79, 0.5);
     }
 
     100% {
-        transform: translate(-50%, 0%) scale(1);
+        transform: translate(-50%,50%) scale(1);
         box-shadow: 0 0 0 rgba(11, 110, 79, 0.5);
     }
 }
