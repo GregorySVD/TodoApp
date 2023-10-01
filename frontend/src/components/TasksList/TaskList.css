@@ -1,9 +1,9 @@
 
-.TaskList_container {
+.TaskList__container {
     width: 100%;
     margin-bottom: 3vh;
 }
-.TaskList_container ol {
+.TaskList__container ol {
     list-style-type: none;
     margin: 0;
     padding: 0;

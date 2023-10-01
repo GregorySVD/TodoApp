@@ -2,13 +2,13 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Spinner} from "./components/common/Loader/Spinner";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
-import {TaskProgress} from "./components/Tasks/TaskPogress/TaskProgress";
+import {TaskProgressBar} from "./components/TasksList/TaskPogress/TaskProgressBar";
 import {Header} from "./components/layouts/Header/Header";
 import {ErrorPage} from "./components/layouts/ErrorPage/ErrorPage";
 import {useErrorContext} from './context/ErrorContext';
 import {AddTaskForm} from "./components/AddTaskForm/AddTaskForm";
 import {useTaskListRerenderContext} from "./context/TaskListRerenderContext";
-import {TaskList} from "./components/Tasks/TaskTable/TaskList";
+import {TaskList} from "./components/TasksList/TaskList";
 import {useTaskListContext} from "./context/TaskListContext";
 import {FormValidationContextProvider} from "./context/FormValidationContext";
 
@@ -25,7 +25,7 @@ export const App = () => {
                 try {
                     const res = await fetch(`http://localhost:3001/todo`);
                     if (!res.ok) {
-                        setError(new Error(`Failed to fetch tasks from server. Please try again later.`));
+                        setError(new Error(`Failed to load tasks from server. Please try again later.`));
                     }
                     const result = await res.json();
                     setTaskList(result);
@@ -51,8 +51,8 @@ export const App = () => {
             <Header/>
             <FormValidationContextProvider>
                 {(tasksList.length === 0) ? <NoTaskLayout/> :
-                    <div className="App_TaskList_loaded_content">
-                        <TaskProgress/>
+                    <div className="TaskList_loaded_content">
+                        <TaskProgressBar/>
                         <TaskList/>
                         <AddTaskForm/>
                     </div>

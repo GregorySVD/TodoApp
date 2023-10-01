@@ -1,4 +1,4 @@
-.SingleTask_container {
+.SingleTaskRow_container {
     display: flex;
     width: 100%;
     height: auto;
@@ -8,7 +8,7 @@
     font-size: 1.2rem;
     align-items: center;
 }
-.SingleTask_container .SingleTask_title {
+.SingleTaskRow_container .SingleTaskRow_title {
     flex: 4;
     text-align: left;
     line-height: 1.5rem;
@@ -22,7 +22,7 @@
     text-overflow: ellipsis;
     max-width: 100%;
 }
-.SingleTask_task_operation_Btn {
+.SingleTaskRow__actions {
     display: flex;
     justify-content: space-between;
     width: 100px;
