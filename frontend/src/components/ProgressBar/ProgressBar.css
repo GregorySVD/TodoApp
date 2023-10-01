@@ -1,0 +1,31 @@
+.ProgressBar__container {
+    display: flex;
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+.ProgressBar__progress_container::before {
+    content: '';
+    background-color: #f0efe9;
+    position: absolute;
+    top: 90%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 5px;
+    width: 100%;
+    z-index: 1;
+}
+
+.ProgressBar__progress {
+    background-color: #50e3a4;
+    position: absolute;
+    top: 90%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 5px;
+    width: 0;
+    z-index: 1;
+    transition: 0.4s ease;
+}

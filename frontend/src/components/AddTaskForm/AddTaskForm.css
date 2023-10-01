@@ -1,0 +1,19 @@
+.AddTaskForm__container{
+    border-top: 2px solid #f0efe9;
+    height: 25vh;
+}
+
+.AddTaskForm__form {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.AddTaskFormTitleInput__validation_info {
+    font-size: 0.7em;
+    color: #ff4545;
+    width: 100%;
+    font-style: italic;
+}

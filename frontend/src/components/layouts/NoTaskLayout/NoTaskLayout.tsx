@@ -1,17 +1,9 @@
-import React, {useContext, useEffect} from 'react';
-import {AddTaskForm} from "../../AddForm/AddTaskForm";
+import React from 'react';
 import './NoTaskLayout.css'
-import {OpenAddFormContext} from "../../../context/OpenAddFormContext";
-
+import {AddTaskForm} from "../../AddTaskForm/AddTaskForm";
 
 export const NoTaskLayout = () => {
 
-    const contextAddForm = useContext(OpenAddFormContext);
-    const {setAddFormIsOpen} = contextAddForm;
-
-    useEffect(() => {
-        setAddFormIsOpen(false);
-    },[]);
 
     return (
         <div className="NoTaskLayout__quote_container">
@@ -20,8 +12,6 @@ export const NoTaskLayout = () => {
                     — Tony Robbins
                 </footer>
             </blockquote>
-            <p>Click big green button below to add your first tank :)</p>
-
             <AddTaskForm/>
         </div>
     )

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import {GetDate} from "../../../GetDate/GetDate";
+import {GetDate} from "./GetDate/GetDate";
 
 
 export const Header = () => {

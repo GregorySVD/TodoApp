@@ -3,16 +3,32 @@
 
 }
 .NoTaskLayout__quote_container blockquote {
-    padding: 5rem;
+    padding: 5rem 2rem;
     color: inherit;
     letter-spacing: 2px;
     font-size: 1.5rem;
     font-weight: bolder;
 }
 .NoTaskLayout__quote_container blockquote footer {
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-align: right;
     font-weight: lighter;
     font-style: italic;
-    margin-top: 2rem;
+    margin-top: 1rem;
+}
+@media (max-width: 500px) {
+    .NoTaskLayout__quote_container blockquote {
+        padding: 2rem 1rem;
+        color: inherit;
+        letter-spacing: 2px;
+        font-size: 1rem;
+        font-weight: bolder;
+    }
+    .NoTaskLayout__quote_container blockquote footer {
+        font-size: 0.6rem;
+        text-align: right;
+        font-weight: lighter;
+        font-style: italic;
+        margin-top: 1rem;
+    }
 }
