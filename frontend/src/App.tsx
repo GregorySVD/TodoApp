@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Spinner} from "./components/common/Loader/Spinner";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
-import {TaskProgressBar} from "./components/TasksList/TaskPogress/TaskProgressBar";
+import {TaskProgress} from "./components/TasksList/TaskPogress/TaskProgress";
 import {Header} from "./components/layouts/Header/Header";
 import {ErrorPage} from "./components/layouts/ErrorPage/ErrorPage";
 import {useErrorContext} from './context/ErrorContext';
@@ -52,7 +52,7 @@ export const App = () => {
             <FormValidationContextProvider>
                 {(tasksList.length === 0) ? <NoTaskLayout/> :
                     <div className="TaskList_loaded_content">
-                        <TaskProgressBar/>
+                        <TaskProgress/>
                         <TaskList/>
                         <AddTaskForm/>
                     </div>

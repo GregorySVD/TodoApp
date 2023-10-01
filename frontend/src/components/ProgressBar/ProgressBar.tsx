@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './ProgressBar.css'
-import {calcPercent} from "../../../../utils/calcPercent";
+import {calcPercent} from "../../utils/calcPercent";
 
 interface Props {
     doneTask: number | null;
@@ -17,17 +17,14 @@ export const ProgressBar = (props: Props) => {
             setProgressPercent("0%");
         } else {
             const percentValue = calcPercent(props.doneTask, props.allTasks);
-
             setProgressPercent(percentValue);
-
         }
     },[props.doneTask, props.allTasks]);
 
     return (
         <div className="ProgressBar__container">
-            <h4>{props.doneTask}/{props.allTasks}</h4>
-            <div className="progress-container">
-                <div className="progress" style={{width: progressPercent}}></div>
+            <div className="ProgressBar__progress_container">
+                <div className="ProgressBar__progress" style={{width: progressPercent}}></div>
             </div>
         </div>
     );

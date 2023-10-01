@@ -1,5 +1,5 @@
 
-.TaskProgressBar__container {
+.TaskProgress__container {
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -8,7 +8,7 @@
     height: 16vh;
 }
 
-.TaskProgressBar__container h1{
+.TaskProgress__container h1{
     letter-spacing: 1px;
     margin: 0;
 }

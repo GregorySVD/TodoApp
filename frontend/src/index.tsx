@@ -6,7 +6,7 @@ import {App} from './App';
 import {TaskListRerenderContextProvider} from "./context/TaskListRerenderContext";
 import {TaskListContextProvider} from "./context/TaskListContext";
 import {ErrorContextProvider} from "./context/ErrorContext";
-import { OpenAddTaskFormContextProvider} from "./context/OpenAddTaskFormContext";
+import {OpenAddTaskFormContextProvider} from "./context/OpenAddTaskFormContext";
 
 
 const root = ReactDOM.createRoot(
