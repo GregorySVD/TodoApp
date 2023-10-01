@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './GetDate.css'
-import { useErrorContext} from "../context/ErrorContext";
-import {ErrorPage} from "../components/layouts/ErrorPage/ErrorPage";
+import { useErrorContext} from "../../../../context/ErrorContext";
+import {ErrorPage} from "../../ErrorPage/ErrorPage";
 
 export const GetDate = () => {
     const [getYear, setGetYear] = useState<number>(0);
@@ -19,8 +19,8 @@ export const GetDate = () => {
         setGetDayNumber(currentDate.getDate());
         setGetMonth(getMonthString(currentDate));
         setGetDatOfWeek(getDayOfWeek(currentDate));
-        } catch (e) {
-            setError(e as Error);
+        } catch (err) {
+            setError(err as Error);
         }
     }, [])
 
