@@ -1,5 +1,5 @@
 /* Hide the default checkbox */
-.container input {
+.TaskDoneStatusCheckbox__label input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -7,7 +7,7 @@
     width: 0;
 }
 
-.container {
+.TaskDoneStatusCheckbox__label {
     display: block;
     position: relative;
     cursor: pointer;
@@ -15,7 +15,6 @@
     user-select: none;
 }
 
-/* Create a custom checkbox */
 .checkmark {
     --clr: #0B6E4F;
     position: relative;
@@ -29,7 +28,7 @@
 }
 
 /* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.TaskDoneStatusCheckbox__label input:checked ~ .checkmark {
     background-color: var(--clr);
     border-radius: .5rem;
     animation: pulse 500ms ease-in-out;
@@ -43,12 +42,12 @@
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
+.TaskDoneStatusCheckbox__label input:checked ~ .checkmark:after {
     display: block;
 }
 
 /* Style the checkmark/indicator */
-.container .checkmark:after {
+.TaskDoneStatusCheckbox__label .checkmark:after {
     left: 0.45em;
     top: 0.25em;
     width: 0.25em;
