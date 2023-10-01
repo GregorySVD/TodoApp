@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Loader} from "./components/common/Loader/Loader";
+import {Spinner} from "./components/common/Loader/Spinner";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
 import {TaskProgress} from "./components/Tasks/TaskPogress/TaskProgress";
 import {Header} from "./components/layouts/Header/Header";
@@ -14,9 +14,10 @@ import {FormValidationContextProvider} from "./context/FormValidationContext";
 
 export const App = () => {
 
-    const {shouldRerender, setShouldRerender} = useTaskListRerenderContext()
-    const {error, setError, clearError} = useErrorContext()
+    const {shouldRerender, setShouldRerender} = useTaskListRerenderContext();
+    const {error, setError, clearError} = useErrorContext();
     const {tasksList, setTaskList} = useTaskListContext();
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         if (!shouldRerender) {
@@ -24,32 +25,33 @@ export const App = () => {
                 try {
                     const res = await fetch(`http://localhost:3001/todo`);
                     if (!res.ok) {
-                        new Error('Failed to fetch data, try again later');
+                        setError(new Error(`Failed to fetch tasks from server. Please try again later.`));
                     }
                     const result = await res.json();
                     setTaskList(result);
                 } catch (err) {
                     setError(err as Error);
+                } finally {
+                    setLoading(false);
                 }
             })();
         }
         setShouldRerender(false);
         clearError();
-    }, [shouldRerender, setShouldRerender, setTaskList, setError, clearError]);
+    }, [shouldRerender, setShouldRerender, setTaskList]);
 
     if (error) {
         return <ErrorPage error={error}/>
     }
-    if (tasksList === null) {
-        return <Loader/>
+    if (loading) {
+        return <Spinner/>
     }
-    /*@TODO implement ErrorContext in other Components*/
     return (
-        <div className="App">
+        <div className="AppContainer">
             <Header/>
             <FormValidationContextProvider>
                 {(tasksList.length === 0) ? <NoTaskLayout/> :
-                    <div>
+                    <div className="App_TaskList_loaded_content">
                         <TaskProgress/>
                         <TaskList/>
                         <AddTaskForm/>

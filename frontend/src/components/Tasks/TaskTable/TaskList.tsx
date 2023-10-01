@@ -1,15 +1,10 @@
 import React from "react";
 import {useTaskListContext} from "../../../context/TaskListContext";
-import {Loader} from "../../common/Loader/Loader";
 import './TaskList.css';
 import {SingleTask} from "./TaskTableSingleRow/SingleTask";
 
 export const TaskList = () => {
-
     const {tasksList} = useTaskListContext();
-
-    if (!tasksList)
-        return <Loader/>;
 
     return (
         <div className="TaskList_container">

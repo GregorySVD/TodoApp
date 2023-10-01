@@ -1,6 +1,6 @@
 import React, {SyntheticEvent, useState} from 'react';
 import {TodoEntity} from 'types';
-import {Loader} from "../common/Loader/Loader";
+import {Spinner} from "../common/Loader/Spinner";
 import {AddTaskFormTitleInput} from "./AddTaskFormTitleInput/AddTaskFormTitleInput";
 import {useFormValidationContext} from "../../context/FormValidationContext";
 import {useErrorContext} from "../../context/ErrorContext";
@@ -69,7 +69,7 @@ export const AddTaskForm = () => {
     }
 
     if (loading) {
-        return <Loader/>
+        return <Spinner/>
     }
     if (error) {
         return <ErrorPage error={error}/>
