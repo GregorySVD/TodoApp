@@ -14,22 +14,29 @@ todoRouter
             throw new ValidationError("List of tasks cannot be found, please try again later");
         }
     })
+    .delete ("/", async (req: Request, res: Response) => {
+        try {
+            await TodoRecord.DeleteAllTodos();
+        } catch (err) {
+            throw new ValidationError("Cannot delete all tasks at this moment");
+        }
+        res.end();
+    })
     .get("/:id", async (req: Request, res: Response) => {
         try {
-            const result = await TodoRecord.getOne(req.params.id);
+            const result = await TodoRecord.getOneTodo(req.params.id);
             if (!result) {
                 res.status(404).json({error: `Task with id ${req.params.id} does not exist`});
             } else {
                 res.json(result);
             }
-
         } catch (err) {
-            throw new ValidationError("Task with given id");
+            throw new ValidationError("Task with given id does not exist");
         }
     })
     .delete("/done", async (req, res) => {
         try {
-            await TodoRecord.DeleteAllDoneTasks();
+            await TodoRecord.DeleteAllDoneTodos();
             res.end();
         } catch (e) {
             throw new ValidationError("Cannot delete this tasks, try again later");
@@ -37,13 +44,13 @@ todoRouter
     })
     .delete("/:id", async (req: Request, res: Response) => {
         try {
-            const task = await TodoRecord.getOne(req.params.id);
+            const task = await TodoRecord.getOneTodo(req.params.id);
             if (!task) {
-                throw new ValidationError("Task with given id not found");
+                res.status(404).json({error: `Task with id ${req.params.id} does not exist`});
             }
-            await task.delete();
+            await task.deleteSelectedTodo();
             res.end();
-        } catch (e) {
+        } catch (err) {
             throw new ValidationError("Cannot delete task with given id");
         }
 
@@ -53,17 +60,17 @@ todoRouter
         try {
             const newTask = new TodoRecord(req.body);
             await console.log(newTask);
-            await newTask.insert();
+            await newTask.insertNewTodo();
             res.json(newTask);
-        } catch (e) {
+        } catch (err) {
             throw new ValidationError("Cannot insert task with given id");
         }
 
     })
     .patch("/switch/:id", async (req: Request, res: Response) => {
-        const task = await TodoRecord.getOne(req.params.id);
+        const task = await TodoRecord.getOneTodo(req.params.id);
         if (!task) {
-            throw new ValidationError("Task with given id not found");
+            res.status(404).json({error: `Task with id ${req.params.id} does not exist`});
         }
         try {
             await task.switchIsDoneState();
@@ -71,7 +78,5 @@ todoRouter
         } catch (err) {
             res.status(500).json({error: `Error updating todo with id ${req.params.id}, try again later`});
         }
-
         res.end();
-
     });

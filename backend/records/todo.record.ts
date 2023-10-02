@@ -37,58 +37,77 @@ export class TodoRecord implements TodoEntity {
     }
 
     async switchIsDoneState(): Promise<number> {
-        await pool.execute("UPDATE `todos` SET `isDone` = CASE WHEN `isDone` = 0 THEN 1 WHEN `isDone` = 1 THEN 0 END WHERE `id` = :id;", {
-            id: this.id,
-        });
-        return this.isDone;
+        try {
+            await pool.execute("UPDATE `todos` SET `isDone` = CASE WHEN `isDone` = 0 THEN 1 WHEN `isDone` = 1 THEN 0 END WHERE `id` = :id;", {
+                id: this.id,
+            });
+            return this.isDone;
+        } catch (err) {
+            throw new ValidationError("Cannot switch done state of this tasks. Try again later");
+        }
     }
 
-
-    async insert(): Promise<string> {
-        if (!this.id) {
-            this.id = uuid();
+    async insertNewTodo(): Promise<string> {
+        try {
+            if (!this.id) {
+                this.id = uuid();
+            }
+            if (!this.isDone) {
+                this.isDone = 0;
+            }
+            if (!this.date) {
+                this.date = getCurrentFormattedDate();
+            }
+            if (!this.description) {
+                this.description = null;
+            }
+            await pool.execute("INSERT INTO `todos` (`id`, `title`, `date`, `isDone`, `description`)VALUES(:id, :title, :date," +
+                " :isDone," +
+                " :description)", {
+                id: this.id,
+                title: this.title,
+                date: this.date,
+                isDone: this.isDone,
+                description: this.description,
+            } as TodoRecord);
+            return this.id;
+        } catch (err) {
+            throw new ValidationError("Cannot insert task. Try again later");
         }
-        if (!this.isDone) {
-            this.isDone = 0;
-        }
-        if (!this.date) {
-            this.date = getCurrentFormattedDate();
-        }
-        if (!this.description) {
-            this.description = null;
-        }
-        await pool.execute("INSERT INTO `todos` (`id`, `title`, `date`, `isDone`, `description`)VALUES(:id, :title, :date," +
-            " :isDone," +
-            " :description)", {
-            id: this.id,
-            title: this.title,
-            date: this.date,
-            isDone: this.isDone,
-            description: this.description,
-        } as TodoRecord);
-        return this.id;
     }
 
-    async delete(): Promise<void> {
-        await pool.execute("DELETE FROM `todos` WHERE `id` = :id", {
-            id: this.id,
-        });
+    async deleteSelectedTodo(): Promise<void> {
+        try {
+            await pool.execute("DELETE FROM `todos` WHERE `id` = :id", {
+                id: this.id,
+            });
+        } catch (err) {
+            throw new ValidationError("Cannot delete task with given id");
+        }
     }
 
-    static async getOne(id: string): Promise<TodoRecord | null> {
-        const [result] = (await pool.execute("SELECT * FROM `todos` WHERE `id` = :id",
-            {
-                id,
-            }) as TodoRecordResults);
-        return result.length === 0 ? null : new TodoRecord(result[0]);
+    static async getOneTodo(id: string): Promise<TodoRecord | null> {
+        try {
+            const [result] = (await pool.execute("SELECT * FROM `todos` WHERE `id` = :id",
+                {
+                    id,
+                }) as TodoRecordResults);
+            return result.length === 0 ? null : new TodoRecord(result[0]);
+        } catch (err) {
+            throw new ValidationError("Cannot get task with given id.");
+        }
     }
 
     static async ListAll(): Promise<TodoRecord[]> {
-        const [results] = (await pool.execute("SELECT * FROM `todos` ORDER BY `date` ASC")) as TodoRecordResults;
-        return results.map(obj => new TodoRecord(obj));
+        try {
+            const [results] = (await pool.execute("SELECT * FROM `todos` ORDER BY `date` ASC")) as TodoRecordResults;
+            return results.map(obj => new TodoRecord(obj));
+        } catch (err) {
+            throw new ValidationError("Cannot get list of Tasks from server");
+        }
     }
 
-    static async DeleteAllDoneTasks(): Promise<void> {
+    static async DeleteAllDoneTodos(): Promise<void> {
         try {
             const [results] = await (await pool.execute("SELECT * FROM `todos` WHERE `isDone` = :isDone", {isDone: 1})) as TodoRecordResults;
             if (results.length === 0) {
@@ -98,6 +117,13 @@ export class TodoRecord implements TodoEntity {
         } catch (err) {
             throw new ValidationError(err);
         }
+    }
 
+    static async DeleteAllTodos(): Promise<void> {
+        try {
+            await pool.execute("DELETE FROM `todos`");
+        } catch (err) {
+            throw new ValidationError(err);
+        }
     }
 }
