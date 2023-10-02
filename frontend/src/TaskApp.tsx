@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
+import './TaskApp.css';
 import {Spinner} from "./components/common/Spinner/Spinner";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
 import {TaskProgress} from "./components/TasksList/TaskPogress/TaskProgress";
@@ -12,7 +12,7 @@ import {TaskList} from "./components/TasksList/TaskList";
 import {useTaskListContext} from "./context/TaskListContext";
 import {FormValidationContextProvider} from "./context/FormValidationContext";
 
-export const App = () => {
+export const TaskApp = () => {
 
     const {shouldRerender, setShouldRerender} = useTaskListRerenderContext();
     const {error, setError, clearError} = useErrorContext();
@@ -47,7 +47,7 @@ export const App = () => {
         return <Spinner/>
     }
     return (
-        <div className="AppContainer">
+        <div className="TaskAppContainer">
             <Header/>
             <FormValidationContextProvider>
                 {(tasksList.length === 0) ? <NoTaskLayout/> :
