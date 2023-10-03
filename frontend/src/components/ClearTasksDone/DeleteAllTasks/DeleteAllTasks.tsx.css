@@ -1,0 +1,110 @@
+.DeleteAllTasks_btn {
+    padding: 1.3em 3em;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    border-radius: 45px;
+    color: inherit;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+.DeleteAllTasks_btn:hover {
+    background-color: #ff4545;
+    box-shadow: 0 15px 20px rgba(255, 81, 68, 0.4);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+body.active-modal {
+    overflow-y: hidden;
+}
+
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 2;
+}
+
+.overlay {
+    background: rgba(49, 49, 49, 0.8);
+}
+
+.modal-content {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    aspect-ratio: 16/9;
+    background-color: #fff;
+    min-width: 250px;
+    width: 60vw;
+    border-radius: 16px;
+    z-index: 3;
+    padding: 1em;
+    max-width: 500px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    bottom: 90%;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+}
+
+.modal-close-btn:hover {
+    cursor: pointer;
+}
+
+.modal-action-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal-accept-action--btn, .modal-cancel-action-btn {
+    padding: 1.3em 3em;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 1px solid;
+
+    outline: none;
+    border-radius: 16px;
+}
+
+.modal-accept-action--btn:hover, .modal-cancel-action-btn:hover {
+    cursor: pointer;
+    animation: pulse 1s linear infinite both;
+}
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(204, 204, 204, 0.5);
+    }
+
+    50% {
+        transform: scale(1.2);
+        box-shadow: 0 0 100px rgba(153, 153, 153, 0.5);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(204, 204, 204, 0.5);
+    }
+}

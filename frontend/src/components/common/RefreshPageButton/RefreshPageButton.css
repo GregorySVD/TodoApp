@@ -1,0 +1,42 @@
+
+.button {
+    font: inherit;
+    color: #1d1e23;
+    background-color: #ffffff;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    margin-top: 0.5rem;
+}
+
+.button:hover {
+    background-color: #eeeeee;
+}
+
+.button i {
+    display: inline;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: 0.75rem;
+    color: #1d1e23;
+}
+
+.button:hover i {
+    animation: spin_357 0.5s linear infinite;
+}
+
+@keyframes spin_357 {
+    from {
+        transform: rotate(0turn);
+    }
+
+    to {
+        transform: rotate(1turn);
+    }
+}

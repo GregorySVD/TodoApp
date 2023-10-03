@@ -1,5 +1,6 @@
 import React from 'react';
 import './ErrorPage.css'
+import {RefreshPageButton} from "../../common/RefreshPageButton/RefreshPageButton";
 
 interface ErrorPageProps {
     error: Error | null;
@@ -15,6 +16,8 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({error}) => {
                     href="mailto:support@example.com">support@example.com</a> with the link to this page or try agin later. The error message below:</p>
                 <li className="ErrorPage__error_message">{error?.message}</li>
             </div>
+            <RefreshPageButton/>
         </div>
+
     );
 };
