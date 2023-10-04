@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useTaskListRerenderContext} from "../../../context/TaskListRerenderContext";
 import {useErrorContext} from "../../../context/ErrorContext";
-import './DeleteAllTasks.tsx.css';
+import './DeleteAllTasks.css';
 
 
 export const DeleteAllTasks = () => {

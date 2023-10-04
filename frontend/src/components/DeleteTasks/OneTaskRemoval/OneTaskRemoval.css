@@ -1,4 +1,4 @@
-.TaskRemoval__btn {
+.OneTaskRemoval__btn {
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -24,7 +24,7 @@
     fill: #1d1e23;
 }
 
-.TaskRemoval__btn:hover {
+.OneTaskRemoval__btn:hover {
     width: 60px;
     border-radius: 50px;
     transition-duration: .3s;
@@ -32,13 +32,13 @@
     align-items: center;
 }
 
-.TaskRemoval__btn:hover .svgIcon {
+.OneTaskRemoval__btn:hover .svgIcon {
     width: 50px;
     transition-duration: .3s;
     transform: translateY(65%);
 }
 
-.TaskRemoval__btn::before {
+.OneTaskRemoval__btn::before {
     position: absolute;
     top: -20px;
     content: "Delete";
@@ -47,7 +47,7 @@
     font-size: 2px;
 }
 
-.TaskRemoval__btn:hover::before {
+.OneTaskRemoval__btn:hover::before {
     font-size: 13px;
     opacity: 1;
     transform: translateY(30px);
