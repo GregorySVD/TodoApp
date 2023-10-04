@@ -1,8 +1,8 @@
 import React from 'react';
 import './ClearTasksDone.css'
-import {useTaskListRerenderContext} from "../../context/TaskListRerenderContext";
-import {useErrorContext} from "../../context/ErrorContext";
-import {ErrorPage} from "../layouts/ErrorPage/ErrorPage";
+import {useTaskListRerenderContext} from "../../../context/TaskListRerenderContext";
+import {useErrorContext} from "../../../context/ErrorContext";
+import {ErrorPage} from "../../layouts/ErrorPage/ErrorPage";
 
 
 export const ClearTasksDone = () => {
