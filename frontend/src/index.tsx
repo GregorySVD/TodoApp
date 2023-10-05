@@ -7,6 +7,7 @@ import {TaskListRerenderContextProvider} from "./context/TaskListRerenderContext
 import {TaskListContextProvider} from "./context/TaskListContext";
 import {ErrorContextProvider} from "./context/ErrorContext";
 import {OpenAddTaskFormContextProvider} from "./context/OpenAddTaskFormContext";
+import {Toaster} from "sonner";
 
 
 const root = ReactDOM.createRoot(
@@ -20,6 +21,7 @@ root.render(
                 <OpenAddTaskFormContextProvider>
                     <TaskListRerenderContextProvider>
                         <TaskListContextProvider>
+                            <Toaster richColors/>
                                 <TaskApp/>
                         </TaskListContextProvider>
                     </TaskListRerenderContextProvider>
