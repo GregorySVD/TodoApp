@@ -11,10 +11,10 @@ import {AddTaskFormCloser} from "./AddTaskFormCloser/AddTaskFormCloser";
 import {useOpenAddTaskFormContext} from "../../context/OpenAddTaskFormContext";
 import {AddTaskFormOpener} from "./AddTaskFormOpener/AddTaskFormOpener";
 import {useTaskListRerenderContext} from "../../context/TaskListRerenderContext";
+import {toast} from "sonner";
 
 export const AddTaskForm = () => {
     const [loading, setLoading] = useState(false);
-    const [id, setId] = useState('');
     const [form, setForm] = useState<TodoEntity>({
         title: '',
     });
@@ -45,12 +45,14 @@ export const AddTaskForm = () => {
                 })
             })
             if (!res.ok) {
-                new Error(`Sorry there was an error while adding new task, try again later.`);
+                await setError(new Error(`Sorry there was an error while adding new task, try again later.`));
+                await toast.error(`Sorry there was an error while adding new task, try again later.`)
+            } else {
+                await toast.success(`Task added successfully`);
+                await res.json();
+                await setShouldRerender(true);
             }
-            const data = await res.json();
-            setId(data.id);
-            setShouldRerender(true);
-            console.log(`${id} Task added successfully `)
+
         } catch (err) {
             setError(err as Error);
         } finally {

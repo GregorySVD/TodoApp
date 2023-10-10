@@ -39,9 +39,9 @@
 .AddTaskFormTitleInput__input_group :is(input:focus, input:valid) {
     border-color: #23c483;
 }
-.AddTaskFormTitleInput__input_group input:invalid {
+.AddTaskFormTitleInput__input_group input:invalid:focus {
     border-color: #ff5144;
 }
-.AddTaskFormTitleInput__input_group input:invalid + label {
+.AddTaskFormTitleInput__input_group input:invalid:focus + label {
     color: #ff5144;
 }

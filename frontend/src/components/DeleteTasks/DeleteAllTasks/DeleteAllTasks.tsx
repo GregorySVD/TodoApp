@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import {useTaskListRerenderContext} from "../../../context/TaskListRerenderContext";
 import {useErrorContext} from "../../../context/ErrorContext";
 import './DeleteAllTasks.css';
+import {toast} from "sonner";
+import {ErrorPage} from "../../layouts/ErrorPage/ErrorPage";
 
 
 export const DeleteAllTasks = () => {
     const [modal, setModal] = useState<boolean>(false);
     const {setShouldRerender} = useTaskListRerenderContext();
-    const {setError} = useErrorContext();
+    const {setError, error} = useErrorContext();
 
     //delete scroll when modal open
     if (modal) {
@@ -18,20 +20,30 @@ export const DeleteAllTasks = () => {
 
     const handleDeleteAllTasks = async () => {
         try {
-            await fetch(`http://localhost:3001/todo/`, {
+            const res = await fetch(`http://localhost:3001/todo`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
                 },
             });
-            setShouldRerender(true);
+            if (!res.ok) {
+                await setError(new Error(`Couldn't delete all tasks. Try again later.`));
+                await toast.error(`Couldn't delete all tasks`);
+            } else {
+                setShouldRerender(true);
+                await toast.success(`Successfully deleted all tasks`);
+            }
         } catch (err) {
-            setError(err as Error);
-            setModal(!modal);
+            await setError(new Error(`Couldn't delete all tasks. Try again later.`));
+            await toast.error(`Couldn't delete all tasks`);
         }
     }
     const toggleModal = () => {
         setModal(!modal);
+    }
+
+    if (error) {
+        return <ErrorPage error={error}/>;
     }
 
     return (
