@@ -11,10 +11,10 @@ afterAll(async () => {
 });
 
 test("Can build TodoRecord", async () => {
-    const ad = new TodoRecord(mockTodo);
+    const todoRecord = new TodoRecord(mockTodo);
 
-    expect(ad.title).toBe("Testing Jest");
-    expect(ad.description).toBe("this is mock task");
+    expect(todoRecord.title).toBe("Testing Jest");
+    expect(todoRecord.description).toBe("this is mock task");
 });
 
 // title Validation
@@ -60,4 +60,15 @@ test("No description returns null", async () => {
     });
     console.log(Todo);
     expect(Todo.description).toBeNull();
+});
+test("Can update task title", async () => {
+    const todoRecord = new TodoRecord(mockTodo);
+    await console.log(todoRecord.title);
+    expect(todoRecord.title).toBe(mockTodo.title);
+
+
+    await todoRecord.updateTitle("XXXX");
+
+
+    // expect(todoRecord.title).toBe("XXXX");
 });
