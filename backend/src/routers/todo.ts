@@ -81,7 +81,8 @@ todoRouter
         res.end();
     })
     .patch("/updateTitle/:id", async (req: Request, res: Response) => {
-        const {id, title} = req.params;
+        const {id} = req.params;
+        const { title } = req.body;
         const task = await TodoRecord.getOneTodo(id);
         if (!task) {
             res.status(404).json({error: `Task with id ${id} does not exist`});
