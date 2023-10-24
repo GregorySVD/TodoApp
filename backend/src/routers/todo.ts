@@ -80,14 +80,15 @@ todoRouter
         }
         res.end();
     })
-    .patch("/update/:id/:title", async (req: Request, res: Response) => {
-        const task = await TodoRecord.getOneTodo(req.params.id);
+    .patch("/updateTitle/:id", async (req: Request, res: Response) => {
+        const {id, title} = req.params;
+        const task = await TodoRecord.getOneTodo(id);
         if (!task) {
-            res.status(404).json({error: `Task with id ${req.params.id} does not exist`});
+            res.status(404).json({error: `Task with id ${id} does not exist`});
         }
         try {
-            await task.updateTitle(req.params.title);
-            res.json({title: req.params.title});
+            await task.updateTitle(title);
+            await res.json(task);
         } catch (err) {
             res.status(500).json({error: `Error while updating todo with id ${req.params.id}, try again later`});
         }

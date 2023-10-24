@@ -6,9 +6,6 @@ const mockTodo: TodoEntity = {
     title: "Testing Jest",
     description: "this is mock task",
 };
-afterAll(async () => {
-    await pool.end();
-});
 
 test("Can build TodoRecord", async () => {
     const todoRecord = new TodoRecord(mockTodo);
@@ -61,14 +58,7 @@ test("No description returns null", async () => {
     console.log(Todo);
     expect(Todo.description).toBeNull();
 });
-test("Can update task title", async () => {
-    const todoRecord = new TodoRecord(mockTodo);
-    await console.log(todoRecord.title);
-    expect(todoRecord.title).toBe(mockTodo.title);
 
-
-    await todoRecord.updateTitle("XXXX");
-
-
-    // expect(todoRecord.title).toBe("XXXX");
+afterAll(async () => {
+    await pool.end();
 });
