@@ -1,7 +1,9 @@
 import React from 'react';
+import { TodoEntity } from 'types';
 
 interface Props {
     onClick: () => Promise<void>;
+    task: TodoEntity;
 }
 export const EditTask = (props: Props) => {
 
