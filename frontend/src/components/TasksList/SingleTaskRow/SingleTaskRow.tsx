@@ -34,7 +34,6 @@ export const SingleTaskRow = (props: Props) => {
             return;
         } else {
             try {
-                const newTitle = editedTitle;
                 const res = await fetch(
                     `http://localhost:3001/todo/updateTitle/${taskId}`, {
                         method: 'PATCH',
@@ -42,7 +41,7 @@ export const SingleTaskRow = (props: Props) => {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            title: newTitle,
+                            title: editedTitle,
                         })
                     }
                 )
@@ -166,8 +165,8 @@ export const SingleTaskRow = (props: Props) => {
                     <button className="modal-close-btn" onClick={toggleModal}>
                         <i className="fa fa-close"></i>
                     </button>
-                    <h2>Are you sure you want to remove:
-                        <i>"{props.task.title}"</i> task ?
+                    <h2>Are you sure you want to delete:<p>
+                        <i>"{props.task.title}"</i></p>
                     </h2>
                     <p>This action cannot be undone. 🗑️</p>
                     <div className="modal-action-buttons">
