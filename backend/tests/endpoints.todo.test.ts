@@ -63,3 +63,10 @@ test("TodoRecord.switchIsDoneState changes the state of isDone", async () => {
     const test = await TodoRecord.getOneTodo(insertedId);
     expect(test.isDone).toBeTruthy();
 });
+test("TodoRecord.updateTitle updates the title", async () => {
+    const todo = new TodoRecord(mockTodo);
+    const insertedId = await todo.insertNewTodo();
+    await todo.updateTitle("XXXX");
+    const test = await TodoRecord.getOneTodo(insertedId);
+    expect(test.title).toBe("XXXX");
+});

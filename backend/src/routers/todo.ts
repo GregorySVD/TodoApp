@@ -14,7 +14,7 @@ todoRouter
             throw new ValidationError("List of tasks cannot be found, please try again later");
         }
     })
-    .delete ("/", async (req: Request, res: Response) => {
+    .delete("/", async (req: Request, res: Response) => {
         try {
             await TodoRecord.DeleteAllTodos();
         } catch (err) {
@@ -77,6 +77,21 @@ todoRouter
             res.json({isDone: task.isDone});
         } catch (err) {
             res.status(500).json({error: `Error updating todo with id ${req.params.id}, try again later`});
+        }
+        res.end();
+    })
+    .patch("/updateTitle/:id", async (req: Request, res: Response) => {
+        const {id} = req.params;
+        const { title } = req.body;
+        const task = await TodoRecord.getOneTodo(id);
+        if (!task) {
+            res.status(404).json({error: `Task with id ${id} does not exist`});
+        }
+        try {
+            await task.updateTitle(title);
+            await res.json(task);
+        } catch (err) {
+            res.status(500).json({error: `Error while updating todo with id ${req.params.id}, try again later`});
         }
         res.end();
     });

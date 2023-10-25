@@ -14,7 +14,7 @@ export const TaskDoneStatusCheckbox = (props: Props) => {
     };
 
     return (
-        <label className="TaskDoneStatusCheckbox__label">
+        <label className="TaskDoneStatusCheckbox__label" title={!props.status ? "Done" : "Undone"}>
             <input
                 checked={props.status}
                 type="checkbox"

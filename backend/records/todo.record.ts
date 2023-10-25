@@ -85,7 +85,16 @@ export class TodoRecord implements TodoEntity {
             throw new ValidationError("Cannot delete task with given id");
         }
     }
-
+    async updateTitle(title: string): Promise<void> {
+        try {
+            await pool.execute("UPDATE `todos` SET `title` = :title WHERE `id` = :id", {
+                title,
+                id: this.id,
+            });
+        } catch (err) {
+            throw new ValidationError("Cannot update title of task. Try again later");
+        }
+    }
     static async getOneTodo(id: string): Promise<TodoRecord | null> {
         try {
             const [result] = (await pool.execute("SELECT * FROM `todos` WHERE `id` = :id",
