@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {TodoEntity} from 'types'
 import {OneTaskRemoval} from "../../DeleteTasks/OneTaskRemoval/OneTaskRemoval";
 import './SingleTaskRow.css'
+import '../../common/modal.css'
 import {TaskDoneStatusCheckbox} from "../../TaskDoneStatusCheckbox/TaskDoneStatusCheckbox";
 import {useTaskListRerenderContext} from "../../../context/TaskListRerenderContext";
 import {useErrorContext} from "../../../context/ErrorContext";
@@ -26,11 +27,10 @@ export const SingleTaskRow = (props: Props) => {
     }
 
     const updateTaskTitle = async (taskId: string | undefined) => {
-        if (editedTitle.length < 3) {
+        if (editedTitle.length < 3 || editedTitle.length > 150) {
             await toast.error('An error occurred while updating task title: Title needs to be at least 3 characters' +
                 ' long ❌');
             setEditedTitle(props.task.title);
-            setModalTaskEditor(!modalTaskEditor);
             return;
         } else {
             try {
@@ -43,7 +43,9 @@ export const SingleTaskRow = (props: Props) => {
                         body: JSON.stringify({
                             title: editedTitle,
                         })
+
                     }
+
                 )
                 if (!res.ok) {
                     await setError(new Error(`An error occurred while updating task title. Try again later.`))
@@ -51,7 +53,7 @@ export const SingleTaskRow = (props: Props) => {
                 } else {
                     await setShouldRerender(true);
                     await toast.success('Task title updated! ✅');
-                    setEditedTitle(props.task.title);
+                    setEditedTitle(editedTitle);
                     setModalTaskEditor(!modalTaskEditor);
                 }
             } catch
@@ -136,22 +138,25 @@ export const SingleTaskRow = (props: Props) => {
                     <button className="modal-close-btn" onClick={toggleModalTaskEditor}>
                         <i className="fa fa-close"></i>
                     </button>
-                    <h2>Edit Task : <i>"{props.task.title}"</i>
-                    </h2>
-                    <div className="modal-action-buttons">
-                        <label>Title:</label>
+                    <h4>Edit Task title:
+                    </h4>
+                    <h2> <i>"{props.task.title}"</i></h2>
+                    <div className="modal__change_title_input">
+                        <label>New Title:</label>
                         <input className="modal_task_title_update"
                                type="text"
                                value={editedTitle}
                                onChange={(e) => setEditedTitle(e.target.value)}
                         />
+                    </div>
+                    <div className="modal-action-buttons">
                         <button className="modal-accept-action--btn"
                                 onClick={async () => updateTaskTitle(props.task.id)}
-                        >Save
+                        >Save 💾
                         </button>
                         <button className="modal-cancel-action-btn"
                                 onClick={toggleModalTaskEditor}
-                        >Cancel
+                        >Cancel ⛔
                         </button>
                     </div>
                 </div>
@@ -172,11 +177,11 @@ export const SingleTaskRow = (props: Props) => {
                     <div className="modal-action-buttons">
                         <button className="modal-accept-action--btn"
                                 onClick={async () => handleDeleteTask(props.task.id)}
-                        >Yes
+                        >Yes ✅
                         </button>
                         <button className="modal-cancel-action-btn"
                                 onClick={toggleModal}
-                        >No
+                        >No ❌
                         </button>
                     </div>
                 </div>
