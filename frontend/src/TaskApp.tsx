@@ -11,6 +11,7 @@ import {useTaskListRerenderContext} from "./context/TaskListRerenderContext";
 import {TaskList} from "./components/TasksList/TaskList";
 import {useTaskListContext} from "./context/TaskListContext";
 import {FormValidationContextProvider} from "./context/FormValidationContext";
+import {NavMenu} from "./components/layouts/NavMenu/NavMenu";
 
 export const TaskApp = () => {
 
@@ -47,6 +48,8 @@ export const TaskApp = () => {
         return <Spinner/>
     }
     return (
+        <>
+        <NavMenu/>
         <div className="TaskAppContainer">
             <Header/>
             <FormValidationContextProvider>
@@ -59,5 +62,6 @@ export const TaskApp = () => {
                 }
             </FormValidationContextProvider>
         </div>
+        </>
     );
 };
