@@ -8,6 +8,7 @@ import {TaskListContextProvider} from "./context/TaskListContext";
 import {ErrorContextProvider} from "./context/ErrorContext";
 import {OpenAddTaskFormContextProvider} from "./context/OpenAddTaskFormContext";
 import {Toaster} from "sonner";
+import {ThemeContextProvider} from "./context/ThemeContext";
 
 
 const root = ReactDOM.createRoot(
@@ -16,17 +17,19 @@ const root = ReactDOM.createRoot(
 
 
 root.render(
-        <React.StrictMode>
+    <React.StrictMode>
+        <ThemeContextProvider>
             <ErrorContextProvider>
                 <OpenAddTaskFormContextProvider>
                     <TaskListRerenderContextProvider>
                         <TaskListContextProvider>
                             <Toaster richColors/>
-                                <TaskApp/>
+                            <TaskApp/>
                         </TaskListContextProvider>
                     </TaskListRerenderContextProvider>
                 </OpenAddTaskFormContextProvider>
             </ErrorContextProvider>
-        </React.StrictMode>
+        </ThemeContextProvider>
+    </React.StrictMode>
 );
 reportWebVitals();
