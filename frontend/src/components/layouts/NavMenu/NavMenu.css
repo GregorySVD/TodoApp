@@ -56,6 +56,7 @@
     align-items: center;
     justify-content: space-around;
 }
+
 .nav_btn-contact {
     color: #ffffff;
     background: #221e23;
@@ -63,14 +64,22 @@
 
 .nav_btn-theme-changed {
     overflow: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 .fa-sun,
-.fa-arrow-right {
+.fa-arrow-right,
+.fa-moon {
     transition: transform 0.3s ease-in-out;
     padding: 0 0.5rem;
 }
 
-.nav_btn-theme-changed:hover .fa-sun {
+.dark-theme {
+    background-color: #221e23;
+    color: #fff;
+}
+.nav_btn-theme-changed:hover .fa-sun,
+.nav_btn-theme-changed:hover .fa-moon {
     transform: rotate(360deg);
 }
 
