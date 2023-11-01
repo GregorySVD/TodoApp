@@ -1,6 +1,6 @@
 import React from 'react';
 import './NavBar.css'
-import {NavBarAboutProject} from "./NavBarAbout/NavBarAboutProject";
+import {NavBarAboutOpenBtn} from "./NavBarAbout/NavBarAboutOpenBtn/NavBarAboutOpenBtn";
 import {NavBarThemChanger} from "./NavBarThemeChanger/NavBarThemChanger";
 
 export const NavBar = () => {
@@ -17,7 +17,7 @@ export const NavBar = () => {
                 <span>CONTACT</span>
                 <div className="fa fa-arrow-right"></div>
             </button>
-            <NavBarAboutProject/>
+            <NavBarAboutOpenBtn/>
         </div>
     </nav>
 }
