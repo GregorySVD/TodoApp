@@ -20,7 +20,7 @@ interface ThemeContextProviderProps {
 }
 
 export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ children }) => {
-    const [darkTheme, setDarkTheme] = useState<boolean>(false);
+    const [darkTheme, setDarkTheme] = useState<boolean>(true);
 
 
     const contextValue: ThemeContextProps = {

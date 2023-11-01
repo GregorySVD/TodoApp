@@ -28,11 +28,15 @@ body.active-modal {
     width: 60vw;
     border-radius: 16px;
     z-index: 3;
-    padding: 1em;
+    padding: 2em;
     max-width: 500px;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
+    color: inherit;
+}
+.modal-content.dark-theme {
+    background-color: #091220;
 }
 .modal-content h2 {
     white-space: pre-wrap;
@@ -48,6 +52,8 @@ body.active-modal {
     border-radius: 4px;
     margin-top: 0.5em;
     box-sizing: border-box;
+    color: inherit;
+    background-color: transparent;
 }
 
 .modal-close-btn {
@@ -58,6 +64,7 @@ body.active-modal {
     border: none;
     background: transparent;
     font-size: 16px;
+    color: inherit;
 }
 .modal__change_title_input {
     display: flex;
@@ -77,13 +84,15 @@ body.active-modal {
 }
 
 .modal-accept-action--btn, .modal-cancel-action-btn {
-    padding: 1.3em 3em;
+    padding: 0.7em 2em;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
     border: 1px solid;
     outline: none;
     border-radius: 16px;
+    background-color: transparent;
+    color: inherit;
 }
 
 .modal-accept-action--btn:hover, .modal-cancel-action-btn:hover {

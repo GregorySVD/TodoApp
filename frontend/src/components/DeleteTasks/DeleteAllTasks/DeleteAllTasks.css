@@ -13,6 +13,9 @@
     background-color: #fff;
     transition: all 0.3s ease;
 }
+.DeleteAllTasks_btn.dark-theme {
+    box-shadow: 0 8px 15px rgba(255, 255, 255, 0.1);
+}
 
 .DeleteAllTasks_btn:hover {
     background-color: #ff4545;

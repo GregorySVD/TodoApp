@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState} from 'react';
 import {TodoEntity} from 'types'
 import {OneTaskRemoval} from "../../DeleteTasks/OneTaskRemoval/OneTaskRemoval";
 import './SingleTaskRow.css'
@@ -9,6 +9,7 @@ import {useErrorContext} from "../../../context/ErrorContext";
 import {ErrorPage} from "../../layouts/ErrorPage/ErrorPage";
 import {toast} from "sonner";
 import {EditTask} from "../../EditTask/EditTask";
+import {useTheme} from "../../../context/ThemeContext";
 
 interface Props {
     task: TodoEntity;
@@ -20,6 +21,7 @@ export const SingleTaskRow = (props: Props) => {
     const [modal, setModal] = useState<boolean>(false);
     const [modalTaskEditor, setModalTaskEditor] = useState<boolean>(false);
     const [editedTitle, setEditedTitle] = useState<string>(props.task.title);
+    const {darkTheme} = useTheme();
     if (modal) {
         document.body.classList.add('active-modal');
     } else {
@@ -45,7 +47,6 @@ export const SingleTaskRow = (props: Props) => {
                         })
 
                     }
-
                 )
                 if (!res.ok) {
                     await setError(new Error(`An error occurred while updating task title. Try again later.`))
@@ -134,13 +135,13 @@ export const SingleTaskRow = (props: Props) => {
                      onClick={toggleModalTaskEditor}
                 >
                 </div>
-                <div className="modal-content">
+                <div className={darkTheme ? "modal-content dark-theme" : "modal-content"}>
                     <button className="modal-close-btn" onClick={toggleModalTaskEditor}>
                         <i className="fa fa-close"></i>
                     </button>
                     <h4>Edit Task title:
                     </h4>
-                    <h2> <i>"{props.task.title}"</i></h2>
+                    <h2><i>"{props.task.title}"</i></h2>
                     <div className="modal__change_title_input">
                         <label>New Title:</label>
                         <input className="modal_task_title_update"
@@ -166,7 +167,7 @@ export const SingleTaskRow = (props: Props) => {
                      onClick={toggleModal}
                 >
                 </div>
-                <div className="modal-content">
+                <div className={darkTheme ? "modal-content dark-theme" : "modal-content"}>
                     <button className="modal-close-btn" onClick={toggleModal}>
                         <i className="fa fa-close"></i>
                     </button>

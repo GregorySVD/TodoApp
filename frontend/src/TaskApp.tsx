@@ -12,6 +12,7 @@ import {TaskList} from "./components/TasksList/TaskList";
 import {useTaskListContext} from "./context/TaskListContext";
 import {FormValidationContextProvider} from "./context/FormValidationContext";
 import {NavBar} from "./components/layouts/NavMenu/NavBar";
+import {useTheme} from "./context/ThemeContext";
 
 export const TaskApp = () => {
 
@@ -19,6 +20,15 @@ export const TaskApp = () => {
     const {error, setError, clearError} = useErrorContext();
     const {tasksList, setTaskList} = useTaskListContext();
     const [loading, setLoading] = useState<boolean>(true);
+
+    const {darkTheme} = useTheme();
+
+    useEffect(() => {
+        const appRoot = document.querySelector('.TaskAppContainer');
+        if(appRoot) {
+            appRoot.classList.toggle('dark-theme', darkTheme);
+        }
+    }, [darkTheme]);
 
     useEffect(() => {
         if (!shouldRerender) {
@@ -50,7 +60,7 @@ export const TaskApp = () => {
     return (
         <>
         <NavBar/>
-        <div className="TaskAppContainer">
+        <div className="TaskAppContainer dark-theme">
             <Header/>
             <FormValidationContextProvider>
                 {(tasksList.length === 0) ? <NoTaskLayout/> :

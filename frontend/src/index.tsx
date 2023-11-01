@@ -11,10 +11,7 @@ import {Toaster} from "sonner";
 import {ThemeContextProvider} from "./context/ThemeContext";
 
 
-const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
-);
-
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
     <React.StrictMode>
@@ -23,13 +20,13 @@ root.render(
                 <OpenAddTaskFormContextProvider>
                     <TaskListRerenderContextProvider>
                         <TaskListContextProvider>
-                            <Toaster richColors/>
-                            <TaskApp/>
+                            <Toaster richColors />
+                            <TaskApp />
                         </TaskListContextProvider>
                     </TaskListRerenderContextProvider>
                 </OpenAddTaskFormContextProvider>
             </ErrorContextProvider>
         </ThemeContextProvider>
-    </React.StrictMode>
+    </React.StrictMode>,
 );
 reportWebVitals();
