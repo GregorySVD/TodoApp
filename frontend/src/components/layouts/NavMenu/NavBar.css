@@ -12,7 +12,7 @@
     justify-content: space-around;
     font-family: "Lato", sans-serif;
     font-size: 16px;
-    padding: 0.2rem 0.5rem;
+    padding: 0.5rem 0.5rem;
     width: 100%;
     color: #1d1e23;
     min-width: 450px;
@@ -27,32 +27,34 @@
     font-size: 1.5rem;
     display: flex;
     gap: 8px;
-    align-items: baseline;
     background-color: #50e3a4;
-    padding: 0 1rem;
+    padding: 0.2rem 1rem;
     border-radius: 16px;
     justify-content: center;
+    align-items: center;
+    margin-right: 0.2rem;
 }
 
 .nav_btns {
     display: flex;
-    gap: 0.5rem;
-    width: 25%;
+    gap: 0.3rem;
+    width: 300px;
     justify-content: space-around;
-    min-width: 300px;
 }
 
 .nav_btns button {
     border: none;
 }
+.nav_btns button:hover {
+    cursor: pointer;
+}
 
-.nav_btn-theme-changed,
-.nav_btn-contact,
-.nav_btn-menu {
-    border-radius: 12px;
-    padding: 0.2rem 1rem;
+.nav_btn-contact
+ {
+    border-radius: 16px;
+    padding: 0.3rem 1rem;
     display: flex;
-    gap: 0.4rem;
+    gap: 0.2rem;
     align-items: center;
     justify-content: space-around;
 }
@@ -62,14 +64,8 @@
     background: #221e23;
 }
 
-.nav_btn-theme-changed {
-    overflow: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
 
-.fa-sun,
-.fa-arrow-right,
-.fa-moon {
+.fa-arrow-right {
     transition: transform 0.3s ease-in-out;
     padding: 0 0.5rem;
 }
@@ -78,28 +74,23 @@
     background-color: #221e23;
     color: #fff;
 }
-.nav_btn-theme-changed:hover .fa-sun,
-.nav_btn-theme-changed:hover .fa-moon {
-    transform: rotate(360deg);
-}
 
 .nav_btn-contact:hover .fa-arrow-right {
     transform: translateX(5px);
 }
 
-.nav_btn-menu:hover {
-    background-color: #b2b2b2;
-    transition: 0.3s ease-in-out;
-}
 
 @media (max-width: 500px) {
     .nav {
-        padding: 0.2rem;
+        padding: 0.1rem;
         min-width: 300px;
     }
 
     .nav_btns,
     .nav_logo {
         gap: 0.2rem;
+    }
+    .nav{
+        font-size: 8px;
     }
 }
