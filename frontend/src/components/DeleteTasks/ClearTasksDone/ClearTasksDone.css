@@ -4,8 +4,8 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 500;
-    color: #000;
-    background-color: #fff;
+    color: inherit;
+    background-color: inherit;
     border: none;
     border-radius: 45px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
@@ -13,6 +13,9 @@
     cursor: pointer;
     outline: none;
     margin-top: 30px;
+}
+.ClearTaskDone__btn.dark-theme {
+    box-shadow: 0 8px 15px rgba(255, 255, 255, 0.2);
 }
 
 .ClearTaskDone__btn:hover {

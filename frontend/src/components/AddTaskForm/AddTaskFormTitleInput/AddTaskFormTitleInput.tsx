@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './AddTaskFormTitleInput.css'
 import {useFormValidationContext} from "../../../context/FormValidationContext";
+import {useTheme} from "../../../context/ThemeContext";
 
 interface Props {
     className?: string
@@ -13,6 +14,15 @@ interface Props {
 export const AddTaskFormTitleInput = (props: Props) => {
     const [titleInputValue, setTitleInputValue] = useState<string>('');
     const {formIsValid, setFormIsValid} = useFormValidationContext();
+    const {darkTheme} = useTheme();
+
+    useEffect(() => {
+        const appRoot = document.querySelector('.AddTaskFormTitleInput__input_group');
+        if (appRoot) {
+            appRoot.classList.toggle('dark-theme', darkTheme);
+        }
+    }, [darkTheme]);
+
 
     useEffect(() => {
         if (titleInputValue.length < props.setMinLength || titleInputValue.length > props.setMaxLength) {
@@ -32,7 +42,8 @@ export const AddTaskFormTitleInput = (props: Props) => {
         <label className="AddTaskFormTitleInput__label">
             {(!formIsValid)
                 ?
-                <span className="AddTaskFormTitleInput__validation_info">{`${props.placeholder} needs to be between ${props.setMinLength}-${props.setMaxLength} character long`}</span>
+                <span
+                    className="AddTaskFormTitleInput__validation_info">{`${props.placeholder} needs to be between ${props.setMinLength}-${props.setMaxLength} character long`}</span>
                 : null
             }
             <div className="AddTaskFormTitleInput__input_group"

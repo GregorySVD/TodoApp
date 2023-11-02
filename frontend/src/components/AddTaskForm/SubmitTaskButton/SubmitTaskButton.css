@@ -5,6 +5,7 @@
 }
 .SubmitTaskButton__btn {
     flex: 1;
+    color: inherit;
 }
 .SubmitTaskButton__btn {
     background-color: transparent;

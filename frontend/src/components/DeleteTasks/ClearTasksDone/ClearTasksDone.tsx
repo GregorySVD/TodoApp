@@ -1,15 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './ClearTasksDone.css'
 import {useTaskListRerenderContext} from "../../../context/TaskListRerenderContext";
 import {useErrorContext} from "../../../context/ErrorContext";
 import {ErrorPage} from "../../layouts/ErrorPage/ErrorPage";
 import {toast} from "sonner";
+import {useTheme} from "../../../context/ThemeContext";
 
 
 export const ClearTasksDone = () => {
 
+    const {darkTheme} = useTheme();
+
     const {setShouldRerender} = useTaskListRerenderContext();
-    const {error, setError} = useErrorContext()
+    const {error, setError} = useErrorContext();
+
+    useEffect(() => {
+        const appRoot = document.querySelector('.ClearTaskDone__btn');
+        if (appRoot) {
+            appRoot.classList.toggle('dark-theme', darkTheme);
+        }
+    }, [darkTheme]);
 
     const handleClearTasksDone = async (): Promise<void> => {
         try {

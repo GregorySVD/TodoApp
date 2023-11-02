@@ -3,11 +3,11 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: inherit;
     margin-bottom: 30px;
 }
 
-.TaskProgress__container h1{
-    letter-spacing: 1px;
-    margin: 0;
+.TaskProgress__container h4{
+    letter-spacing: 2px;
+    margin: 10px;
 }

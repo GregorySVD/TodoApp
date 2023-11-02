@@ -1,17 +1,26 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useTaskListRerenderContext} from "../../../context/TaskListRerenderContext";
 import {useErrorContext} from "../../../context/ErrorContext";
 import './DeleteAllTasks.css';
 import {toast} from "sonner";
 import {ErrorPage} from "../../layouts/ErrorPage/ErrorPage";
+import {useTheme} from "../../../context/ThemeContext";
 
 
 export const DeleteAllTasks = () => {
     const [modal, setModal] = useState<boolean>(false);
     const {setShouldRerender} = useTaskListRerenderContext();
     const {setError, error} = useErrorContext();
+    const {darkTheme} = useTheme();
 
-    //delete scroll when modal open
+    useEffect(() => {
+        const appRoot = document.querySelector('.DeleteAllTasks_btn');
+        if (appRoot) {
+            appRoot.classList.toggle('dark-theme', darkTheme);
+        }
+    }, [darkTheme]);
+
+
     if (modal) {
         document.body.classList.add('active-modal');
     } else {

@@ -20,6 +20,9 @@ export const TaskDoneStatusCheckbox = (props: Props) => {
                 type="checkbox"
                 onChange={handleCheckboxChange}/>
             <div className="checkmark"></div>
+            <span className="hover-icon">
+        <i className="fa fa-close "></i>
+      </span>
         </label>
     )
 }

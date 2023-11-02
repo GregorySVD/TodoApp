@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.nav_btn-about {
+    border-radius: 16px;
+    padding: 0.3rem 1rem;
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nav_btn-menu:hover {
+    background-color: #b2b2b2;
+    transition: 0.3s ease-in-out;
+}
+
+body.active-modal {
+    overflow-y: hidden;
+}
