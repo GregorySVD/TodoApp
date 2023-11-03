@@ -1,8 +1,7 @@
 
 .ErrorPage__container {
     font-family: "Lato", sans-serif;
-    margin: 10vh auto;
-
+    margin: 15vh auto;
     background-color: #ffffff;
     text-align: left;
     color: #1d1e23;
@@ -14,6 +13,10 @@
     max-width: 500px;
     border-radius: 16px;
     min-height: 300px;
+}
+.ErrorPage__container.dark-theme {
+    background-color: #1d1e23;
+    color: #ffffff;
 }
 .ErrorPage__container_message{
     background-color: #f2dede;
@@ -30,5 +33,7 @@
     margin: 0 0 1rem 1rem;
 }
 .ErrorPage__error_message{
+    margin-top: 0.5em;
     font-size: 0.8rem;
+    font-style: italic;
 }

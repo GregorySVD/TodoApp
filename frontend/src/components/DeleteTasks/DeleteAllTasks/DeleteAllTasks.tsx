@@ -65,7 +65,7 @@ export const DeleteAllTasks = () => {
                      onClick={toggleModal}
                 >
                 </div>
-                <div className="modal-content">
+                <div className={darkTheme ? "modal-content dark-theme" : "modal-content"}>
                     <button className="modal-close-btn" onClick={toggleModal}>
                         <i className="fa fa-close"></i>
                     </button>

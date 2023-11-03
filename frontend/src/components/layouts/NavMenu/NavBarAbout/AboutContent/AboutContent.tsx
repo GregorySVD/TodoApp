@@ -29,6 +29,8 @@ export const AboutContent = (props: Props) => {
                     <li>Removing Tasks: Tasks can be deleted, allowing for cleaning up the task list.</li>
                     <li>Editing Tasks: Existing tasks can be edited by changing their titles.</li>
                     <li>Marking Tasks as Completed: Users can mark tasks as completed, facilitating progress tracking.</li>
+                    <li>Theme Changer: Users can choose between a dark or light version for a personalized interface.</li>
+                    <li>Toast notification: Users receive real-time feedback and updates about their actions, enhancing the interactive experience.</li>
                 </ul>
             </div>
         </div>

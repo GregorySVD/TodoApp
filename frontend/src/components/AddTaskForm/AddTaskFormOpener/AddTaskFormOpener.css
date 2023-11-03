@@ -22,7 +22,9 @@
 .AddTaskFormOpener__btn i {
     font-size: 1.5em;
 }
-
+.AddTaskFormOpener__btn.active {
+    animation: pulse_green 1s linear infinite both;
+}
 .AddTaskFormOpener__btn:hover {
     animation: pulse_green 1s linear infinite both;
 }

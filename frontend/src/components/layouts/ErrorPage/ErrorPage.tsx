@@ -1,14 +1,20 @@
 import React from 'react';
 import './ErrorPage.css'
 import {RefreshPageButton} from "../../common/RefreshPageButton/RefreshPageButton";
+import {NavBar} from "../NavMenu/NavBar";
+import {useTheme} from "../../../context/ThemeContext";
 
 interface ErrorPageProps {
     error: Error | null;
 }
 
 export const ErrorPage: React.FC<ErrorPageProps> = ({error}) => {
-    return (
-        <div className="ErrorPage__container">
+
+    const {darkTheme} = useTheme();
+
+    return (<>
+            <NavBar/>
+        <div className = {darkTheme ? "ErrorPage__container dark-theme" : "ErrorPage__container" }>
             <h1 className="ErrorPage__title">Loading Error</h1>
             <div className="ErrorPage__container_message">
                 <p className="ErrorPage__error_text">Error occurred during loading of this page.</p>
@@ -18,6 +24,7 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({error}) => {
             </div>
             <RefreshPageButton/>
         </div>
+        </>
 
     );
 };

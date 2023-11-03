@@ -1,8 +1,8 @@
 
 .button {
     font: inherit;
-    color: #1d1e23;
-    background-color: #ffffff;
+    color: inherit;
+    background-color: inherit;
     font-weight: 500;
     border-radius: 0.5rem;
     font-size: 1rem;
@@ -16,7 +16,7 @@
 }
 
 .button:hover {
-    background-color: #eeeeee;
+    background-color: #703fb2;
 }
 
 .button i {
@@ -24,7 +24,7 @@
     width: 1.3rem;
     height: 1.3rem;
     margin-right: 0.75rem;
-    color: #1d1e23;
+    color: inherit;
 }
 
 .button:hover i {

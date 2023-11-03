@@ -14,7 +14,7 @@
     font-size: 16px;
     padding: 0.5rem 0.5rem;
     width: 100%;
-    color: #1d1e23;
+    color: #fff;
     min-width: 450px;
     position: fixed;
     left: 0;
@@ -27,12 +27,33 @@
     font-size: 1.5rem;
     display: flex;
     gap: 8px;
-    background-color: #50e3a4;
+    background: #50e3a4;
     padding: 0.2rem 1rem;
     border-radius: 16px;
     justify-content: center;
     align-items: center;
     margin-right: 0.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+}
+.link-no-decoration {
+    text-decoration: none;
+    color: inherit
+}
+
+
+.nav_logo:hover {
+    background-color: #67f4b7;
+    transform: scale(1.1);
+}
+
+.nav_logo:hover {
+    background-color: #45c993;
+}
+
+.nav_logo:hover {
+    cursor: pointer;
 }
 
 .nav_btns {
@@ -45,12 +66,12 @@
 .nav_btns button {
     border: none;
 }
+
 .nav_btns button:hover {
     cursor: pointer;
 }
 
-.nav_btn-contact
- {
+.nav_btn-contact {
     border-radius: 16px;
     padding: 0.3rem 1rem;
     display: flex;
@@ -90,7 +111,8 @@
     .nav_logo {
         gap: 0.2rem;
     }
-    .nav{
+
+    .nav {
         font-size: 8px;
     }
 }
