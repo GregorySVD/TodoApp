@@ -17,9 +17,9 @@
     padding: 2em;
     display: flex;
     flex-direction: column;
-    color: inherit;
     justify-content: space-between;
     text-align: center;
+    color: #091220;
 }
 
 .contact-content-close-btn {
