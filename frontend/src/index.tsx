@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import reportWebVitals from './reportWebVitals';
 import {TaskApp} from './TaskApp';
 import {TaskListRerenderContextProvider} from "./context/TaskListRerenderContext";
 import {TaskListContextProvider} from "./context/TaskListContext";
@@ -32,4 +31,3 @@ root.render(
         </BrowserRouter>
     </React.StrictMode>
 );
-reportWebVitals();
