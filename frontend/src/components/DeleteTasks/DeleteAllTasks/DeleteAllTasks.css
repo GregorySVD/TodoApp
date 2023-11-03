@@ -10,7 +10,7 @@
     font-weight: 500;
     border-radius: 45px;
     color: inherit;
-    background-color: #fff;
+    background-color: inherit;
     transition: all 0.3s ease;
 }
 .DeleteAllTasks_btn.dark-theme {
