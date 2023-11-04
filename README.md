@@ -13,7 +13,7 @@ Ready to dive in? Let's make organizing your tasks a walk in the park. 🚀✨
 Happy tasking!
 
 ## Watch how my App works! 🛸
-![Working App video]([[URL of GIF file](https://github.com/GregorySVD/TodoApp/blob/main/Todo-App.gif)](https://github.com/GregorySVD/TodoApp/blob/main/TodoApp-gif.gif))
+![Working App video](https://github.com/GregorySVD/TodoApp/blob/main/TodoApp-gif.gif)
 
 ## How to run on Your Computer. 
 1. clone this project.
