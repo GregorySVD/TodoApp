@@ -1,3 +1,4 @@
+
 # TodoApp - MegaK Final Project
 
 ## TodoApp is a task manager written as a final project for the MegaK course. The application allows users to add, delete, edit, and mark tasks as completed.
@@ -15,9 +16,68 @@ Happy tasking!
 ## Watch how my App works! 🛸
 ![Working App video](https://github.com/GregorySVD/TodoApp/blob/main/TodoApp-gif.gif)
 
-## How to run on Your Computer. 
-1. clone this project.
-2.
+## Installation
+
+Install my-project with npm and MySQL database:
+
+
+1. Create mySQL Database:
+
+* Open a MySQL terminal or command prompt window.
+* Log in to the MySQL server.
+* Run the following command to create the database:
+```bash
+  CREATE DATABASE todo;
+```
+*Run the following command to create the todos table:
+```bash
+  CREATE TABLE `todo`.`todos` (
+    `id` VARCHAR(36) NOT NULL DEFAULT uuid() COLLATE 'utf8mb4_unicode_ci',
+    `title` VARCHAR(150) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+    `date` DATETIME NOT NULL DEFAULT current_timestamp(),
+    `isDone` TINYINT(1) NOT NULL DEFAULT '0',
+    `description` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+    PRIMARY KEY (`id`) USING BTREE
+);
+```
+
+* Once the database and table have been created, you can start the frontend and backend applications as instructed further on. 
+
+2. Clone the project to your local machine.
+- Open a terminal or command prompt window.
+- Navigate to the directory where you want to clone the project.
+- Run the following command to clone TodoApp repository: 
+
+```bash
+  git clone https://github.com/GregorySVD/TodoApp
+```
+3. Start Frontend [FE]:
+
+- Move to frontend folder - type in terminal or command prompt window: 
+```bash
+  cd .\TodoApp\frontend\     
+```
+- Install the required dependencies:
+```bash
+  npm install 
+```
+- Run the following command to start Frontend:
+```bash
+  npm run start
+```
+3. Start Backend [BE]:
+- Move to backend folder - if You are still in [FE] folder, type in terminal or command prompt window:
+```bash
+  cd ..\backend\
+```
+- Install the required dependencies:
+```bash
+  npm install 
+```
+- Run the following command to start Backend:
+```bash
+  npm run start
+```
 
 ## Features
 - Adding Tasks: Users can add new tasks by specifying their titles.
@@ -58,3 +118,6 @@ Layout Dilemma: Now, here's the head-scratcher. The NavBar component is having a
 ## Author
 
 - [@GTerenda](https://github.com/GregorySVD)
+
+
+
