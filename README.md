@@ -26,6 +26,9 @@ Happy tasking!
 4. [Features](#features)
    - List of features provided by TodoApp.
 
+4. [Next Steps](#next-steps)
+   - Plans for future development and enhancements.
+
 5. [Tech Stack](#-tech-stack)
    - Technologies used in the project.
 
@@ -35,7 +38,7 @@ Happy tasking!
 7. [Author](#author)
    - Information about the project's author.
 
-## Watch how my App works! 🛸
+##2. Watch how my App works! 🛸
 ![Working App video](https://github.com/GregorySVD/TodoApp/blob/main/TodoApp-gif.gif)
 
 ## Installation
@@ -108,6 +111,41 @@ Install my-project with npm and MySQL database:
 - Marking Tasks as Completed: Users can mark tasks as completed, facilitating progress tracking.
 - Theme Changer: Users can choose between a dark or light version for a personalized interface.
 - Toast notification: Users receive real-time feedback and updates about their actions, enhancing the interactive experience.
+
+  ## Next Steps
+
+**User Authentication**
+
+- Implement user registration and login functionality using a secure authentication system.
+- Allow users to create and manage their own accounts.
+
+**Task Sharing**
+
+- Enable users to share their Todo lists with other users.
+- Implement a permissions system to control who can view and edit shared lists.
+
+**Theme Persistence**
+
+- Store the user's preferred theme in cookies for persistent usage.
+- Automatically apply the saved theme when the user revisits the application.
+
+**Drag-and-Drop Functionality**
+
+- Implement drag-and-drop functionality to allow users to easily reorder tasks within their lists.
+- Provide visual feedback during the drag-and-drop operation to enhance user experience.
+
+**Task Prioritization**
+
+- Introduce a task prioritization system to enable users to assign priority levels to their tasks.
+- Visualize task priorities using different colors or icons for easy identification.
+
+**Known Issues Resolution**
+
+- Address the 'Identity Crisis' issue by standardizing the naming convention for tasks across the backend and frontend.
+- Refactor the code to separate the Contact and About components into their own dedicated pages.
+- Implement task descriptions to allow users to add and view detailed descriptions for each task.
+- Organize the project files to improve code structure and maintainability.
+- Resolve the Navbar layout dilemma by conducting user research and evaluating the most effective placement for the Navbar component.
   
 ## 🛠 Tech Stack
 ![Database](https://img.shields.io/badge/Database-MySQL-blue?style=flat-square&logo=mysql)
