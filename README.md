@@ -46,7 +46,7 @@ Happy tasking!
 Install my-project with npm and MySQL database:
 
 
-1. Create mySQL Database:
+1. Create MySQL Database:
 
 * Open a MySQL terminal or command prompt window.
 * Log in to the MySQL server.
