@@ -13,6 +13,28 @@ Ready to dive in? Let's make organizing your tasks a walk in the park. 🚀✨
 
 Happy tasking!
 
+## Table of Contents
+1. [Introduction](#todoapp---megak-final-project)
+   - Overview of TodoApp and its features.
+
+2. [App Overview](#watch-how-my-app-works-)
+   - Visual demonstration of the app in action.
+
+3. [Installation](#installation)
+   - Steps to install TodoApp on your local machine.
+
+4. [Features](#features)
+   - List of features provided by TodoApp.
+
+5. [Tech Stack](#-tech-stack)
+   - Technologies used in the project.
+
+6. [Known Issues](#known-issues)
+   - Identified quirks and issues in TodoApp.
+
+7. [Author](#author)
+   - Information about the project's author.
+
 ## Watch how my App works! 🛸
 ![Working App video](https://github.com/GregorySVD/TodoApp/blob/main/TodoApp-gif.gif)
 
