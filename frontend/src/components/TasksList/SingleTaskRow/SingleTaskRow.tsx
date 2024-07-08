@@ -141,7 +141,7 @@ export const SingleTaskRow = (props: Props) => {
                     </button>
                     <h4>Edit Task title:
                     </h4>
-                    <h2><i>"{props.task.title}"</i></h2>
+                    <h2><i>`{props.task.title}`</i></h2>
                     <div className="modal__change_title_input">
                         <label>New Title:</label>
                         <input className="modal_task_title_update"
@@ -172,7 +172,7 @@ export const SingleTaskRow = (props: Props) => {
                         <i className="fa fa-close"></i>
                     </button>
                     <h2>Are you sure you want to delete:<p>
-                        <i>"{props.task.title}"</i></p>
+                        <i>`{props.task.title}`</i></p>
                     </h2>
                     <p>This action cannot be undone. 🗑️</p>
                     <div className="modal-action-buttons">

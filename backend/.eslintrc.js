@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     root: true,
     parser: "@typescript-eslint/parser",
     plugins: ["@typescript-eslint", "import"],
@@ -6,15 +6,19 @@ module.exports = {
         "airbnb-base",
         "plugin:@typescript-eslint/recommended",
         "plugin:import/typescript",
-        "prettier", // Add this line
+        "prettier",
     ],
+    env: {
+        node: true,
+    },
     rules: {
-        quotes: ["error", "double", {avoidEscape: true}],
+        quotes: ["error", "double", { avoidEscape: true }],
         semi: ["error", "always"],
         "no-console": "off",
         "import/prefer-default-export": "off",
         "lines-between-class-members": "off",
         "no-use-before-define": "off",
         "import/extensions": "off",
+        "no-undef": "off",
     },
 };
