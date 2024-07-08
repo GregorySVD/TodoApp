@@ -21,6 +21,7 @@
     //we will use node module
     "esModuleInterop": true,
     "module": "CommonJS",
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }
