@@ -16,7 +16,7 @@ export class TodoRecord implements TodoEntity {
     public title: string;
     public date?: string;
     public isDone: number;
-    public description?: string | null;
+    public description?: string ;
 
     constructor(obj: TodoEntity) {
         if (!obj.title || obj.title.length < 3 || obj.title.length > 150) {
