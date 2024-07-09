@@ -1,15 +1,49 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
-import { fixupConfigRules } from "@eslint/compat";
+import { FlatCompat } from '@eslint/compat';
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import _import from 'eslint-plugin-import';
+import globals from 'globals';
+import tsParser from '@typescript-eslint/parser';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all,
+});
 
 export default [
-  {files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]},
-  { languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
-  {languageOptions: { globals: globals.browser }},
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  ...fixupConfigRules(pluginReactConfig),
+  ...fixupConfigRules(compat.extends(
+    'airbnb-base',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/typescript',
+    'prettier',
+  )),
+  {
+    plugins: {
+      '@typescript-eslint': fixupPluginRules(typescriptEslint),
+      import: fixupPluginRules(_import),
+    },
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        module: 'readonly',
+      },
+      parser: tsParser,
+    },
+    rules: {
+      quotes: ['error', 'double', { avoidEscape: true }],
+      semi: ['error', 'always'],
+      'no-console': 'off',
+      'import/prefer-default-export': 'off',
+      'lines-between-class-members': 'off',
+      'no-use-before-define': 'off',
+      'import/extensions': 'off',
+      'no-undef': 'off',
+      'import/no-default-export': 'error',
+    },
+  },
 ];
