@@ -20,8 +20,8 @@ interface ThemeContextProviderProps {
 }
 
 export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ children }) => {
-    const [darkTheme, setDarkTheme] = useState<boolean>(true);
-
+    const [darkTheme, setDarkTheme] = useState<boolean>(localStorage.getItem('darkTheme') === 'true'? true : false);
+    localStorage.setItem('darkTheme', String(darkTheme));
 
     const contextValue: ThemeContextProps = {
         darkTheme,
