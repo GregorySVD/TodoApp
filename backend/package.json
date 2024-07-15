@@ -5,7 +5,7 @@
   "main": ".eslintrc.js",
   "scripts": {
     "test": "jest",
-    "start": "tsnd .\\src\\index.ts",
+    "start": "tsnd .\\api\\index.ts",
     "eslint": "npx eslint src",
     "eslint-fix": "npx eslint src --fix\n"
   },
