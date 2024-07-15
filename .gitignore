@@ -3,3 +3,4 @@
 
 # Ignore package-lock.json in any directory
 **/package-lock.json
+backend/.env.development.local

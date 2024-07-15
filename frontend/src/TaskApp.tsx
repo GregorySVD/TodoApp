@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useLayoutEffect} from 'react';
 import './TaskApp.css';
 import {Spinner} from "./components/common/Spinner/Spinner";
 import {NoTaskLayout} from "./components/layouts/NoTaskLayout/NoTaskLayout";
@@ -21,20 +21,16 @@ export const TaskApp = () => {
     const {tasksList, setTaskList} = useTaskListContext();
     const [loading, setLoading] = useState<boolean>(true);
 
+
     const {darkTheme} = useTheme();
 
-    useEffect(() => {
-        const appRoot = document.querySelector('.TaskAppContainer');
-        if(appRoot) {
-            appRoot.classList.toggle('dark-theme', darkTheme);
-        }
-    }, [darkTheme]);
 
     useEffect(() => {
         if (!shouldRerender) {
             (async () => {
                 try {
                     const res = await fetch(`http://localhost:3001/todo`);
+
                     if (!res.ok) {
                         setError(new Error(`Failed to load tasks from server. Please try again later.`));
                     }
@@ -54,13 +50,14 @@ export const TaskApp = () => {
     if (error) {
         return <ErrorPage error={error}/>
     }
+
     if (loading) {
         return <Spinner/>
     }
     return (
         <>
         <NavBar/>
-        <div className="TaskAppContainer dark-theme">
+        <div className={`TaskAppContainer ${darkTheme ? `dark-theme` : ''}`}>
             <Header/>
             <FormValidationContextProvider>
                 {(tasksList.length === 0) ? <NoTaskLayout/> :
