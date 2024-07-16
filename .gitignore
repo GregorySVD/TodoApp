@@ -5,7 +5,7 @@
 **/package-lock.json
 
 # Ignore the public directory and its contents
-public/
+dist/
 
 # Ignore specific environment configuration files
 backend/.env.development.local

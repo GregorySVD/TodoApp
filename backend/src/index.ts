@@ -1,13 +1,13 @@
-import express = require("express");
+import express from "express";
 import cors from "cors";
 import "express-async-errors";
 import { rateLimit } from "express-rate-limit";
-import { DBENV } from "./dbConfig.ts";
+import { DBENV } from "./utils/dbConfig";
 
-import { todoRouter } from "./src/routers/todo.ts";
-import { handleError } from "./src/utils/errors.ts";
-import { homeRouter } from "./src/routers/home.ts";
-import { todoPostgresRouter } from "./src/routers/todo-postgres.ts";
+import { todoRouter } from "./routers/todo";
+import { handleError } from "./utils/errors";
+import { homeRouter } from "./routers/home";
+import { todoPostgresRouter } from "./routers/todo-postgres";
 
 const app = express();
 
@@ -32,3 +32,5 @@ app.use(handleError);
 app.listen(DBENV.POSTGRES_PORT, "0.0.0.0", () => {
   console.log(`Listening on http://localhost:${DBENV.POSTGRES_PORT}`);
 });
+
+export default app;
