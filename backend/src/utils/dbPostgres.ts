@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import { DBENV } from "../../dbConfig";
+import { DBENV } from "./dbConfig";
 
 export const poolPostgres = new Pool({
   connectionString: DBENV.POSTGRES_URL,

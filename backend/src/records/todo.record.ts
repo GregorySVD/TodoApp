@@ -1,11 +1,11 @@
 import { FieldPacket } from "mysql2";
 import { v4 as uuid } from "uuid";
-import { TodoEntity } from "../src/types/index";
-import { ValidationError } from "../src/utils/errors";
-import { pool } from "../src/utils/db";
-import { getCurrentFormattedDate } from "../src/utils/getCurrentFormattedDate";
+import { TodoEntity } from "../types/index";
+import { ValidationError } from "../utils/errors";
+import { pool } from "../utils/db";
+import { getCurrentFormattedDate } from "../utils/getCurrentFormattedDate";
 import { response } from "express";
-import { poolPostgres } from "../src/utils/dbPostgres";
+import { poolPostgres } from "../utils/dbPostgres";
 
 // pool always returns [[result], FieldPacket[]]
 

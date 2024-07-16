@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { TodoRecord } from "../../records/todo.record";
+import { TodoRecord } from "../records/todo.record";
 import { ValidationError } from "../utils/errors";
 
 export const todoPostgresRouter = Router();
