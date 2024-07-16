@@ -3,4 +3,9 @@
 
 # Ignore package-lock.json in any directory
 **/package-lock.json
+
+# Ignore the public directory and its contents
+public/
+
+# Ignore specific environment configuration files
 backend/.env.development.local

@@ -5,9 +5,10 @@
   "main": ".eslintrc.js",
   "scripts": {
     "test": "jest",
-    "start": "tsnd .\\api\\index.ts",
+    "start": "tsnd ./index.ts",
     "eslint": "npx eslint src",
-    "eslint-fix": "npx eslint src --fix\n"
+    "eslint-fix": "npx eslint src --fix\n",
+    "build": "tsc -p tsconfig.build.json"
   },
   "keywords": [],
   "author": "",
