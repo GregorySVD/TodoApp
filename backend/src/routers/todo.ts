@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
-import { TodoRecord } from "../../records/todo.record.ts";
-import { ValidationError } from "../utils/errors.ts";
+import { TodoRecord } from "../../records/todo.record";
+import { ValidationError } from "../utils/errors";
 
 export const todoRouter = Router();
 

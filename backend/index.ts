@@ -1,13 +1,13 @@
-import express = require("express");
+import express from "express";
 import cors from "cors";
 import "express-async-errors";
 import { rateLimit } from "express-rate-limit";
-import { DBENV } from "./dbConfig.ts";
+import { DBENV } from "./dbConfig";
 
-import { todoRouter } from "./src/routers/todo.ts";
-import { handleError } from "./src/utils/errors.ts";
-import { homeRouter } from "./src/routers/home.ts";
-import { todoPostgresRouter } from "./src/routers/todo-postgres.ts";
+import { todoRouter } from "./src/routers/todo";
+import { handleError } from "./src/utils/errors";
+import { homeRouter } from "./src/routers/home";
+import { todoPostgresRouter } from "./src/routers/todo-postgres";
 
 const app = express();
 
