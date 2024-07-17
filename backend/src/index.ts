@@ -1,5 +1,5 @@
 import express from "express";
-import cors, { CorsOptions } from "cors";
+import cors from "cors";
 import "express-async-errors";
 import { DBENV } from "./utils/dbConfig";
 
@@ -10,19 +10,11 @@ import { todoPostgresRouter } from "./routers/todo-postgres";
 
 const app = express();
 
-const allowedOrigins = ["http://localhost:3000", "https://todoapp-sand.vercel.app"];
-
-const corsOptions: CorsOptions = {
-  origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-    if (allowedOrigins.indexOf(origin || "") !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-};
-
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "https://todoapp-sand.vercel.app/",
+  })
+);
 
 app.use(express.json());
 
