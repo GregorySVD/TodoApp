@@ -11,5 +11,5 @@ export const DBENV = {
   POSTGRES_HOST: "ep-patient-flower-a2sfrx81-pooler.eu-central-1.aws.neon.tech",
   POSTGRES_PASSWORD: "oMBYAhp5g9aD",
   POSTGRES_DATABASE: "verceldb",
-  POSTGRES_PORT: 3000,
+  POSTGRES_PORT: 3001,
 };

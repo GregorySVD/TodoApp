@@ -17,7 +17,7 @@ const limiter = rateLimit({
 });
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://todoapp-sand.vercel.app/",
   })
 );
 app.use(limiter);
