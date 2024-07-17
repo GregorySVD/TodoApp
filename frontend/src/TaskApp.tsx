@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./TaskApp.css";
 import { Spinner } from "./components/common/Spinner/Spinner";
 import { NoTaskLayout } from "./components/layouts/NoTaskLayout/NoTaskLayout";
