@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import "express-async-errors";
-import { rateLimit } from "express-rate-limit";
 import { DBENV } from "./utils/dbConfig";
 
 import { todoRouter } from "./routers/todo";
@@ -11,16 +10,11 @@ import { todoPostgresRouter } from "./routers/todo-postgres";
 
 const app = express();
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 300,
-});
 app.use(
   cors({
     origin: "https://todoapp-sand.vercel.app/",
   })
 );
-app.use(limiter);
 
 app.use(express.json());
 
