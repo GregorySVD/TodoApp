@@ -6,6 +6,11 @@
 
 # Ignore the public directory and its contents
 dist/
+build/
 
 # Ignore specific environment configuration files
 backend/.env.development.local
+
+# Ignore the vercel in any director
+**/vercel.json
+
