@@ -30,9 +30,7 @@ export const SingleTaskRow = (props: Props) => {
 
   const updateTaskTitle = async (taskId: string | undefined) => {
     if (editedTitle.length < 3 || editedTitle.length > 150) {
-      await toast.error(
-        "An error occurred while updating task title: Title needs to be at least 3 characters" + " long ❌"
-      );
+      await toast.error("An error occurred while updating task title: Title needs to be at least 3 characters long ❌");
       setEditedTitle(props.task.title);
       return;
     } else {

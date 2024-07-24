@@ -10,9 +10,11 @@ import { todoPostgresRouter } from "./routers/todo-postgres";
 
 const app = express();
 
+const allowedOrigins = ["https://todoapp-sand.vercel.app", "http://localhost:3000"];
+
 app.use(
   cors({
-    origin: "https://todoapp-sand.vercel.app",
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type"],
   })
