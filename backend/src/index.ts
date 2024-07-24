@@ -12,7 +12,9 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://todoapp-sand.vercel.app/",
+    origin: "https://todoapp-sand.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
   })
 );
 

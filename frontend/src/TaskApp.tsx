@@ -26,7 +26,7 @@ export const TaskApp = () => {
     if (!shouldRerender) {
       (async () => {
         try {
-          const res = await fetch(`https://todo-app-backend-brown-ten.vercel.app/postgres`);
+          const res = await fetch(`https://todo-app-be-two.vercel.app/postgres`);
 
           if (!res.ok) {
             setError(new Error(`Failed to load tasks from server. Please try again later.`));
