@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://todoapp-sand.vercel.app/",
+    origin: "https://todo-app-be-two.vercel.app/",
   })
 );
 
