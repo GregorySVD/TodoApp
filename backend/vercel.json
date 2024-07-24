@@ -9,12 +9,12 @@
   ],
   "routes": [
     {
-      "src": "/*(.*)",
+      "src": "/*",
       "dest": "dist/index.js",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "*",
+        "Access-Control-Allow-Origin": "https://todoapp-sand.vercel.app",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type"
       }
     }
