@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./TaskApp.css";
 import { Spinner } from "./components/common/Spinner/Spinner";
 import { NoTaskLayout } from "./components/layouts/NoTaskLayout/NoTaskLayout";
@@ -14,6 +14,8 @@ import { FormValidationContextProvider } from "./context/FormValidationContext";
 import { NavBar } from "./components/layouts/NavMenu/NavBar";
 import { useTheme } from "./context/ThemeContext";
 
+import { BACKEND_URL } from "./utils/backend_URL";
+
 export const TaskApp = () => {
   const { shouldRerender, setShouldRerender } = useTaskListRerenderContext();
   const { error, setError, clearError } = useErrorContext();
@@ -26,7 +28,7 @@ export const TaskApp = () => {
     if (!shouldRerender) {
       (async () => {
         try {
-          const res = await fetch(`https://todo-app-be-two.vercel.app/postgres`);
+          const res = await fetch(`${BACKEND_URL}/postgres`);
 
           if (!res.ok) {
             setError(new Error(`Failed to load tasks from server. Please try again later.`));
