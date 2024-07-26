@@ -12,20 +12,21 @@ const app = express();
 
 const allowedOrigins = ["https://app-todo-fe.vercel.app", "http://localhost:3000", "https://app-todo-fe.vercel.app/"];
 
-app.use;
-cors({
-  origin: (origin, callback) => {
-    console.log("Checking origin:", origin);
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: ["Content-Type"],
-  credentials: true,
-});
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      console.log("Checking origin:", origin);
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
