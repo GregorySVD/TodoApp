@@ -12,6 +12,7 @@ import { useOpenAddTaskFormContext } from "../../context/OpenAddTaskFormContext"
 import { AddTaskFormOpener } from "./AddTaskFormOpener/AddTaskFormOpener";
 import { useTaskListRerenderContext } from "../../context/TaskListRerenderContext";
 import { toast } from "sonner";
+import { BACKEND_URL } from "../../utils/backend_URL";
 
 export const AddTaskForm = () => {
   const [loading, setLoading] = useState(false);
@@ -35,7 +36,7 @@ export const AddTaskForm = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:3001/todo`, {
+      const res = await fetch(`${BACKEND_URL}/postgres`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

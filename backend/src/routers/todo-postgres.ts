@@ -13,14 +13,14 @@ todoPostgresRouter
       throw new ValidationError("List of tasks cannot be found, please try again later");
     }
   })
-  .delete("/", async (req: Request, res: Response) => {
-    try {
-      await TodoRecord.DeleteAllTodos();
-    } catch (err) {
-      throw new ValidationError("Cannot delete all tasks at this moment");
-    }
-    res.end();
-  })
+  // .delete("/", async (req: Request, res: Response) => {
+  //   try {
+  //     await TodoRecord.DeleteAllTodos();
+  //   } catch (err) {
+  //     throw new ValidationError("Cannot delete all tasks at this moment");
+  //   }
+  //   res.end();
+  // })
 
   .get("/:id", async (req: Request, res: Response) => {
     try {
