@@ -1,5 +1,5 @@
-import { pool } from "../src/utils/db";
-import { TodoEntity } from "../src/types";
+import { pool } from "../utils/db";
+import { TodoEntity } from "../types";
 import { TodoRecord } from "../records/todo.record";
 
 const mockTodo: TodoEntity = {
@@ -13,6 +13,7 @@ const mockTodoWithId: TodoEntity = {
 afterAll(async () => {
   await pool.end();
 });
+
 test("TodoRecord returns data from database from one entry", async () => {
   const insertedTodo = await new TodoRecord(mockTodoWithId);
   expect(insertedTodo).toBeDefined();
