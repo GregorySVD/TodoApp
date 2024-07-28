@@ -184,6 +184,13 @@ test("Can list all todos from PostgreSQL", async () => {
   await CleanupPostgresSQLMockData(id2);
 });
 
+test("Can delete all todos from PostgreSQL", async () => {
+  await TodoRecord.DeleteAllTodosPostgres();
+  const result = await TodoRecord.ListAllPostgres();
+
+  expect(result).toEqual([]);
+});
+
 //end of pool
 
 afterAll(async () => {

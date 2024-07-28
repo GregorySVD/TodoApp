@@ -42,4 +42,11 @@ todoPostgresRouter
     } catch (err) {
       throw new ValidationError("Cannot insert task with given id");
     }
+  })
+  .delete("/", async (req: Request, res: Response) => {
+    try {
+      await TodoRecord.DeleteAllTodosPostgres();
+    } catch (err) {
+      throw new ValidationError(err.message);
+    }
   });

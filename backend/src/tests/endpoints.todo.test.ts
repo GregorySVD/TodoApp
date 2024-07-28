@@ -36,10 +36,14 @@ test("TodoRecord returns null from database from unexisting entry", async () => 
   expect(todo).toBeNull();
 });
 test("TodoRecord returns list of records from database", async () => {
+  const insertedTodo = await new TodoRecord(mockTodo);
+  const intertedTodoId = await insertedTodo.insertNewTodo();
   const todoList = await TodoRecord.ListAll();
+
   expect(todoList).toBeDefined();
   expect(todoList).not.toEqual([]);
   expect(todoList[0]).toBeDefined();
+  (await TodoRecord.getOneTodo(intertedTodoId)).deleteSelectedTodo();
 });
 
 test("TodoRecord.insert returns UUID, description is  null, isDone=false and date is defined", async () => {

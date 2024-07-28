@@ -83,6 +83,7 @@ export class TodoRecord implements TodoEntity {
     }
   }
 
+  //Deletes one tasks
   async deleteSelectedTodo(): Promise<void> {
     try {
       await pool.execute("DELETE FROM `todos` WHERE `id` = :id", {
@@ -92,6 +93,7 @@ export class TodoRecord implements TodoEntity {
       throw new ValidationError("Cannot delete task with given id");
     }
   }
+  //Updates title of todo by id
   async updateTitle(title: string): Promise<void> {
     try {
       await pool.execute("UPDATE `todos` SET `title` = :title WHERE `id` = :id", {
@@ -102,6 +104,7 @@ export class TodoRecord implements TodoEntity {
       throw new ValidationError("Cannot update title of task. Try again later");
     }
   }
+  //Finds todo by id in string, returns TodoRecord of null
   static async getOneTodo(id: string): Promise<TodoRecord | null> {
     try {
       const [result] = (await pool.execute("SELECT * FROM `todos` WHERE `id` = :id", {
@@ -112,7 +115,7 @@ export class TodoRecord implements TodoEntity {
       throw new ValidationError("Cannot get task with given id.");
     }
   }
-
+  //Deletes all tasks with .done === true
   static async DeleteAllDoneTodos(): Promise<void> {
     try {
       const [results] = (await await pool.execute("SELECT * FROM `todos` WHERE `isDone` = :isDone", {
@@ -126,7 +129,7 @@ export class TodoRecord implements TodoEntity {
       throw new ValidationError(err);
     }
   }
-
+  //Deletes all todos from DB
   static async DeleteAllTodos(): Promise<void> {
     try {
       await pool.execute("DELETE FROM `todos`");
@@ -134,6 +137,7 @@ export class TodoRecord implements TodoEntity {
       throw new ValidationError(err);
     }
   }
+  //Returns [] of TodoRecordResults
   static async ListAll(): Promise<TodoRecord[]> {
     try {
       const [results] = (await pool.execute("SELECT * FROM `todos` ORDER BY `date` ASC")) as TodoRecordResults;
@@ -157,6 +161,7 @@ export class TodoRecord implements TodoEntity {
       throw new ValidationError("Cannot get list of Tasks from server");
     }
   }
+  //Finds todos by id, returns as TodoRecord if successful
   static async getOneTodoPostgres(id: string): Promise<TodoRecord | null> {
     try {
       const values = [id];
@@ -174,6 +179,7 @@ export class TodoRecord implements TodoEntity {
       throw new ValidationError("Cannot get task with given id.");
     }
   }
+  //Insert new todo<TodoRecord> returns id in string if successful
   async insertNewTodoPostgres(): Promise<string> {
     try {
       if (!this.id) {
@@ -197,6 +203,14 @@ export class TodoRecord implements TodoEntity {
     } catch (err) {
       console.error("Database query error:", err);
       throw new ValidationError("Cannot insert task. Try again later");
+    }
+  }
+  //Deletes all todos in DB
+  static async DeleteAllTodosPostgres(): Promise<void> {
+    try {
+      await poolPostgres.query("DELETE FROM todos");
+    } catch (err) {
+      throw new ValidationError(err);
     }
   }
 }
