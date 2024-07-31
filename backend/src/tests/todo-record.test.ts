@@ -169,6 +169,13 @@ test("Can get a todo by id from PostgreSQL", async () => {
   await CleanupPostgresSQLMockData(id);
 });
 
+test("Can delete all todos from PostgreSQL", async () => {
+  await TodoRecord.DeleteAllTodosPostgres();
+  const result = await TodoRecord.ListAllPostgres();
+
+  expect(result).toEqual([]);
+});
+
 test("Can list all todos from PostgreSQL", async () => {
   const todoRecord1 = new TodoRecord(mockTodo);
   const id1 = await todoRecord1.insertNewTodoPostgres();
@@ -183,14 +190,6 @@ test("Can list all todos from PostgreSQL", async () => {
   await CleanupPostgresSQLMockData(id1);
   await CleanupPostgresSQLMockData(id2);
 });
-
-test("Can delete all todos from PostgreSQL", async () => {
-  await TodoRecord.DeleteAllTodosPostgres();
-  const result = await TodoRecord.ListAllPostgres();
-
-  expect(result).toEqual([]);
-});
-
 //end of pool
 
 afterAll(async () => {
