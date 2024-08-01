@@ -63,7 +63,7 @@ export const SingleTaskRow = (props: Props) => {
 
   const switchDoneStatus = async (taskId: string | undefined) => {
     try {
-      const res = await fetch(`${BACKEND_URL}/switch/${taskId}`, {
+      const res = await fetch(`${BACKEND_URL_POSTGRES}switch/${taskId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
