@@ -10,6 +10,7 @@ import { ErrorPage } from "../../layouts/ErrorPage/ErrorPage";
 import { toast } from "sonner";
 import { EditTask } from "../../EditTask/EditTask";
 import { useTheme } from "../../../context/ThemeContext";
+import { BACKEND_URL } from "src/utils/backend_URL";
 
 interface Props {
   task: TodoEntity;
@@ -30,7 +31,7 @@ export const SingleTaskRow = (props: Props) => {
 
   const updateTaskTitle = async (taskId: string | undefined) => {
     if (editedTitle.length < 3 || editedTitle.length > 150) {
-      await toast.error("An error occurred while updating task title: Title needs to be at least 3 characters long ❌");
+      toast.error("An error occurred while updating task title: Title needs to be at least 3 characters long ❌");
       setEditedTitle(props.task.title);
       return;
     } else {
@@ -45,52 +46,52 @@ export const SingleTaskRow = (props: Props) => {
           }),
         });
         if (!res.ok) {
-          await setError(new Error(`An error occurred while updating task title. Try again later.`));
-          await toast.error("An error occurred while updating task title. Try again later.");
+          setError(new Error(`An error occurred while updating task title. Try again later.`));
+          toast.error("An error occurred while updating task title. Try again later.");
         } else {
-          await setShouldRerender(true);
-          await toast.success("Task title updated! ✅");
+          setShouldRerender(true);
+          toast.success("Task title updated! ✅");
           setEditedTitle(editedTitle);
           setModalTaskEditor(!modalTaskEditor);
         }
       } catch (err) {
-        await setError(new Error(`An error occurred while searching for this task. Try again later.`));
-        await toast.error("Error while searching for this tasks");
+        setError(new Error(`An error occurred while searching for this task. Try again later.`));
+        toast.error("Error while searching for this tasks");
       }
     }
   };
 
   const switchDoneStatus = async (taskId: string | undefined) => {
     try {
-      const res = await fetch(`http://localhost:3001/todo/switch/${taskId}`, {
+      const res = await fetch(`${BACKEND_URL}/switch/${taskId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
       });
       if (!res.ok) {
-        await setError(new Error(`An error occurred while updating task status. Try again later.`));
-        await toast.error("An error occurred while updating task status.");
+        setError(new Error(`An error occurred while updating task status. Try again later.`));
+        toast.error("An error occurred while updating task status.");
       } else {
-        await setShouldRerender(true);
-        await toast.success("Task status updated");
+        setShouldRerender(true);
+        toast.success("Task status updated");
       }
     } catch (err) {
-      await setError(new Error(`An error occurred while updating task status. Try again later.`));
-      await toast.error("An error occurred while updating task status.");
+      setError(new Error(`An error occurred while updating task status. Try again later.`));
+      toast.error("An error occurred while updating task status.");
     }
   };
 
   const toggleModal = async () => {
-    await setModal(!modal);
+    setModal(!modal);
   };
   const toggleModalTaskEditor = async () => {
-    await setModalTaskEditor(!modalTaskEditor);
+    setModalTaskEditor(!modalTaskEditor);
   };
 
   const handleDeleteTask = async (taskId: string | undefined) => {
     try {
-      const res = await fetch(`http://localhost:3001/todo/${taskId}`, {
+      const res = await fetch(`${BACKEND_URL}/${taskId}`, {
         method: "DELETE",
       });
       if (!res.ok) {
