@@ -10,7 +10,7 @@ import { ErrorPage } from "../../layouts/ErrorPage/ErrorPage";
 import { toast } from "sonner";
 import { EditTask } from "../../EditTask/EditTask";
 import { useTheme } from "../../../context/ThemeContext";
-import { BACKEND_URL } from "src/utils/backend_URL";
+import { BACKEND_URL, BACKEND_URL_POSTGRES } from "src/utils/backend_URL";
 
 interface Props {
   task: TodoEntity;
@@ -91,7 +91,7 @@ export const SingleTaskRow = (props: Props) => {
 
   const handleDeleteTask = async (taskId: string | undefined) => {
     try {
-      const res = await fetch(`${BACKEND_URL}/${taskId}`, {
+      const res = await fetch(`${BACKEND_URL_POSTGRES}${taskId}`, {
         method: "DELETE",
       });
       if (!res.ok) {

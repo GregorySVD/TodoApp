@@ -11,8 +11,8 @@
     "build": "npx tsc",
     "type-check": "tsc -p tsconfig.json --noEmit",
     "dev": "tsnd src/index.ts",
-    "dev-vercel": "npm run build & vercel & vercel dev",
-    "vercel-prod": "npm run build & vercel --prod"
+    "dev-vercel": "npm run build && vercel && vercel dev",
+    "vercel-prod": "npm run build && vercel --prod"
   },
   "keywords": [],
   "author": "",
