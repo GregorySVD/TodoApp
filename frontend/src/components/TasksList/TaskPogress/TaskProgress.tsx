@@ -11,7 +11,8 @@ export const TaskProgress = () => {
 
   useEffect(() => {
     setAllTasksCounter(tasksList.length);
-    const countTasksDone = tasksList.filter(task => task.isDone === true);
+    const countTasksDone = tasksList.filter(task => task.is_done === true);
+
     setTaskDoneCounter(countTasksDone.length);
   }, [tasksList]);
 

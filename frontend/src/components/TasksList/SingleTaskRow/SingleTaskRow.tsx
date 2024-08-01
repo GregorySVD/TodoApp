@@ -10,7 +10,7 @@ import { ErrorPage } from "../../layouts/ErrorPage/ErrorPage";
 import { toast } from "sonner";
 import { EditTask } from "../../EditTask/EditTask";
 import { useTheme } from "../../../context/ThemeContext";
-import { BACKEND_URL, BACKEND_URL_POSTGRES } from "src/utils/backend_URL";
+import { BACKEND_URL_POSTGRES } from "src/utils/backend_URL";
 import { TodoPostgresEntity } from "../../../types/postgres.todo.entity";
 
 interface Props {
@@ -114,7 +114,7 @@ export const SingleTaskRow = (props: Props) => {
         <div className="SingleTaskRow__container">
           <div className="SingleTaskRow_title overflow-hidden">{props.task.title}</div>
           <div className="SingleTaskRow__actions">
-            <TaskDoneStatusCheckbox status={props.task.isDone} onChange={() => switchDoneStatus(props.task.id)} />
+            <TaskDoneStatusCheckbox status={props.task.is_done} onChange={() => switchDoneStatus(props.task.id)} />
             <OneTaskRemoval onClick={() => toggleModal()} />
             <EditTask onClick={() => toggleModalTaskEditor()} task={props.task} />
           </div>
