@@ -2,6 +2,6 @@ export interface TodoPostgresEntity {
   id?: string;
   title: string;
   description?: string;
-  isDone?: boolean;
+  is_done?: boolean;
   date?: string;
 }

@@ -53,7 +53,7 @@ todoPostgresRouter
     }
     try {
       await task.switchIsDoneStatePostgres();
-      res.json({ isDone: task.isDone });
+      res.json({ is_done: task.is_done });
     } catch (err) {
       res.status(500).json({
         error: `Error updating todo with id ${req.params.id}, try again later`,

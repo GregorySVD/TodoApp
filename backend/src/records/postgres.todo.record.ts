@@ -13,7 +13,7 @@ export class PostgresTodoRecord implements TodoPostgresEntity {
   public id?: string;
   public title: string;
   public date?: string;
-  public isDone: boolean;
+  public is_done: boolean;
   public description?: string;
 
   constructor(obj: TodoPostgresEntity) {
@@ -23,7 +23,7 @@ export class PostgresTodoRecord implements TodoPostgresEntity {
     this.id = obj.id || uuid();
     this.title = obj.title;
     this.date = obj.date;
-    this.isDone = obj.isDone !== undefined ? obj.isDone : false;
+    this.is_done = obj.is_done !== undefined ? obj.is_done : false;
 
     if (obj.description === null || obj.description === undefined) {
       this.description = null;
@@ -72,8 +72,8 @@ export class PostgresTodoRecord implements TodoPostgresEntity {
       if (!this.id) {
         this.id = uuid();
       }
-      if (this.isDone === undefined) {
-        this.isDone = false;
+      if (this.is_done === undefined) {
+        this.is_done = false;
       }
       if (!this.date) {
         this.date = getCurrentFormattedDatePostgres();
@@ -82,7 +82,7 @@ export class PostgresTodoRecord implements TodoPostgresEntity {
         this.description = null;
       }
       const query = `INSERT INTO todos (id, title, date, is_done, description) VALUES ($1, $2, $3, $4, $5)`;
-      const values = [this.id, this.title, this.date, this.isDone, this.description];
+      const values = [this.id, this.title, this.date, this.is_done, this.description];
 
       await poolPostgres.query(query, values);
 
@@ -111,9 +111,9 @@ export class PostgresTodoRecord implements TodoPostgresEntity {
       `;
       const values = [this.id];
       const result = await poolPostgres.query(query, values);
-      this.isDone = result.rows[0].is_done;
+      this.is_done = result.rows[0].is_done;
 
-      return this.isDone;
+      return this.is_done;
     } catch (err) {
       console.error("Error in switchIsDoneStatePostgres:", err);
       throw new ValidationError("Cannot switch done state of this task. Try again later");

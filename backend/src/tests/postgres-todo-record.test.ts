@@ -146,13 +146,13 @@ test("Can change todo done status", async () => {
   const foundedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
 
   expect(foundedTodo).toBeDefined();
-  expect(foundedTodo.isDone).toBeFalsy();
+  expect(foundedTodo.is_done).toBeFalsy();
 
   await foundedTodo.switchIsDoneStatePostgres();
-  expect(foundedTodo.isDone).toBeTruthy();
+  expect(foundedTodo.is_done).toBeTruthy();
 
   const updatedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
-  expect(updatedTodo.isDone).toBeFalsy();
+  expect(updatedTodo.is_done).toBeFalsy();
 
   await CleanupPostgresSQLMockData(insertedTodoId);
 });
