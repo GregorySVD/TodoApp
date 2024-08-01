@@ -4,9 +4,6 @@ import { TodoEntity } from "../types/index";
 import { ValidationError } from "../utils/errors";
 import { pool } from "../utils/db";
 import { getCurrentFormattedDate } from "../utils/getCurrentFormattedDate";
-import { response } from "express";
-import { poolPostgres } from "../utils/dbPostgres";
-import { getCurrentFormattedDatePostgres } from "../utils/getCurrentFormettedDatePostgres";
 
 // pool always returns [[result], FieldPacket[]]
 
