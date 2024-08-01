@@ -45,4 +45,19 @@ todoPostgresRouter
     } catch (err) {
       throw new ValidationError("Cannot insert task with given id");
     }
+  })
+  .patch("/switch/:id", async (req: Request, res: Response) => {
+    const task = await PostgresTodoRecord.getOneTodoPostgres(req.params.id);
+    if (!task) {
+      res.status(404).json({ error: `Task with id ${req.params.id} does not exist` });
+    }
+    try {
+      await task.switchIsDoneStatePostgres();
+      res.json({ isDone: task.isDone });
+    } catch (err) {
+      res.status(500).json({
+        error: `Error updating todo with id ${req.params.id}, try again later`,
+      });
+    }
+    res.end();
   });
