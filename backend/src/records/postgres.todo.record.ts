@@ -93,9 +93,9 @@ export class PostgresTodoRecord implements TodoPostgresEntity {
     }
   }
   //Deletes todos with done status
-  static async DeleteAllDoneTodosPostgres(): Promise<void> {
+  static async DeleteAllDoneTodosPostgres(): Promise<any> {
     try {
-      await poolPostgres.query("DELETE FROM todos WHERE is_done = $1", [1]);
+      return await poolPostgres.query("DELETE FROM todos WHERE is_done = true;");
     } catch (err) {
       throw new ValidationError(err);
     }

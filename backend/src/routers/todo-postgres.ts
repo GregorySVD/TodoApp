@@ -23,6 +23,19 @@ todoPostgresRouter
     }
     res.end();
   })
+
+  .delete("/done", async (req, res) => {
+    try {
+      const result = await PostgresTodoRecord.DeleteAllDoneTodosPostgres();
+
+      if (result.rowCount === 0) {
+        return res.status(404).json({ message: "No tasks found to delete." });
+      }
+      res.status(204).end();
+    } catch (e) {
+      res.status(500).json({ error: "Cannot delete these tasks, try again later" });
+    }
+  })
   .delete("/:id", async (req: Request, res: Response) => {})
 
   .get("/:id", async (req: Request, res: Response) => {
