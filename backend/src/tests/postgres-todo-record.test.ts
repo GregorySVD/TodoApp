@@ -1,182 +1,158 @@
-import { TodoEntity } from "../types";
-import { TodoRecord } from "../records/todo.record";
-import { pool } from "../utils/db";
-import { poolPostgres } from "../utils/dbPostgres";
-import { PostgresTodoRecord } from "../records/postgres.todo.record";
 import { TodoPostgresEntity } from "todo/todo.postgres.entity";
+import { PostgresTodoRecord } from "../records/postgres.todo.record";
+import { poolPostgres } from "../utils/dbPostgres";
 
-//Mock
+// Mock data
 const mockTodo: TodoPostgresEntity = {
   title: "Testing Jest",
   description: "this is mock task",
 };
 
-//Insert new Todo
-
+// Helper function to insert a mock todo
 async function insertNewMockTodo(): Promise<string> {
   const todoRecord = new PostgresTodoRecord(mockTodo);
   const id = await todoRecord.insertNewTodoPostgres();
   return id;
 }
 
-test("Can build TodoRecord", async () => {
-  const todoRecord = new PostgresTodoRecord(mockTodo);
-
-  expect(todoRecord.title).toBe("Testing Jest");
-  expect(todoRecord.description).toBe("this is mock task");
-});
-//CLEAN UP PostgresSQL
-async function CleanupPostgresSQLMockData(id: string) {
+// Cleanup function
+async function cleanupPostgresSQLMockData(id: string) {
   await poolPostgres.query("DELETE FROM todos WHERE id = $1", [id]);
 }
 
-//PostgresSQL tests
-test("Can build TodoRecord", async () => {
-  const todoRecord = new PostgresTodoRecord(mockTodo);
-  expect(todoRecord.title).toBe("Testing Jest");
-  expect(todoRecord.description).toBe("this is mock task");
-});
-// Title Validation
-test("Validates too short title for task todo", async () => {
-  const shortTitle = "X".repeat(2);
-  expect(
-    () =>
-      new PostgresTodoRecord({
-        ...mockTodo,
-        title: shortTitle,
-      })
-  ).toThrow("Title has to be between 3 and 150 characters long");
-});
+// Test suite for PostgresTodoRecord
+describe("PostgresTodoRecord", () => {
+  let insertedTodoId: string;
 
-test("Validates too long title for task todo", async () => {
-  const longTitle = "X".repeat(151);
-  expect(
-    () =>
-      new PostgresTodoRecord({
-        ...mockTodo,
-        title: longTitle,
-      })
-  ).toThrow("Title has to be between 3 and 150 characters long");
-});
-
-// Description Validation
-test("Description is null, do not throw error", async () => {
-  expect(
-    () =>
-      new PostgresTodoRecord({
-        title: "Description is null",
-      })
-  ).not.toThrow("Description has to be between 3 and 255 characters long");
-});
-
-test("Validates too long description for task todo", async () => {
-  const longDescription = "X".repeat(256);
-  expect(
-    () =>
-      new PostgresTodoRecord({
-        ...mockTodo,
-        description: longDescription,
-      })
-  ).toThrow("Description has to be between 3 and 255 characters long");
-});
-
-test("Validates too short description for task todo", async () => {
-  const shortDescription = "X".repeat(2);
-  expect(
-    () =>
-      new PostgresTodoRecord({
-        ...mockTodo,
-        description: shortDescription,
-      })
-  ).toThrow("Description has to be between 3 and 255 characters long");
-});
-
-test("No description returns null", async () => {
-  const todo = new PostgresTodoRecord({
-    ...mockTodo,
-    description: null,
+  beforeEach(async () => {
+    insertedTodoId = await insertNewMockTodo();
   });
-  expect(todo.description).toBeNull();
-});
 
-// PostgreSQL CRUD tests
+  afterEach(async () => {
+    await cleanupPostgresSQLMockData(insertedTodoId);
+  });
 
-test("Can insert new todo into PostgreSQL", async () => {
-  const todoRecord = new PostgresTodoRecord(mockTodo);
-  const id = await todoRecord.insertNewTodoPostgres();
-  expect(id).toBeDefined();
+  afterAll(async () => {
+    await poolPostgres.end();
+  });
 
-  await CleanupPostgresSQLMockData(id);
-});
-test("Can get a todo by id from PostgreSQL", async () => {
-  const todoRecord = new PostgresTodoRecord(mockTodo);
-  const id = await todoRecord.insertNewTodoPostgres();
-  const fetchedTodo = await PostgresTodoRecord.getOneTodoPostgres(id);
-  expect(fetchedTodo).not.toBeNull();
-  expect(fetchedTodo.title).toBe(mockTodo.title);
+  test("Can build TodoRecord", () => {
+    const todoRecord = new PostgresTodoRecord(mockTodo);
+    expect(todoRecord.title).toBe("Testing Jest");
+    expect(todoRecord.description).toBe("this is mock task");
+  });
 
-  await CleanupPostgresSQLMockData(id);
-});
+  test("Can insert new todo into PostgreSQL", async () => {
+    const todoRecord = new PostgresTodoRecord(mockTodo);
+    const id = await todoRecord.insertNewTodoPostgres();
+    expect(id).toBeDefined();
+    await cleanupPostgresSQLMockData(id);
+  });
 
-test("Can delete all todos from PostgreSQL", async () => {
-  await PostgresTodoRecord.deleteAllTodosPostgres();
-  const result = await PostgresTodoRecord.ListAllPostgres();
+  test("Can get a todo by id from PostgreSQL", async () => {
+    const fetchedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
+    expect(fetchedTodo).not.toBeNull();
+    expect(fetchedTodo.title).toBe(mockTodo.title);
+  });
 
-  expect(result).toEqual([]);
-});
+  test("Can list all todos from PostgreSQL", async () => {
+    const todoRecord1 = new PostgresTodoRecord(mockTodo);
+    const id1 = await todoRecord1.insertNewTodoPostgres();
 
-test("Can list all todos from PostgreSQL", async () => {
-  const todoRecord1 = new PostgresTodoRecord(mockTodo);
-  const id1 = await todoRecord1.insertNewTodoPostgres();
+    const todoRecord2 = new PostgresTodoRecord({ ...mockTodo, title: "Another Task" });
+    const id2 = await todoRecord2.insertNewTodoPostgres();
 
-  const todoRecord2 = new PostgresTodoRecord({ ...mockTodo, title: "Another Task" });
-  const id2 = await todoRecord2.insertNewTodoPostgres();
+    const todos = await PostgresTodoRecord.ListAllPostgres();
+    expect(todos.length).toBeGreaterThanOrEqual(2);
 
-  const todos = await PostgresTodoRecord.ListAllPostgres();
-  expect(todos.length).toBeGreaterThanOrEqual(2);
+    // Cleanup
+    await cleanupPostgresSQLMockData(id1);
+    await cleanupPostgresSQLMockData(id2);
+  });
 
-  // Cleanup
-  await CleanupPostgresSQLMockData(id1);
-  await CleanupPostgresSQLMockData(id2);
-});
+  test("Can change todo done status", async () => {
+    const foundedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
+    expect(foundedTodo).toBeDefined();
+    expect(foundedTodo.is_done).toBeFalsy();
 
-test("Can change todo done status", async () => {
-  const insertedTodoId = await insertNewMockTodo();
-  const foundedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
+    await foundedTodo.switchIsDoneStatePostgres();
+    const updatedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
+    expect(updatedTodo.is_done).toBeTruthy();
+  });
 
-  expect(foundedTodo).toBeDefined();
-  expect(foundedTodo.is_done).toBeFalsy();
+  test("getOneTodoPostgres returns an instance of PostgresTodoRecord", async () => {
+    const foundedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
+    expect(foundedTodo).toBeDefined();
+    expect(foundedTodo).toBeInstanceOf(PostgresTodoRecord);
+  });
 
-  await foundedTodo.switchIsDoneStatePostgres();
-  expect(foundedTodo.is_done).toBeTruthy();
+  test("Can delete a selected todo from PostgreSQL", async () => {
+    const foundedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
+    expect(foundedTodo).toBeDefined();
 
-  const updatedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
-  expect(updatedTodo.is_done).toBeFalsy();
+    await foundedTodo.deleteSelectedTodo();
 
-  await CleanupPostgresSQLMockData(insertedTodoId);
-});
+    const deletedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
+    expect(deletedTodo).toBeNull();
+  });
 
-test("getOneTodoPostgres returns an instance of PostgresTodoRecord", async () => {
-  const insertedTodoId = await insertNewMockTodo();
-  const foundedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
+  test("Can update a title for selected todo from PostgreSQL", async () => {
+    const foundedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
+    expect(foundedTodo).toBeDefined();
 
-  expect(foundedTodo).toBeDefined();
-  expect(foundedTodo).toBeInstanceOf(PostgresTodoRecord);
+    const newTitle = "Updated Title";
+    await foundedTodo.updateTitle(newTitle);
 
-  await CleanupPostgresSQLMockData(insertedTodoId);
-});
-test("Can delete a selected todo from PostgreSQL", async () => {
-  const insertedTodoId = await insertNewMockTodo();
-  const foundedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
-  expect(foundedTodo).toBeDefined();
+    const updatedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
+    expect(updatedTodo.title).toBe(newTitle);
+  });
 
-  await foundedTodo.deleteSelectedTodo();
+  test("Can delete all todos from PostgreSQL", async () => {
+    await PostgresTodoRecord.deleteAllTodosPostgres();
+    const result = await PostgresTodoRecord.ListAllPostgres();
+    expect(result).toEqual([]);
+  });
 
-  const deletedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
-  expect(deletedTodo).toBeNull();
-});
+  describe("Title Validation", () => {
+    test("Validates too short title for task todo", () => {
+      const shortTitle = "X".repeat(2);
+      expect(() => new PostgresTodoRecord({ ...mockTodo, title: shortTitle })).toThrow(
+        "Title has to be between 3 and 150 characters long"
+      );
+    });
 
-//end of pool
-afterAll(async () => {
-  await poolPostgres.end();
+    test("Validates too long title for task todo", () => {
+      const longTitle = "X".repeat(151);
+      expect(() => new PostgresTodoRecord({ ...mockTodo, title: longTitle })).toThrow(
+        "Title has to be between 3 and 150 characters long"
+      );
+    });
+  });
+
+  describe("Description Validation", () => {
+    test("Description is null, do not throw error", () => {
+      expect(() => new PostgresTodoRecord({ title: "Description is null" })).not.toThrow(
+        "Description has to be between 3 and 255 characters long"
+      );
+    });
+
+    test("Validates too long description for task todo", () => {
+      const longDescription = "X".repeat(256);
+      expect(() => new PostgresTodoRecord({ ...mockTodo, description: longDescription })).toThrow(
+        "Description has to be between 3 and 255 characters long"
+      );
+    });
+
+    test("Validates too short description for task todo", () => {
+      const shortDescription = "X".repeat(2);
+      expect(() => new PostgresTodoRecord({ ...mockTodo, description: shortDescription })).toThrow(
+        "Description has to be between 3 and 255 characters long"
+      );
+    });
+
+    test("No description returns null", () => {
+      const todo = new PostgresTodoRecord({ ...mockTodo, description: null });
+      expect(todo.description).toBeNull();
+    });
+  });
 });

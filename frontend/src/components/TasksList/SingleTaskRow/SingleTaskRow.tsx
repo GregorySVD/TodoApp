@@ -36,7 +36,7 @@ export const SingleTaskRow = (props: Props) => {
       return;
     } else {
       try {
-        const res = await fetch(`http://localhost:3001/todo/updateTitle/${taskId}`, {
+        const res = await fetch(`${BACKEND_URL_POSTGRES}updateTitle/${taskId}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -95,15 +95,15 @@ export const SingleTaskRow = (props: Props) => {
         method: "DELETE",
       });
       if (!res.ok) {
-        await setError(new Error(`There was an error deleting ${taskId} task. Try again later.`));
-        await toast.error("Error while deleting task :(");
+        setError(new Error(`There was an error deleting ${taskId} task. Try again later.`));
+        toast.error("Error while deleting task :(");
       } else {
         setShouldRerender(true);
-        await toast.success("Task deleted successfully!");
+        toast.success("Task deleted successfully!");
       }
     } catch (error) {
-      await setError(new Error(`There was an error deleting ${taskId} task. Try again later.`));
-      await toast.error("Error while deleting task :(");
+      setError(new Error(`There was an error deleting ${taskId} task. Try again later.`));
+      toast.error("Error while deleting task :(");
     }
     if (error) return <ErrorPage error={error} />;
   };

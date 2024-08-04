@@ -111,6 +111,17 @@ export class PostgresTodoRecord implements TodoPostgresEntity {
       throw new ValidationError("Cannot switch done state of this task. Try again later");
     }
   }
+  // Updates title of todo by id
+  async updateTitle(title: string): Promise<void> {
+    try {
+      if (!title || title.length < 3 || title.length > 150) {
+        throw new ValidationError("Title has to be between 3 and 150 characters long");
+      }
+      await poolPostgres.query("UPDATE todos SET title = $1 WHERE id = $2", [title, this.id]);
+    } catch (err) {
+      throw new ValidationError("Cannot update title of task. Try again later");
+    }
+  }
   //Deletes one tasks
   async deleteSelectedTodo(): Promise<void> {
     try {
