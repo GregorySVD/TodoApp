@@ -4,13 +4,10 @@ import { TodoEntity } from "../types/index";
 import { ValidationError } from "../utils/errors";
 import { pool } from "../utils/db";
 import { getCurrentFormattedDate } from "../utils/getCurrentFormattedDate";
-import { response } from "express";
-import { poolPostgres } from "../utils/dbPostgres";
 
 // pool always returns [[result], FieldPacket[]]
 
 type TodoRecordResults = [TodoRecord[], FieldPacket[]];
-type TodoRecordResultsPostgres = [TodoRecord[], FieldPacket[]];
 
 export class TodoRecord implements TodoEntity {
   public id?: string;
@@ -37,7 +34,7 @@ export class TodoRecord implements TodoEntity {
     }
   }
 
-  async switchIsDoneState(): Promise<number> {
+  async switchIsDoneState(): Promise<boolean | number> {
     try {
       await pool.execute(
         "UPDATE `todos` SET `isDone` = CASE WHEN `isDone` = 0 THEN 1 WHEN `isDone` = 1 THEN 0 END WHERE `id` = :id;",
@@ -83,6 +80,7 @@ export class TodoRecord implements TodoEntity {
     }
   }
 
+  //Deletes one tasks
   async deleteSelectedTodo(): Promise<void> {
     try {
       await pool.execute("DELETE FROM `todos` WHERE `id` = :id", {
@@ -92,6 +90,7 @@ export class TodoRecord implements TodoEntity {
       throw new ValidationError("Cannot delete task with given id");
     }
   }
+  //Updates title of todo by id
   async updateTitle(title: string): Promise<void> {
     try {
       await pool.execute("UPDATE `todos` SET `title` = :title WHERE `id` = :id", {
@@ -102,6 +101,7 @@ export class TodoRecord implements TodoEntity {
       throw new ValidationError("Cannot update title of task. Try again later");
     }
   }
+  //Finds todo by id in string, returns TodoRecord of null
   static async getOneTodo(id: string): Promise<TodoRecord | null> {
     try {
       const [result] = (await pool.execute("SELECT * FROM `todos` WHERE `id` = :id", {
@@ -112,7 +112,7 @@ export class TodoRecord implements TodoEntity {
       throw new ValidationError("Cannot get task with given id.");
     }
   }
-
+  //Deletes all tasks with .done === true
   static async DeleteAllDoneTodos(): Promise<void> {
     try {
       const [results] = (await await pool.execute("SELECT * FROM `todos` WHERE `isDone` = :isDone", {
@@ -126,7 +126,7 @@ export class TodoRecord implements TodoEntity {
       throw new ValidationError(err);
     }
   }
-
+  //Deletes all todos from DB
   static async DeleteAllTodos(): Promise<void> {
     try {
       await pool.execute("DELETE FROM `todos`");
@@ -134,69 +134,13 @@ export class TodoRecord implements TodoEntity {
       throw new ValidationError(err);
     }
   }
+  //Returns [] of TodoRecordResults
   static async ListAll(): Promise<TodoRecord[]> {
     try {
       const [results] = (await pool.execute("SELECT * FROM `todos` ORDER BY `date` ASC")) as TodoRecordResults;
       return results.map(obj => new TodoRecord(obj));
     } catch (err) {
       throw new ValidationError("Cannot get list of Tasks from server");
-    }
-  }
-
-  ///POSTGRES VERSION
-
-  static async ListAllPostgres(): Promise<TodoRecord[]> {
-    try {
-      const client = await poolPostgres.connect();
-      const result = await poolPostgres.query("SELECT * FROM todos ORDER BY date ASC");
-      const results = result.rows as TodoRecord[];
-      client.release();
-      return results;
-    } catch (error) {
-      console.error("Database query error:", error);
-      throw new ValidationError("Cannot get list of Tasks from server");
-    }
-  }
-  static async getOneTodoPostgres(id: string): Promise<TodoRecord | null> {
-    try {
-      const values = [id];
-      const query = "SELECT * FROM todos WHERE id = $1";
-      const result = await poolPostgres.query(query, values);
-      const rows = result.rows as TodoRecord[];
-
-      if (rows.length === 0) {
-        throw new ValidationError("Task with given id does not exist.");
-      }
-
-      return rows[0];
-    } catch (err) {
-      console.error("Database query error:", err);
-      throw new ValidationError("Cannot get task with given id.");
-    }
-  }
-  async insertNewTodoPostgres(): Promise<string> {
-    try {
-      if (!this.id) {
-        this.id = uuid();
-      }
-      if (!this.isDone) {
-        this.isDone = 0;
-      }
-      if (!this.date) {
-        this.date = getCurrentFormattedDate();
-      }
-      if (!this.description) {
-        this.description = null;
-      }
-      const query = `INSERT INTO todos (id, title, date, is_done, description) VALUES ($1, $2, $3, $4, $5)`;
-      const values = [this.id, this.title, this.date, this.isDone, this.description];
-
-      await poolPostgres.query(query, values);
-
-      return this.id;
-    } catch (err) {
-      console.error("Database query error:", err);
-      throw new ValidationError("Cannot insert task. Try again later");
     }
   }
 }

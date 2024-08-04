@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { TodoEntity } from "../../../types/todo.entity";
+import { useState } from "react";
 import { OneTaskRemoval } from "../../DeleteTasks/OneTaskRemoval/OneTaskRemoval";
 import "./SingleTaskRow.css";
 import "../../common/modal.css";
@@ -10,9 +9,11 @@ import { ErrorPage } from "../../layouts/ErrorPage/ErrorPage";
 import { toast } from "sonner";
 import { EditTask } from "../../EditTask/EditTask";
 import { useTheme } from "../../../context/ThemeContext";
+import { BACKEND_URL_POSTGRES } from "src/utils/backend_URL";
+import { TodoPostgresEntity } from "../../../types/postgres.todo.entity";
 
 interface Props {
-  task: TodoEntity;
+  task: TodoPostgresEntity;
 }
 
 export const SingleTaskRow = (props: Props) => {
@@ -30,12 +31,12 @@ export const SingleTaskRow = (props: Props) => {
 
   const updateTaskTitle = async (taskId: string | undefined) => {
     if (editedTitle.length < 3 || editedTitle.length > 150) {
-      await toast.error("An error occurred while updating task title: Title needs to be at least 3 characters long ❌");
+      toast.error("An error occurred while updating task title: Title needs to be at least 3 characters long ❌");
       setEditedTitle(props.task.title);
       return;
     } else {
       try {
-        const res = await fetch(`http://localhost:3001/todo/updateTitle/${taskId}`, {
+        const res = await fetch(`${BACKEND_URL_POSTGRES}updateTitle/${taskId}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -45,64 +46,64 @@ export const SingleTaskRow = (props: Props) => {
           }),
         });
         if (!res.ok) {
-          await setError(new Error(`An error occurred while updating task title. Try again later.`));
-          await toast.error("An error occurred while updating task title. Try again later.");
+          setError(new Error(`An error occurred while updating task title. Try again later.`));
+          toast.error("An error occurred while updating task title. Try again later.");
         } else {
-          await setShouldRerender(true);
-          await toast.success("Task title updated! ✅");
+          setShouldRerender(true);
+          toast.success("Task title updated! ✅");
           setEditedTitle(editedTitle);
           setModalTaskEditor(!modalTaskEditor);
         }
       } catch (err) {
-        await setError(new Error(`An error occurred while searching for this task. Try again later.`));
-        await toast.error("Error while searching for this tasks");
+        setError(new Error(`An error occurred while searching for this task. Try again later.`));
+        toast.error("Error while searching for this tasks");
       }
     }
   };
 
   const switchDoneStatus = async (taskId: string | undefined) => {
     try {
-      const res = await fetch(`http://localhost:3001/todo/switch/${taskId}`, {
+      const res = await fetch(`${BACKEND_URL_POSTGRES}switch/${taskId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
       });
       if (!res.ok) {
-        await setError(new Error(`An error occurred while updating task status. Try again later.`));
-        await toast.error("An error occurred while updating task status.");
+        setError(new Error(`An error occurred while updating task status. Try again later.`));
+        toast.error("An error occurred while updating task status.");
       } else {
-        await setShouldRerender(true);
-        await toast.success("Task status updated");
+        setShouldRerender(true);
+        toast.success("Task status updated");
       }
     } catch (err) {
-      await setError(new Error(`An error occurred while updating task status. Try again later.`));
-      await toast.error("An error occurred while updating task status.");
+      setError(new Error(`An error occurred while updating task status. Try again later.`));
+      toast.error("An error occurred while updating task status.");
     }
   };
 
   const toggleModal = async () => {
-    await setModal(!modal);
+    setModal(!modal);
   };
   const toggleModalTaskEditor = async () => {
-    await setModalTaskEditor(!modalTaskEditor);
+    setModalTaskEditor(!modalTaskEditor);
   };
 
   const handleDeleteTask = async (taskId: string | undefined) => {
     try {
-      const res = await fetch(`http://localhost:3001/todo/${taskId}`, {
+      const res = await fetch(`${BACKEND_URL_POSTGRES}${taskId}`, {
         method: "DELETE",
       });
       if (!res.ok) {
-        await setError(new Error(`There was an error deleting ${taskId} task. Try again later.`));
-        await toast.error("Error while deleting task :(");
+        setError(new Error(`There was an error deleting ${taskId} task. Try again later.`));
+        toast.error("Error while deleting task :(");
       } else {
         setShouldRerender(true);
-        await toast.success("Task deleted successfully!");
+        toast.success("Task deleted successfully!");
       }
     } catch (error) {
-      await setError(new Error(`There was an error deleting ${taskId} task. Try again later.`));
-      await toast.error("Error while deleting task :(");
+      setError(new Error(`There was an error deleting ${taskId} task. Try again later.`));
+      toast.error("Error while deleting task :(");
     }
     if (error) return <ErrorPage error={error} />;
   };
@@ -112,10 +113,7 @@ export const SingleTaskRow = (props: Props) => {
         <div className="SingleTaskRow__container">
           <div className="SingleTaskRow_title overflow-hidden">{props.task.title}</div>
           <div className="SingleTaskRow__actions">
-            <TaskDoneStatusCheckbox
-              status={Boolean(props.task.isDone)}
-              onChange={() => switchDoneStatus(props.task.id)}
-            />
+            <TaskDoneStatusCheckbox status={props.task.is_done} onChange={() => switchDoneStatus(props.task.id)} />
             <OneTaskRemoval onClick={() => toggleModal()} />
             <EditTask onClick={() => toggleModalTaskEditor()} task={props.task} />
           </div>

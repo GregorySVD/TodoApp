@@ -1,5 +1,5 @@
-import { pool } from "../src/utils/db";
-import { TodoEntity } from "../src/types";
+import { pool } from "../utils/db";
+import { TodoEntity } from "../types";
 import { TodoRecord } from "../records/todo.record";
 
 const mockTodo: TodoEntity = {
@@ -13,6 +13,7 @@ const mockTodoWithId: TodoEntity = {
 afterAll(async () => {
   await pool.end();
 });
+
 test("TodoRecord returns data from database from one entry", async () => {
   const insertedTodo = await new TodoRecord(mockTodoWithId);
   expect(insertedTodo).toBeDefined();
@@ -35,10 +36,14 @@ test("TodoRecord returns null from database from unexisting entry", async () => 
   expect(todo).toBeNull();
 });
 test("TodoRecord returns list of records from database", async () => {
+  const insertedTodo = await new TodoRecord(mockTodo);
+  const intertedTodoId = await insertedTodo.insertNewTodo();
   const todoList = await TodoRecord.ListAll();
+
   expect(todoList).toBeDefined();
   expect(todoList).not.toEqual([]);
   expect(todoList[0]).toBeDefined();
+  (await TodoRecord.getOneTodo(intertedTodoId)).deleteSelectedTodo();
 });
 
 test("TodoRecord.insert returns UUID, description is  null, isDone=false and date is defined", async () => {

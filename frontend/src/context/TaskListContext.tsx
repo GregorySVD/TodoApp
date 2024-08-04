@@ -1,9 +1,10 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
 import { TodoEntity } from "../types/todo.entity";
+import { TodoPostgresEntity } from "src/types/postgres.todo.entity";
 
 interface TaskListContextProps {
-  tasksList: TodoEntity[];
-  setTaskList: React.Dispatch<React.SetStateAction<TodoEntity[]>>;
+  tasksList: TodoPostgresEntity[];
+  setTaskList: React.Dispatch<React.SetStateAction<TodoPostgresEntity[]>>;
   error: Error | null;
   setError: React.Dispatch<React.SetStateAction<Error | null>>;
 }
@@ -23,7 +24,7 @@ interface TaskListContextProviderProps {
 }
 
 export const TaskListContextProvider: React.FC<TaskListContextProviderProps> = ({ children }) => {
-  const [tasksList, setTaskList] = useState<TodoEntity[]>([]);
+  const [tasksList, setTaskList] = useState<TodoPostgresEntity[]>([]);
   const [error, setError] = useState<Error | null>(null);
 
   const contextValue: TaskListContextProps = {

@@ -1,10 +1,10 @@
 import React from "react";
-import { TodoEntity } from "../../types/todo.entity";
+import { TodoPostgresEntity } from "../../types/postgres.todo.entity";
 import "./EditTask.css";
 
 interface Props {
   onClick: () => Promise<void>;
-  task: TodoEntity;
+  task: TodoPostgresEntity;
 }
 export const EditTask = (props: Props) => {
   return (

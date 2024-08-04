@@ -1,7 +1,7 @@
 export interface TodoEntity {
-    id?: string;
-    title: string;
-    description?: string | null;
-    isDone?: number;
-    date?: string;
+  id?: string;
+  title: string;
+  description?: string;
+  isDone?: number;
+  date?: string;
 }

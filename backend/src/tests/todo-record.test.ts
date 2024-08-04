@@ -1,11 +1,21 @@
-import { TodoEntity } from "../src/types";
+import { TodoEntity } from "../types";
 import { TodoRecord } from "../records/todo.record";
-import { pool } from "../src/utils/db";
+import { pool } from "../utils/db";
+import { poolPostgres } from "../utils/dbPostgres";
 
+//Mock
 const mockTodo: TodoEntity = {
   title: "Testing Jest",
   description: "this is mock task",
 };
+
+//Insert new Todo
+
+async function insertNewMockTodo(): Promise<string> {
+  const todoRecord = new TodoRecord(mockTodo);
+  const id = await todoRecord.insertNewTodo();
+  return id;
+}
 
 test("Can build TodoRecord", async () => {
   const todoRecord = new TodoRecord(mockTodo);
@@ -13,6 +23,12 @@ test("Can build TodoRecord", async () => {
   expect(todoRecord.title).toBe("Testing Jest");
   expect(todoRecord.description).toBe("this is mock task");
 });
+//CLEAN UP PostgresSQL
+async function CleanupPostgresSQLMockData(id: string) {
+  await poolPostgres.query("DELETE FROM todos WHERE id = $1", [id]);
+}
+
+// MySQL tests
 
 // title Validation
 test("Validates too short title for task todo", async () => {
@@ -70,7 +86,6 @@ test("No description returns null", async () => {
     ...mockTodo,
     description: null,
   });
-  console.log(Todo);
   expect(Todo.description).toBeNull();
 });
 

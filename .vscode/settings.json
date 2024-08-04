@@ -1,3 +1,4 @@
 {
-  "prettier.configPath": "./backend/.prettierrc.json"
+  "prettier.configPath": "./backend/.prettierrc.json",
+  "jest.enable": false
 }
