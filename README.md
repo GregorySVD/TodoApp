@@ -41,6 +41,14 @@ Happy tasking!
 ##2. Watch how my App works! 🛸
 ![Working App video](https://github.com/GregorySVD/TodoApp/blob/main/TodoApp-gif.gif)
 
+
+
+
+##Deployment
+
+- **Frontend**: [https://app-todo-fe.vercel.app/](https://app-todo-fe.vercel.app/)
+- **Backend**: [https://todo-app-be-two.vercel.app/](https://todo-app-be-two.vercel.app/)
+
 ## Installation
 
 Install my-project with npm and MySQL database:
