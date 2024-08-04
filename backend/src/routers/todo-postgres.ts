@@ -36,7 +36,18 @@ todoPostgresRouter
       res.status(500).json({ error: "Cannot delete these tasks, try again later" });
     }
   })
-  .delete("/:id", async (req: Request, res: Response) => {})
+  .delete("/:id", async (req: Request, res: Response) => {
+    try {
+      const task = await PostgresTodoRecord.getOneTodoPostgres(req.params.id);
+      if (!task) {
+        return res.status(404).json({ error: `Task with id ${req.params.id} does not exist` });
+      }
+      await task.deleteSelectedTodo();
+      res.status(204).end();
+    } catch (err) {
+      res.status(500).json({ error: "Cannot delete task with given id, try again later" });
+    }
+  })
 
   .get("/:id", async (req: Request, res: Response) => {
     try {

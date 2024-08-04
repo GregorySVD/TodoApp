@@ -139,7 +139,6 @@ test("Can list all todos from PostgreSQL", async () => {
   await CleanupPostgresSQLMockData(id1);
   await CleanupPostgresSQLMockData(id2);
 });
-//end of pool
 
 test("Can change todo done status", async () => {
   const insertedTodoId = await insertNewMockTodo();
@@ -166,7 +165,18 @@ test("getOneTodoPostgres returns an instance of PostgresTodoRecord", async () =>
 
   await CleanupPostgresSQLMockData(insertedTodoId);
 });
+test("Can delete a selected todo from PostgreSQL", async () => {
+  const insertedTodoId = await insertNewMockTodo();
+  const foundedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
+  expect(foundedTodo).toBeDefined();
 
+  await foundedTodo.deleteSelectedTodo();
+
+  const deletedTodo = await PostgresTodoRecord.getOneTodoPostgres(insertedTodoId);
+  expect(deletedTodo).toBeNull();
+});
+
+//end of pool
 afterAll(async () => {
   await poolPostgres.end();
 });

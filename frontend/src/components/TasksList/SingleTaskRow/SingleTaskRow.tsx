@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { TodoEntity } from "../../../types/todo.entity";
+import { useState } from "react";
 import { OneTaskRemoval } from "../../DeleteTasks/OneTaskRemoval/OneTaskRemoval";
 import "./SingleTaskRow.css";
 import "../../common/modal.css";

@@ -92,14 +92,6 @@ export class PostgresTodoRecord implements TodoPostgresEntity {
       throw new ValidationError("Cannot insert task. Try again later");
     }
   }
-  //Deletes todos with done status
-  static async DeleteAllDoneTodosPostgres(): Promise<any> {
-    try {
-      return await poolPostgres.query("DELETE FROM todos WHERE is_done = true;");
-    } catch (err) {
-      throw new ValidationError(err);
-    }
-  }
   //Switch todos with status in Postgres
   async switchIsDoneStatePostgres(): Promise<boolean | number> {
     try {
@@ -119,7 +111,22 @@ export class PostgresTodoRecord implements TodoPostgresEntity {
       throw new ValidationError("Cannot switch done state of this task. Try again later");
     }
   }
-
+  //Deletes one tasks
+  async deleteSelectedTodo(): Promise<void> {
+    try {
+      await poolPostgres.query("DELETE FROM todos WHERE id = $1", [this.id]);
+    } catch (err) {
+      throw new ValidationError("Cannot delete task with given id");
+    }
+  }
+  //Deletes todos with done status
+  static async DeleteAllDoneTodosPostgres(): Promise<any> {
+    try {
+      return await poolPostgres.query("DELETE FROM todos WHERE is_done = true;");
+    } catch (err) {
+      throw new ValidationError(err);
+    }
+  }
   //Deletes all todos in DB
   static async deleteAllTodosPostgres(): Promise<void> {
     try {
