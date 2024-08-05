@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import "./ContactContent.css";
 import { useTheme } from "../../../../../context/ThemeContext";
 import { Link } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 interface Props {
   onClick: () => void;
@@ -9,6 +10,18 @@ interface Props {
 
 export const ContactContent = (props: Props) => {
   const { darkTheme } = useTheme();
+  const [isHuman, setIsHuman] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const handleCaptchaVerify = (token: string | null) => {
+    if (token) {
+      setTimeout(() => {
+        setIsHuman(true);
+      }, 1500);
+    } else {
+      setIsHuman(false);
+    }
+  };
 
   return (
     <div className="nav_about">
@@ -18,7 +31,7 @@ export const ContactContent = (props: Props) => {
           <i className="fa fa-close"></i>
         </button>
         <div>
-          <h3 className="contact-content-header">Hi, I am</h3>
+          <h3 className="contact-content-header">Hi, my name is</h3>
           <h1 className="contact-content-name">Grzegorz Terenda</h1>
         </div>
         <span>
@@ -32,7 +45,22 @@ export const ContactContent = (props: Props) => {
           for me in the field of software engineering.
         </span>
 
-        <span>Email: example@email.com</span>
+        {isHuman ? (
+          <a href="mailto:grzegorzterenda@gmail.com" className="email-link">
+            <i className="fa-solid fa-envelope"></i>
+            grzegorzterenda@gmail.com
+          </a>
+        ) : (
+          <div className="recaptcha-container">
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={"6LdeJSAqAAAAACVuTFZ49iKFZSVPcxQbyZ95j5GT"}
+              onChange={handleCaptchaVerify}
+            />
+            <p>Please complete the CAPTCHA to see the email address.</p>
+          </div>
+        )}
+
         <div className="contact-socials">
           <div className="contact-socials-links">
             <Link to="https://www.facebook.com/grzegorz.terenda/" target="_blank">
