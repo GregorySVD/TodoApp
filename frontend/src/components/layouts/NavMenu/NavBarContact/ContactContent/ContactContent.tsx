@@ -3,6 +3,7 @@ import "./ContactContent.css";
 import { useTheme } from "../../../../../context/ThemeContext";
 import { Link } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
+import { Socials } from "src/components/common/Socials/Socials";
 
 interface Props {
   onClick: () => void;
@@ -30,15 +31,29 @@ export const ContactContent = (props: Props) => {
         <button className="contact-content-close-btn" onClick={props.onClick}>
           <i className="fa fa-close"></i>
         </button>
-        <div>
-          <h3 className="contact-content-header">Hi, my name is</h3>
-          <h1 className="contact-content-name">Grzegorz Terenda</h1>
+        <div className="constact-hero">
+          <div className="constact-hero-flex-container">
+            <div className="constact-hero-text-container">
+              <span>Hi, I'm Grzegorz 👋</span>
+              <span>Javascript lover. I love building things and helping people. Learning tech since 2022</span>
+            </div>
+            <div className="constact-hero-avatar">
+              <span>
+                <img
+                  alt="Grzegorz Terenda"
+                  src="https://raw.githubusercontent.com/GregorySVD/TodoApp/dev/frontend/public/GT_avatar.png"
+                ></img>
+              </span>
+            </div>
+          </div>
         </div>
         <span>
-          I am a passionate software engineer with a strong interest in computer science. I have been fascinated by
-          computers since I was a child, and I have been learning to code since 2022. I am currently a student at WSB
-          University of Applied Sciences, where I am studying computer science. I have completed the MegaK course, where
-          I learned to build web applications using Node.js, Express.js, TypeScript, MySQL, ReactJS, and MongoDB.
+          I am a passionate software engineer with a deep-seated interest in computer science. My fascination with
+          computers began in childhood, and I have been learning to code since 2022. Currently, I am pursuing a degree
+          in computer science at WSB University of Applied Sciences. I’ve completed the MegaK course, where I mastered
+          the skills needed to build dynamic web applications using technologies like Node.js, Express.js, TypeScript,
+          MySQL, ReactJS, and MongoDB. Each new project fuels my excitement for technology and drives me to continuously
+          expand my expertise.
         </span>
         <span>
           I am always looking for new ways to improve my skills and knowledge. I am excited to see what the future holds
@@ -57,23 +72,12 @@ export const ContactContent = (props: Props) => {
               sitekey={"6LdeJSAqAAAAACVuTFZ49iKFZSVPcxQbyZ95j5GT"}
               onChange={handleCaptchaVerify}
             />
-            <p>Please complete the CAPTCHA to see the email address.</p>
+            <p className="CAPTCHA-info">
+              <i>Please complete the CAPTCHA to see the email address.</i>
+            </p>
           </div>
         )}
-
-        <div className="contact-socials">
-          <div className="contact-socials-links">
-            <Link to="https://www.facebook.com/grzegorz.terenda/" target="_blank">
-              <i className="fa-brands fa-facebook"></i>
-            </Link>
-            <Link to="https://www.linkedin.com/in/grzegorz-terenda/" target="_blank">
-              <i className="fa-brands fa-linkedin"></i>
-            </Link>
-            <Link to="https://github.com/GregorySVD" target="_blank">
-              <i className="fa-brands fa-github"></i>
-            </Link>
-          </div>
-        </div>
+        <Socials />
       </div>
     </div>
   );
