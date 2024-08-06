@@ -4,7 +4,6 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  background-color: #fff;
   min-width: 300px;
   width: 60dvw;
   border-radius: 16px;
@@ -13,7 +12,9 @@
   display: flex;
   text-align: left;
   height: 80vh;
-  font: inherit;
+  color: #000;
+  background-color: #fff;
+  flex-direction: column;
 }
 
 main {
@@ -28,7 +29,7 @@ main {
 
 .contact-content-close-btn {
   position: fixed;
-  top: 10px;
+  top: -38vh;
   right: 10px;
   border: none;
   background: transparent;
