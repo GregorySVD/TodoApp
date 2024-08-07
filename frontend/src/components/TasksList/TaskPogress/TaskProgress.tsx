@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./TaskProgress.css";
 import { useTaskListContext } from "../../../context/TaskListContext";
 import { ProgressBar } from "../../ProgressBar/ProgressBar";
-import { ClearTasksDone } from "../../DeleteTasks/ClearTasksDone/ClearTasksDone";
+import { ClearTasksDone } from "../../DeleteTasks/DeleteTasksDone/DeleteTasksDone";
 
 export const TaskProgress = () => {
   const [allTasksCounter, setAllTasksCounter] = useState<number | null>(null);

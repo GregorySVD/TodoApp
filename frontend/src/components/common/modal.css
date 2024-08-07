@@ -1,125 +1,126 @@
 body.active-modal {
-    overflow-y: hidden;
+  overflow-y: hidden;
 }
 
-.modal, .overlay {
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
-    z-index: 2;
+.modal,
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 2;
 }
 
 .overlay {
-    background: rgba(49, 49, 49, 0.8);
+  background: rgba(49, 49, 49, 0.8);
 }
 
 .modal-content {
-    transform: translate(-50%, -50%);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    aspect-ratio: 16/9;
-    background-color: #fff;
-    min-width: 250px;
-    width: 60vw;
-    border-radius: 16px;
-    z-index: 3;
-    padding: 2em;
-    max-width: 500px;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    color: inherit;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 16/9;
+  background-color: #fff;
+  min-width: 250px;
+  width: 60vw;
+  border-radius: 16px;
+  z-index: 3;
+  padding: 2em;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  color: inherit;
 }
 .modal-content.dark-theme {
-    background-color: #091220;
+  background-color: #091220;
 }
 .modal-content h2 {
-    white-space: pre-wrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 .modal_task_title_update {
-    width: 100%;
-    padding: 0.5em;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-top: 0.5em;
-    box-sizing: border-box;
-    color: inherit;
-    background-color: transparent;
+  width: 100%;
+  padding: 0.5em;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 0.5em;
+  box-sizing: border-box;
+  color: inherit;
+  background-color: transparent;
 }
 
 .modal-close-btn {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    bottom: 90%;
-    border: none;
-    background: transparent;
-    font-size: 16px;
-    color: inherit;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  bottom: 90%;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  color: inherit;
 }
 .modal__change_title_input {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
 }
 
-
 .modal-close-btn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .modal-action-buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 1em;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1em;
 }
 
-.modal-accept-action--btn, .modal-cancel-action-btn {
-    padding: 0.7em 2em;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border: 1px solid;
-    outline: none;
-    border-radius: 16px;
-    background-color: transparent;
-    color: inherit;
+.modal-accept-action--btn,
+.modal-cancel-action-btn {
+  padding: 0.7em 2em;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 1px solid;
+  outline: none;
+  border-radius: 16px;
+  background-color: transparent;
+  color: inherit;
 }
 
-.modal-accept-action--btn:hover, .modal-cancel-action-btn:hover {
-    cursor: pointer;
-    animation: pulse_modal 1s linear infinite both;
+.modal-accept-action--btn:hover,
+.modal-cancel-action-btn:hover {
+  cursor: pointer;
+  animation: pulse_modal 1s linear infinite both;
 }
-
 
 @media (max-width: 768px) {
-    .modal_task_title_update {
-        font-size: 12px;
-    }
+  .modal_task_title_update {
+    font-size: 12px;
+  }
 }
 
 @keyframes pulse_modal {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 rgba(204, 204, 204, 0.5);
-    }
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(204, 204, 204, 0.5);
+  }
 
-    50% {
-        transform: scale(1.2);
-        box-shadow: 0 0 100px rgba(153, 153, 153, 0.5);
-    }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 100px rgba(153, 153, 153, 0.5);
+  }
 
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 rgba(204, 204, 204, 0.5);
-    }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(204, 204, 204, 0.5);
+  }
 }

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTaskListRerenderContext } from "../../../context/TaskListRerenderContext";
 import { useErrorContext } from "../../../context/ErrorContext";
 import "./DeleteAllTasks.css";
 import { toast } from "sonner";
-import { ErrorPage } from "../../layouts/ErrorPage/ErrorPage";
+import { ErrorPage } from "../../pages/ErrorPage/ErrorPage";
 import { useTheme } from "../../../context/ThemeContext";
 import { BACKEND_URL } from "../../../utils/backend_URL";
 
@@ -35,15 +35,15 @@ export const DeleteAllTasks = () => {
         },
       });
       if (!res.ok) {
-        await setError(new Error(`Couldn't delete all tasks. Try again later.`));
-        await toast.error(`Couldn't delete all tasks`);
+        setError(new Error(`Couldn't delete all tasks. Try again later.`));
+        toast.error(`Couldn't delete all tasks`);
       } else {
         setShouldRerender(true);
-        await toast.success(`Successfully deleted all tasks`);
+        toast.success(`Successfully deleted all tasks`);
       }
     } catch (err) {
-      await setError(new Error(`Couldn't delete all tasks. Try again later.`));
-      await toast.error(`Couldn't delete all tasks`);
+      setError(new Error(`Couldn't delete all tasks. Try again later.`));
+      toast.error(`Couldn't delete all tasks`);
     }
   };
   const toggleModal = () => {

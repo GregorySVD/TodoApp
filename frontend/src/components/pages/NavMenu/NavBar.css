@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-around;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  padding: 0.5rem 0.5rem;
+  width: 100%;
+  color: #fff;
+  min-width: 450px;
+  position: fixed;
+  left: 0;
+  z-index: 2;
+  top: 0;
+  background-color: #703fb2;
+}
+
+.nav_logo {
+  font-size: 1.5rem;
+  display: flex;
+  gap: 8px;
+  background: #50e3a4;
+  padding: 0.2rem 0.5rem;
+  border-radius: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.link-no-decoration {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav_logo:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: #45c993;
+}
+
+.nav_btns {
+  display: flex;
+  gap: 0.3rem;
+  width: 300px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav_btns button {
+  border: none;
+  height: 100%;
+}
+
+.nav_btns button:hover {
+  cursor: pointer;
+}
+
+.nav_btn-contact {
+  border-radius: 16px;
+  padding: 0.3rem 1rem;
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav_btn-contact {
+  color: #ffffff;
+  background: #221e23;
+}
+
+.fa-arrow-right {
+  transition: transform 0.3s ease-in-out;
+  padding: 0 0.5rem;
+}
+
+.dark-theme {
+  background-color: #221e23;
+  color: #fff;
+}
+
+.nav_btn-contact:hover .fa-arrow-right {
+  transform: translateX(5px);
+}
+.nav_logo_text.short {
+  display: none;
+}
+
+/* Media Queries */
+
+/* For Tablets and Larger Phones */
+@media (max-width: 768px) {
+  .nav {
+    min-width: 100%;
+    padding: 0.4rem 0.4rem;
+    font-size: 14px;
+  }
+
+  .nav_logo {
+    font-size: 1.25rem;
+    padding: 0.1rem 0.4rem;
+  }
+
+  .nav_btns {
+    width: 250px;
+    gap: 0.2rem;
+  }
+
+  .nav_btn-contact {
+    padding: 0.2rem 0.8rem;
+  }
+}
+
+/* For Smaller Phones (Including iPhone) */
+@media (max-width: 480px) {
+  .nav {
+    min-width: 100%;
+    padding: 0.3rem 0.3rem;
+    font-size: 12px;
+  }
+
+  .nav_logo {
+    font-size: 1rem;
+    padding: 0.1rem 0.3rem;
+  }
+
+  .nav_btns {
+    width: 300px;
+    gap: 0.1rem;
+  }
+
+  .nav_btn-contact {
+    padding: 0.1rem 0.6rem;
+  }
+}
+@media (max-width: 400px) {
+  .nav_logo {
+    font-size: 0.5rem;
+    padding: 0.1rem 0.3rem;
+  }
+  .nav_logo_text.full {
+    display: none;
+  }
+  .nav_logo_text.short {
+    display: inline;
+  }
+}
