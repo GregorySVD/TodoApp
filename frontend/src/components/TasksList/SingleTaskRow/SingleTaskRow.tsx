@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { OneTaskRemoval } from "../../DeleteTasks/OneTaskRemoval/OneTaskRemoval";
+import { OneTaskRemoval } from "../../DeleteTasks/DeleteSelectedTask/DeleteSelectedTask";
 import "./SingleTaskRow.css";
 import "../../common/modal.css";
 import { TaskDoneStatusCheckbox } from "../../TaskDoneStatusCheckbox/TaskDoneStatusCheckbox";
 import { useTaskListRerenderContext } from "../../../context/TaskListRerenderContext";
 import { useErrorContext } from "../../../context/ErrorContext";
-import { ErrorPage } from "../../layouts/ErrorPage/ErrorPage";
+import { ErrorPage } from "../../pages/ErrorPage/ErrorPage";
 import { toast } from "sonner";
 import { EditTask } from "../../EditTask/EditTask";
 import { useTheme } from "../../../context/ThemeContext";

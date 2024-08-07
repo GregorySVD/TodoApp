@@ -1,31 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
-
-
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css");
 
 .TaskAppContainer {
-    font-family: "Lato", sans-serif;
-    margin: 10vh auto;
-    display: flex;
-    flex-direction: column;
-    overflow: visible;
-    background-color: #ffffff;
-    text-align: center;
-    color: #1d1e23;
-    width: 70vw;
-    height: auto;
-    font-size: 16px;
-    padding: 2rem;
-    min-width: 300px;
-    position: relative;
-    max-width: 500px;
-    border-radius: 16px;
-    min-height: 300px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Lato", sans-serif;
+  margin: 10vh auto;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  background-color: #ffffff;
+  text-align: center;
+  color: #1d1e23;
+  width: 70vw;
+  height: auto;
+  font-size: 16px;
+  padding: 2rem;
+  min-width: 300px;
+  position: relative;
+  max-width: 500px;
+  border-radius: 16px;
+  min-height: 300px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 .TaskAppContainer.dark-theme {
-    background-color: #1d1e23;
-    color: #ffffff;
-    box-shadow: 0 8px 15px rgba(255, 255, 255, 0.1);
+  background-color: #1d1e23;
+  color: #ffffff;
+  box-shadow: 0 8px 15px rgba(255, 255, 255, 0.1);
 }

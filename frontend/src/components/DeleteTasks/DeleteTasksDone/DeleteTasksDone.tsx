@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import "./ClearTasksDone.css";
+import { useEffect } from "react";
+import "./DeleteTasksDone.css";
 import { useTaskListRerenderContext } from "../../../context/TaskListRerenderContext";
 import { useErrorContext } from "../../../context/ErrorContext";
-import { ErrorPage } from "../../layouts/ErrorPage/ErrorPage";
+import { ErrorPage } from "../../pages/ErrorPage/ErrorPage";
 import { toast } from "sonner";
 import { useTheme } from "../../../context/ThemeContext";
 import { BACKEND_URL_POSTGRES } from "src/utils/backend_URL";

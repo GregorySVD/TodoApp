@@ -1,10 +1,10 @@
-import React, { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { TodoEntity } from "../../types/todo.entity";
 import { Spinner } from "../common/Spinner/Spinner";
 import { AddTaskFormTitleInput } from "./AddTaskFormTitleInput/AddTaskFormTitleInput";
 import { useFormValidationContext } from "../../context/FormValidationContext";
 import { useErrorContext } from "../../context/ErrorContext";
-import { ErrorPage } from "../layouts/ErrorPage/ErrorPage";
+import { ErrorPage } from "../pages/ErrorPage/ErrorPage";
 import { SubmitTaskButton } from "./SubmitTaskButton/SubmitTaskButton";
 import "./AddTaskForm.css";
 import { AddTaskFormCloser } from "./AddTaskFormCloser/AddTaskFormCloser";

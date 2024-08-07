@@ -1,4 +1,4 @@
-import "./OneTaskRemoval.css";
+import "./DeleteSelectedTask.css";
 interface Props {
   onClick: () => Promise<void>;
 }
