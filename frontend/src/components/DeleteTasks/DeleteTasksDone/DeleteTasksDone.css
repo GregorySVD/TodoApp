@@ -1,9 +1,8 @@
 .ClearTaskDone__btn {
-  padding: 1.3em 3em;
-  font-size: 12px;
-  text-transform: uppercase;
+  padding: 1em 2.5em;
+  font-size: 0.9rem;
   letter-spacing: 2px;
-  font-weight: 500;
+  font-weight: 700;
   color: inherit;
   background-color: inherit;
   border: none;
@@ -13,15 +12,16 @@
   cursor: pointer;
   outline: none;
   margin-top: 30px;
+  background-color: #703fb2;
 }
 .ClearTaskDone__btn.dark-theme {
   box-shadow: 0 8px 15px rgba(255, 255, 255, 0.2);
 }
 
 .ClearTaskDone__btn:hover {
-  background-color: #23c483;
+  background-color: #602ea1;
   box-shadow: 0 15px 20px rgba(46, 229, 157, 0.4);
-  color: #fff;
+  color: inherit;
   transform: translateY(-7px);
 }
 

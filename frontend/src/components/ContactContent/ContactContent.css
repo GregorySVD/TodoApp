@@ -11,7 +11,7 @@
   padding: 2em;
   display: flex;
   text-align: left;
-  height: 80vh;
+  height: 90dvh;
   color: #000;
   background-color: #fff;
   flex-direction: column;
@@ -29,7 +29,7 @@ main {
 
 .contact-content-close-btn {
   position: fixed;
-  top: -38vh;
+  top: -43vh;
   right: 10px;
   border: none;
   background: transparent;
@@ -75,7 +75,7 @@ main {
 
 .constact-hero-text-container span:first-child {
   display: inline-block;
-  font-size: 2.5rem; /* 30px */
+  font-size: 2.5rem;
   font-weight: 700;
   margin-top: 2rem;
 }
@@ -184,5 +184,8 @@ main {
 
   .constact-hero-avatar span img {
     height: 100%;
+  }
+  .contact-about-me:nth-of-type(2) {
+    display: none;
   }
 }

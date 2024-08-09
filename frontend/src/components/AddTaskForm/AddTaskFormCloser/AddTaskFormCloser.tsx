@@ -1,4 +1,3 @@
-import React from "react";
 import "./AddTaskFormCloser.css";
 
 interface Props {
