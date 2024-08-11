@@ -2,17 +2,16 @@
   padding: 1em 2.5em;
   margin-top: 0.5em;
   font-size: 0.9rem;
-  letter-spacing: 2px;
   border: none;
   cursor: pointer;
   outline: none;
-  font-weight: 700;
   border-radius: 45px;
-  color: inherit;
   background-color: inherit;
   transition: all 0.3s ease;
   background-color: #ff4545;
-  color: inherit;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 .DeleteAllTasks_btn.dark-theme {
   color: #fff;
