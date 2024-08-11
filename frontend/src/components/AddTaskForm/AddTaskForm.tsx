@@ -13,6 +13,7 @@ import { AddTaskFormOpener } from "./AddTaskFormOpener/AddTaskFormOpener";
 import { useTaskListRerenderContext } from "../../context/TaskListRerenderContext";
 import { toast } from "sonner";
 import { BACKEND_URL } from "../../utils/backend_URL";
+import "animate.css";
 
 export const AddTaskForm = () => {
   const [loading, setLoading] = useState(false);
@@ -80,7 +81,7 @@ export const AddTaskForm = () => {
   return !addTaskFormIsOpen ? (
     <AddTaskFormOpener onClick={handleOpenForm} />
   ) : (
-    <div className="AddTaskForm__container">
+    <div className="AddTaskForm__container animate__bounceIn">
       <form className="AddTaskForm__form" onSubmit={saveTodo}>
         <AddTaskFormTitleInput placeholder={"Title"} setMaxLength={150} setMinLength={3} updateFormEvent={updateForm} />
         <SubmitTaskButton onClick={saveTodo} />
