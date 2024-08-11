@@ -1,0 +1,58 @@
+/* Base Styles (Desktop) */
+.AboutProjectFeature_container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 10dvw;
+  align-items: center;
+}
+
+.AboutProjectFeature_container img {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+
+.AboutProjectFeature_container h3,
+.AboutProjectFeature_container span {
+  text-align: center;
+}
+
+.AboutProjectFeature_container span {
+  font-size: 0.9em;
+  margin-top: 0.5rem;
+}
+
+/* Media Queries */
+
+/* For Tablets */
+@media (max-width: 768px) {
+  .AboutProjectFeature_container {
+    width: 15dvw;
+  }
+
+  .AboutProjectFeature_container img {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .AboutProjectFeature_container span {
+    font-size: 0.85em;
+  }
+}
+
+/* For Phones */
+@media (max-width: 600px) {
+  .AboutProjectFeature_container {
+    width: 25dvw;
+  }
+
+  .AboutProjectFeature_container img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .AboutProjectFeature_container span {
+    font-size: 0.8em;
+  }
+}
