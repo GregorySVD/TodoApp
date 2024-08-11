@@ -1,0 +1,8 @@
+.modal-close-btn {
+  position: fixed;
+  top: 1%;
+  right: 20%;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+}

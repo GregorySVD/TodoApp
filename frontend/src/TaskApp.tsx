@@ -8,7 +8,7 @@ import { useErrorContext } from "./context/ErrorContext";
 import { useTaskListRerenderContext } from "./context/TaskListRerenderContext";
 import { useTaskListContext } from "./context/TaskListContext";
 import { FormValidationContextProvider } from "./context/FormValidationContext";
-import { NavBar } from "./components/pages/NavMenu/NavBar";
+import { NavBar } from "./components/NavBar/NavBar";
 import { useTheme } from "./context/ThemeContext";
 
 import { BACKEND_URL } from "./utils/backend_URL";

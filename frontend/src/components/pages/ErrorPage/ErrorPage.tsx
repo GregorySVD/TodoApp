@@ -1,7 +1,7 @@
 import React from "react";
 import "./ErrorPage.css";
 import { RefreshPageButton } from "../../common/RefreshPageButton/RefreshPageButton";
-import { NavBar } from "../NavMenu/NavBar";
+import { NavBar } from "../../NavBar/NavBar";
 import { useTheme } from "../../../context/ThemeContext";
 
 interface ErrorPageProps {

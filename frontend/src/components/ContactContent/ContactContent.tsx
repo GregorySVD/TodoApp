@@ -3,6 +3,7 @@ import "./ContactContent.css";
 import { useTheme } from "../../context/ThemeContext";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Socials } from "src/components/common/Socials/Socials";
+import { CloseModalBtn } from "../common/CloseModalBtn/CloseModalBtn";
 
 interface Props {
   onClick: () => void;
@@ -27,9 +28,7 @@ export const ContactContent = (props: Props) => {
     <div className="nav_about">
       <div className="overlay" onClick={props.onClick}></div>
       <div className={darkTheme ? "contact-content dark-theme" : "contact-content"}>
-        <button className="contact-content-close-btn" onClick={props.onClick}>
-          <i className="fa fa-close"></i>
-        </button>
+        <CloseModalBtn onClick={props.onClick} />
         <main>
           <div className="constact-hero">
             <div className="constact-hero-flex-container">

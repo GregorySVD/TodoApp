@@ -1,6 +1,7 @@
 import "./AboutContent.css";
-import { useTheme } from "../../../../../context/ThemeContext";
-import { AboutProjectFeature } from "../../../../AboutProjectFeature/AboutProjectFeature";
+import { useTheme } from "../../context/ThemeContext";
+import { AboutProjectFeature } from "../AboutProjectFeature/AboutProjectFeature";
+import { CloseModalBtn } from "../common/CloseModalBtn/CloseModalBtn";
 
 interface Props {
   onClick: () => void;
@@ -13,12 +14,10 @@ export const AboutContent = (props: Props) => {
     <div className="nav_about">
       <div className="overlay" onClick={props.onClick}></div>
       <div className={darkTheme ? "about-content dark-theme" : "about-content"}>
-        <button className="about-content-close-btn" onClick={props.onClick}>
-          <i className="fa fa-close"></i>
-        </button>
+        <CloseModalBtn onClick={props.onClick} />
         <h2 className="about-content-header">TodoApp - About Project</h2>
         <p className="about-content-description">
-          TodoApp is a simple task manager written as a final project to train my developer skills in Typscript, React,
+          TodoApp is a simple task manager written as a project to train my developer skills in Typscript, React,
           Express and SQL database. The application allows users to add, delete, edit, and mark tasks as completed.
         </p>
         <h3 className="about-content-features">

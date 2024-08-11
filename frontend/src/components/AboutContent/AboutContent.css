@@ -19,16 +19,6 @@
   text-align: center;
 }
 
-.about-content-close-btn {
-  position: fixed;
-  top: -47%;
-  right: 10px;
-  border: none;
-  background: transparent;
-  font-size: 16px;
-  color: inherit;
-}
-
 .about-content.dark-theme {
   background-color: #091220;
   color: #fff;
@@ -85,9 +75,5 @@
 
   .about-content-header {
     font-size: 1.5em;
-  }
-
-  .about-content-close-btn {
-    top: -45%;
   }
 }

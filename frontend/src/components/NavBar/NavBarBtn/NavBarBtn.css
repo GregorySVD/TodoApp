@@ -1,0 +1,48 @@
+.navbar_btn {
+  border: none;
+  height: 34px;
+  padding: 0 0.6rem;
+  border-radius: 16px;
+  gap: 0.2rem;
+  align-items: center;
+  justify-content: space-around;
+}
+.navbar_btn:hover {
+  cursor: pointer;
+}
+.navbar_btn:hover div {
+  animation: shake 0.3s ease-in-out;
+}
+.navbar_btn div {
+  margin-left: 0.2rem;
+}
+
+@media (max-width: 768px) {
+  .navbar_btn {
+    padding: 0.2rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar_btn {
+    padding: 0.1rem 0.6rem;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
