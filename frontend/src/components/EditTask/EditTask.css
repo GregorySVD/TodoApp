@@ -1,20 +1,21 @@
 .EditTask__btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: #cccccc;
-    border: none;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.164);
-    cursor: pointer;
-    transition-duration: 0.4s;
-    overflow: hidden;
-    position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #cccccc;
+  border: none;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.4s;
+  overflow: hidden;
+  position: relative;
+  color: #000;
 }
 
 .EditTask__btn:hover {
-    background-color: #703fb2;
+  background-color: #703fb2;
 }

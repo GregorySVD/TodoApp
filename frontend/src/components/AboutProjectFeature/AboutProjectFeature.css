@@ -56,3 +56,8 @@
     font-size: 0.8em;
   }
 }
+@media (max-width: 430px) {
+  .AboutProjectFeature_container span {
+    display: none;
+  }
+}

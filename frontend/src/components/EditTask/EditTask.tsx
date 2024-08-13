@@ -1,4 +1,3 @@
-import React from "react";
 import { TodoPostgresEntity } from "../../types/postgres.todo.entity";
 import "./EditTask.css";
 

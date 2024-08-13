@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import "./TaskDoneStatusCheckbox.css";
 
 interface Props {
@@ -13,11 +13,11 @@ export const TaskDoneStatusCheckbox = (props: Props) => {
   };
 
   return (
-    <label className="TaskDoneStatusCheckbox__label" title={!props.status ? "Done" : "Undone"}>
+    <label className="TaskDoneStatusCheckbox__label" title={!props.status ? "Mark it done" : "Make it undone"}>
       <input checked={props.status} type="checkbox" onChange={handleCheckboxChange} />
       <div className="checkmark"></div>
       <span className="hover-icon">
-        <i className="fa fa-close "></i>
+        <i className="fa fa-check "></i>
       </span>
     </label>
   );
