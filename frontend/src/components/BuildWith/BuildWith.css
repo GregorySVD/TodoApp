@@ -1,0 +1,43 @@
+.build-with {
+  height: 50dvh;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 300px;
+  width: 60dvw;
+  border-radius: 16px;
+  z-index: 3;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #fff;
+  color: #000;
+}
+.build-with-stack-png img {
+  margin: 1rem;
+}
+.build-with-stack-png img:hover {
+  animation: bounce;
+  animation-duration: 2s;
+}
+
+.build-with.dark-theme {
+  background-color: #091220;
+  color: #fff;
+}
+@media (max-width: 768px) {
+  .build-with-stack-png img {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+@media (min-width: 1025px) {
+  .build-with-stack-png img {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+}
