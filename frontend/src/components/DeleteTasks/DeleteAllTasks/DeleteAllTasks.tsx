@@ -6,12 +6,14 @@ import { toast } from "sonner";
 import { ErrorPage } from "../../pages/ErrorPage/ErrorPage";
 import { useTheme } from "../../../context/ThemeContext";
 import { BACKEND_URL } from "../../../utils/backend_URL";
+import { Loader } from "src/components/common/Loader/Loader";
 
 export const DeleteAllTasks = () => {
   const [modal, setModal] = useState<boolean>(false);
   const { setShouldRerender } = useTaskListRerenderContext();
   const { setError, error } = useErrorContext();
   const { darkTheme } = useTheme();
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const appRoot = document.querySelector(".DeleteAllTasks_btn");
@@ -28,6 +30,7 @@ export const DeleteAllTasks = () => {
 
   const handleDeleteAllTasks = async () => {
     try {
+      setLoading(true);
       const res = await fetch(`${BACKEND_URL}/postgres`, {
         method: "DELETE",
         headers: {
@@ -39,6 +42,7 @@ export const DeleteAllTasks = () => {
         toast.error(`Couldn't delete all tasks`);
       } else {
         setShouldRerender(true);
+        setLoading(false);
         toast.success(`Successfully deleted all tasks`);
       }
     } catch (err) {
@@ -52,6 +56,9 @@ export const DeleteAllTasks = () => {
 
   if (error) {
     return <ErrorPage error={error} />;
+  }
+  if (loading) {
+    return <Loader />;
   }
 
   return (

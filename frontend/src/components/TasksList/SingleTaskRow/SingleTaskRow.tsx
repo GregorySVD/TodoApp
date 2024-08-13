@@ -11,6 +11,7 @@ import { EditTask } from "../../EditTask/EditTask";
 import { useTheme } from "../../../context/ThemeContext";
 import { BACKEND_URL_POSTGRES } from "src/utils/backend_URL";
 import { TodoPostgresEntity } from "../../../types/postgres.todo.entity";
+import { Loader } from "src/components/common/Loader/Loader";
 
 interface Props {
   task: TodoPostgresEntity;
@@ -23,6 +24,8 @@ export const SingleTaskRow = (props: Props) => {
   const [modalTaskEditor, setModalTaskEditor] = useState<boolean>(false);
   const [editedTitle, setEditedTitle] = useState<string>(props.task.title);
   const { darkTheme } = useTheme();
+  const [loading, setLoading] = useState<boolean>(false);
+
   if (modal) {
     document.body.classList.add("active-modal");
   } else {
@@ -36,6 +39,7 @@ export const SingleTaskRow = (props: Props) => {
       return;
     } else {
       try {
+        setLoading(true);
         const res = await fetch(`${BACKEND_URL_POSTGRES}updateTitle/${taskId}`, {
           method: "PATCH",
           headers: {
@@ -53,6 +57,7 @@ export const SingleTaskRow = (props: Props) => {
           toast.success("Task title updated! ✅");
           setEditedTitle(editedTitle);
           setModalTaskEditor(!modalTaskEditor);
+          setLoading(false);
         }
       } catch (err) {
         setError(new Error(`An error occurred while searching for this task. Try again later.`));
@@ -63,6 +68,7 @@ export const SingleTaskRow = (props: Props) => {
 
   const switchDoneStatus = async (taskId: string | undefined) => {
     try {
+      setLoading(true);
       const res = await fetch(`${BACKEND_URL_POSTGRES}switch/${taskId}`, {
         method: "PATCH",
         headers: {
@@ -75,6 +81,7 @@ export const SingleTaskRow = (props: Props) => {
       } else {
         setShouldRerender(true);
         toast.success("Task status updated");
+        setLoading(false);
       }
     } catch (err) {
       setError(new Error(`An error occurred while updating task status. Try again later.`));
@@ -91,6 +98,7 @@ export const SingleTaskRow = (props: Props) => {
 
   const handleDeleteTask = async (taskId: string | undefined) => {
     try {
+      setLoading(true);
       const res = await fetch(`${BACKEND_URL_POSTGRES}${taskId}`, {
         method: "DELETE",
       });
@@ -99,6 +107,7 @@ export const SingleTaskRow = (props: Props) => {
         toast.error("Error while deleting task :(");
       } else {
         setShouldRerender(true);
+        setLoading(false);
         toast.success("Task deleted successfully!");
       }
     } catch (error) {
@@ -107,6 +116,9 @@ export const SingleTaskRow = (props: Props) => {
     }
     if (error) return <ErrorPage error={error} />;
   };
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <>
       <li className="SingleTaskRow" key={props.task.id}>
