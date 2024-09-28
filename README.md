@@ -17,7 +17,7 @@ Happy tasking!
 1. [Introduction](#todoapp---megak-final-project)
    - Overview of TodoApp and its features.
 
-2. [App Overview](#watch-how-my-app-works-)
+2. [App Overview](#watch-how-my-app-works)
    - Visual demonstration of the app in action.
 
 3. [Installation](#installation)
@@ -26,25 +26,28 @@ Happy tasking!
 4. [Features](#features)
    - List of features provided by TodoApp.
 
-4. [Next Steps](#next-steps)
+5. [API Routes](#api-routes)
+   - Available Routes. 
+
+6. [Next Steps](#next-steps)
    - Plans for future development and enhancements.
 
-5. [Tech Stack](#-tech-stack)
+7. [Tech Stack](#-tech-stack)
    - Technologies used in the project.
 
-6. [Known Issues](#known-issues)
+8. [Known Issues](#known-issues)
    - Identified quirks and issues in TodoApp.
 
-7. [Author](#author)
+9. [Author](#author)
    - Information about the project's author.
 
-##2. Watch how my App works! 🛸
+## Watch how my App works 
+
+
 ![Working App video](https://github.com/GregorySVD/TodoApp/blob/main/TodoApp-gif.gif)
 
 
-
-
-##Deployment
+## Deployment 🛸
 
 - **Frontend**: [https://app-todo-fe.vercel.app/](https://app-todo-fe.vercel.app/)
 - **Backend**: [https://todo-app-be-two.vercel.app/](https://todo-app-be-two.vercel.app/)
@@ -119,6 +122,67 @@ Install my-project with npm and MySQL database:
 - Marking Tasks as Completed: Users can mark tasks as completed, facilitating progress tracking.
 - Theme Changer: Users can choose between a dark or light version for a personalized interface.
 - Toast notification: Users receive real-time feedback and updates about their actions, enhancing the interactive experience.
+
+## API Routes
+
+### Base URL
+- **Backend**: [https://todo-app-be-two.vercel.app/postgres](https://todo-app-be-two.vercel.app/postgres)
+
+### Available Routes:
+
+1. **Get All Tasks**
+   - **URL**: `https://todo-app-be-two.vercel.app/postgres/`
+   - **Method**: `GET`
+   - **Description**: Retrieves all tasks.
+
+2. **Get Task By ID**
+   - **URL**: `https://todo-app-be-two.vercel.app/postgres/:id`
+   - **Method**: `GET`
+   - **Description**: Fetch a single task by its `id`.
+
+3. **Create a New Task**
+   - **URL**: `https://todo-app-be-two.vercel.app/postgres/`
+   - **Method**: `POST`
+   - **Description**: Adds a new task.
+   - **Request Body**:
+     ```json
+     {
+       "title": "My new task",
+       "description": "This is a task description."
+     }
+     ```
+
+4. **Delete All Tasks**
+   - **URL**: `https://todo-app-be-two.vercel.app/postgres/`
+   - **Method**: `DELETE`
+   - **Description**: Deletes all tasks from the list.
+
+5. **Delete Completed Tasks**
+   - **URL**: `https://todo-app-be-two.vercel.app/postgres/done`
+   - **Method**: `DELETE`
+   - **Description**: Deletes all completed tasks.
+
+6. **Delete Task by ID**
+   - **URL**: `https://todo-app-be-two.vercel.app/postgres/:id`
+   - **Method**: `DELETE`
+   - **Description**: Deletes a task by its `id`.
+
+7. **Switch Task Completion Status**
+   - **URL**: `https://todo-app-be-two.vercel.app/postgres/switch/:id`
+   - **Method**: `PATCH`
+   - **Description**: Toggles the `isDone` status of a task.
+
+8. **Update Task Title**
+   - **URL**: `https://todo-app-be-two.vercel.app/postgres/updateTitle/:id`
+   - **Method**: `PATCH`
+   - **Description**: Updates the title of a task by `id`.
+   - **Request Body**:
+     ```json
+     {
+       "title": "Updated Task Title"
+     }
+     ```
+
 
   ## Next Steps
 
